@@ -65,14 +65,16 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/">MyPage</a>
+              <a class="nav-link js-scroll-trigger" href="/#">MyPage</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Logout</a>
+              <a class="nav-link js-scroll-trigger" href="/user/logout"
+                >Logout</a
+              >
             </li>
 
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Contact</a>
+              <a class="nav-link js-scroll-trigger" href="#Contact">Contact</a>
             </li>
           </ul>
         </div>

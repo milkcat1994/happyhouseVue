@@ -16,7 +16,7 @@ export default {
           msg = "삭제가 완료되었습니다.";
         }
         alert(msg);
-        this.$router.push("/list");
+        this.$router.push("/qna/list");
       })
       .catch(() => {
         alert("삭제 처리시 에러가 발생했습니다.");
