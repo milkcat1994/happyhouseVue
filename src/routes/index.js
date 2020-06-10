@@ -7,6 +7,12 @@ import Read from "@/page/read.vue";
 import Update from "@/page/update.vue";
 import Delete from "@/page/delete.vue";
 
+import QnAList from "@/page/qna/list.vue";
+import QnACreate from "@/page/qna/create.vue";
+import QnARead from "@/page/qna/read.vue";
+import QnAUpdate from "@/page/qna/update.vue";
+import QnADelete from "@/page/qna/delete.vue";
+
 Vue.use(VueRouter);
 export const router = new VueRouter({
   mode: "history",
@@ -40,6 +46,37 @@ export const router = new VueRouter({
       path: "/delete",
       name: "delete",
       component: Delete
+    },
+    {
+      path: "/qna",
+      name: "qna",
+      children: [
+        {
+          path: "list",
+          name: "qnalist",
+          component: QnAList
+        },
+        {
+          path: "create",
+          name: "qnacreate",
+          component: QnACreate
+        },
+        {
+          path: "read",
+          name: "qnaread",
+          component: QnARead
+        },
+        {
+          path: "update",
+          name: "qnaupdate",
+          component: QnAUpdate
+        },
+        {
+          path: "delete",
+          name: "qnadelete",
+          component: QnADelete
+        }
+      ]
     }
   ]
 });

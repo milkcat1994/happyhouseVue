@@ -7,7 +7,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: [],
-    item: {}
+    item: {},
+    QnAs: [],
+    QnA: {}
   },
   getters: {
     items(state) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     mutateSetItem(state, item) {
       state.item = item;
+    },
+    mutateSetQnAs(state, QnAs) {
+      state.QnAs = QnAs;
+    },
+    mutateSetQnA(state, QnA) {
+      state.QnA = QnA;
     }
   },
   actions: {
@@ -39,6 +47,21 @@ export default new Vuex.Store({
     getItem(context, payload) {
       http.get(payload).then(({ data }) => {
         context.commit("mutateSetItem", data);
+      });
+    },
+    getQnAs(context) {
+      http
+        .get("/api/qna")
+        .then(({ data }) => {
+          context.commit("mutateSetQnAs", data);
+        })
+        .catch(() => {
+          alert("qna 리스트 조회중 에러가 발생했습니다.");
+        });
+    },
+    getQnA(context, payload) {
+      http.get(payload).then(({ data }) => {
+        context.commit("mutateSetQnA", data);
       });
     }
   }
