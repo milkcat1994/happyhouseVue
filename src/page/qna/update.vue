@@ -7,7 +7,7 @@
 <script>
 import UpdateForm from "@/components/qna/Form.vue";
 export default {
-  name: "update",
+  name: "qnaupdate",
   components: {
     UpdateForm
   }

@@ -9,7 +9,7 @@ import store from "@/store/store.js";
 import Detail from "@/components/qna/Detail.vue";
 
 export default {
-  name: "read",
+  name: "qnaread",
   components: {
     Detail
   },

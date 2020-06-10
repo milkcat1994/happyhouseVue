@@ -48,35 +48,29 @@ export const router = new VueRouter({
       component: Delete
     },
     {
-      path: "/qna",
-      name: "qna",
-      children: [
-        {
-          path: "list",
-          name: "qnalist",
-          component: QnAList
-        },
-        {
-          path: "create",
-          name: "qnacreate",
-          component: QnACreate
-        },
-        {
-          path: "read",
-          name: "qnaread",
-          component: QnARead
-        },
-        {
-          path: "update",
-          name: "qnaupdate",
-          component: QnAUpdate
-        },
-        {
-          path: "delete",
-          name: "qnadelete",
-          component: QnADelete
-        }
-      ]
+      path: "/qna/list",
+      name: "qnalist",
+      component: QnAList
+    },
+    {
+      path: "/qna/create",
+      name: "qnacreate",
+      component: QnACreate
+    },
+    {
+      path: "/qna/read",
+      name: "qnaread",
+      component: QnARead
+    },
+    {
+      path: "/qna/update",
+      name: "qnaupdate",
+      component: QnAUpdate
+    },
+    {
+      path: "/qna/delete",
+      name: "qnadelete",
+      component: QnADelete
     }
   ]
 });

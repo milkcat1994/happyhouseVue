@@ -86,9 +86,9 @@ export default {
     createHandler() {
       http
         .post("/qna", {
-          writer: this.writer,
-          title: this.title,
-          content: this.content
+          qnaUserid: this.writer,
+          qnaTitle: this.title,
+          qnaContent: this.content
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
@@ -105,11 +105,11 @@ export default {
     updateHandler() {
       http
         .put(`/qna/${this.no}`, {
-          no: this.no,
-          regtime: this.regtime,
-          writer: this.writer,
-          title: this.title,
-          content: this.content
+          qnaNo: this.no,
+          qnaDatetime: this.regtime,
+          qnaUserid: this.writer,
+          qnaTitle: this.title,
+          qnaContent: this.content
         })
         .then(({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
@@ -124,7 +124,7 @@ export default {
         });
     },
     moveList() {
-      this.$router.push("/list");
+      this.$router.push("/qna/list");
     }
   },
   created() {
@@ -132,11 +132,11 @@ export default {
       http
         .get(`/qna/${this.$route.query.no}`)
         .then(({ data }) => {
-          this.no = data.no;
-          this.regtime = data.regtime;
-          this.writer = data.writer;
-          this.title = data.title;
-          this.content = data.content;
+          this.no = data.qnaNo;
+          this.regtime = data.qnaDatetime;
+          this.writer = data.qnaUserid;
+          this.title = data.qnaTitle;
+          this.content = data.qnaContent;
         })
         .catch(() => {
           alert("에러가 발생했습니다.");

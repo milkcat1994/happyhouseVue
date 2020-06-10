@@ -22,10 +22,10 @@
           <list-row
             v-for="(QnA, index) in QnAs"
             :key="`${index}_qna`"
-            :no="QnA.no"
-            :title="QnA.title"
-            :writer="QnA.writer"
-            :regtime="QnA.regtime"
+            :no="QnA.qnaNo"
+            :title="QnA.qnaTitle"
+            :writer="QnA.qnaUserid"
+            :regtime="QnA.qnaDatetime"
           />
         </table>
       </div>
@@ -47,7 +47,7 @@ import ListRow from "@/components/qna/Row.vue";
 // import Pagination from "@/components/qna/Pagination.vue";
 
 export default {
-  name: "list",
+  name: "qnalist",
   components: {
     ListRow
     // Pagination
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     movePage() {
-      this.$router.push("/create");
+      this.$router.push("/qna/create");
     }
   }
 };

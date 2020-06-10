@@ -8,6 +8,9 @@
         <li>
           <router-link to="/list">게시판</router-link>
         </li>
+        <li>
+          <router-link to="/qna/list">질문 게시판</router-link>
+        </li>
       </ul>
     </nav>
   </header>

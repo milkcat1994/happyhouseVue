@@ -6,7 +6,7 @@
 import http from "@/util/http-common";
 
 export default {
-  name: "delete",
+  name: "qnadelete",
   created() {
     http
       .delete(`/qna/${this.$route.query.no}`)

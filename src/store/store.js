@@ -42,7 +42,7 @@ export default new Vuex.Store({
   actions: {
     getItems(context) {
       http
-        .get("/board")
+        .get("/qna")
         .then(({ data }) => {
           context.commit("mutateSetItems", data);
         })
@@ -57,9 +57,10 @@ export default new Vuex.Store({
     },
     getQnAs(context) {
       http
-        .get("/api/qna")
+        .get("/qna")
         .then(({ data }) => {
           context.commit("mutateSetQnAs", data);
+          console.dir(data);
         })
         .catch(() => {
           alert("qna 리스트 조회중 에러가 발생했습니다.");
@@ -67,6 +68,7 @@ export default new Vuex.Store({
     },
     getQnA(context, payload) {
       http.get(payload).then(({ data }) => {
+        console.dir(data);
         context.commit("mutateSetQnA", data);
       });
     }

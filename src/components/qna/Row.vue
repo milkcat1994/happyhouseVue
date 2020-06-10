@@ -1,10 +1,11 @@
 <template>
-  <tr class="noticeItem" data-noticeno="{{no}}">
+  <tr class="qnaItem" v-on:click="qnaDetail(no)">
     <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
       {{ no }}
     </td>
     <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-      <router-link :to="`/qna/read?no=${no}`">{{ title }}</router-link>
+      <!-- <router-link :to="`/qna/read?no=${no}`">{{ title }}</router-link> -->
+      {{ title }}
     </td>
     <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
       {{ writer }}
@@ -28,7 +29,16 @@ export default {
   methods: {
     getFormatDate(regtime) {
       return moment(new Date(regtime)).format("YYYY.MM.DD");
+    },
+    qnaDetail(no) {
+      this.$router.push("/qna/read?no=" + no);
     }
   }
 };
 </script>
+
+<style scoped>
+.qnaItem {
+  cursor: pointer;
+}
+</style>
