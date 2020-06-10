@@ -17,6 +17,12 @@ export default new Vuex.Store({
     },
     item(state) {
       return state.item;
+    },
+    QnAs(state) {
+      return state.QnAs;
+    },
+    QnA(state) {
+      return state.QnA;
     }
   },
   mutations: {
