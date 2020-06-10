@@ -19,14 +19,16 @@
               <th>시간</th>
             </tr>
           </thead>
-          <list-row
-            v-for="(QnA, index) in QnAs"
-            :key="`${index}_qna`"
-            :no="QnA.qnaNo"
-            :title="QnA.qnaTitle"
-            :writer="QnA.qnaUserid"
-            :regtime="QnA.qnaDatetime"
-          />
+          <tbody>
+            <list-row
+              v-for="(QnA, index) in QnAs"
+              :key="`${index}_qna`"
+              :no="QnA.qnaNo"
+              :title="QnA.qnaTitle"
+              :writer="QnA.qnaUserid"
+              :regtime="QnA.qnaDatetime"
+            />
+          </tbody>
         </table>
       </div>
       <div class="col-sm-10">

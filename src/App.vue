@@ -1,7 +1,6 @@
 <template>
-  <div id="app" class="container">
+  <div id="app">
     <nav-header></nav-header>
-    <h2 class="text-center">Vue를 이용한 게시판</h2>
     <router-view></router-view>
   </div>
 </template>
