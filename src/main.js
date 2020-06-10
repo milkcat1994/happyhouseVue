@@ -16,8 +16,8 @@ import "expose-loader?$!expose-loader?jQuery!jquery";
 
 // import Bootstrap from 'bootstrap'
 // Vue.use(Bootstrap);
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 new Vue({
   render: h => h(App),

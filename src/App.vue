@@ -16,4 +16,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+@import "@/assets/scss/styles";
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css);
+</style>

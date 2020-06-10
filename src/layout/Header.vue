@@ -87,6 +87,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "../assets/scss/styles";
+<style>
+header.masthead {
+  background: linear-gradient(
+      to bottom,
+      rgba(92, 77, 66, 0.8) 0%,
+      rgba(92, 77, 66, 0.8) 100%
+    ),
+    url("../assets/img/user/city1.jpg");
+}
 </style>

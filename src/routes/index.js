@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import Main from "@/page/Main.vue";
+import Register from "@/page/user/Register.vue";
+import Findpwd from "@/page/user/FindPwd.vue";
+
 import QnAList from "@/page/qna/list.vue";
 import QnACreate from "@/page/qna/create.vue";
 import QnARead from "@/page/qna/read.vue";
@@ -13,8 +17,17 @@ export const router = new VueRouter({
   routes: [
     {
       path: "/",
-      name: "qnalist",
-      component: QnAList
+      component: Main
+    },
+    {
+      path: "/user/register",
+      name: "register",
+      component: Register
+    },
+    {
+      path: "/user/findpwd",
+      name: "findpwd",
+      component: Findpwd
     },
     {
       path: "/qna/list",
