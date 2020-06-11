@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <nav-header></nav-header>
+    <top-header/>
+    <header />
     <router-view></router-view>
+    <footer />
   </div>
 </template>
 
 <script>
-import NavHeader from "@/layout/Header.vue";
+import Header from "@/layout/Header.vue";
+import TopHeader from "@/layout/TopHeader.vue";
+import Footer from "@/layout/Footer.vue";
 
 export default {
   name: "App",
   components: {
-    NavHeader
+    TopHeader,
+    Header,
+    Footer
   }
 };
 </script>
