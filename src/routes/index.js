@@ -30,7 +30,7 @@ export const router = new VueRouter({
       component: Findpwd
     },
     {
-      path: "/qna/list",
+      path: "/qna",
       name: "qnalist",
       component: QnAList
     },

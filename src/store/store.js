@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import http from "@/util/http-common";
-import router from "@/routes/index.js";
+import { router } from "@/routes/index.js";
 
 Vue.use(Vuex);
 

@@ -34,11 +34,7 @@
                           <tbody>
                             <tr>
                               <td width="107" align="center">
-                                <img
-                                  src="@/assets/img/login.png"
-                                  border="0"
-                                  width="150dp"
-                                />
+                                <img src="" border="0" width="150dp" />
                               </td>
                               <td width="70%" align="center">
                                 <form
@@ -61,7 +57,7 @@
                                       <tr>
                                         <td>
                                           <img
-                                            src="@/assets/img/user/id_id.gif"
+                                            src=""
                                             border="0"
                                             alt=""
                                             width="100dp"
@@ -88,7 +84,7 @@
                                       <tr>
                                         <td>
                                           <img
-                                            src="@/assets/img/user/id_pass.gif"
+                                            src=""
                                             border="0"
                                             alt=""
                                             width="100dp"

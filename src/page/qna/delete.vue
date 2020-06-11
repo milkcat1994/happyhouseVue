@@ -1,5 +1,5 @@
 <template>
-  <div>삭제중...</div>
+  <div>qna삭제중입니다.</div>
 </template>
 
 <script>
@@ -11,15 +11,15 @@ export default {
     http
       .delete(`/qna/${this.$route.query.no}`)
       .then(({ data }) => {
-        let msg = "삭제 처리시 문제가 발생했습니다.";
+        let msg = "qna 삭제 처리시 문제가 발생했습니다.";
         if (data === "success") {
-          msg = "삭제가 완료되었습니다.";
+          msg = "qna 삭제가 완료되었습니다.";
         }
         alert(msg);
         this.$router.push("/qna/list");
       })
       .catch(() => {
-        alert("삭제 처리시 에러가 발생했습니다.");
+        alert("qna 삭제 처리시 에러가 발생했습니다.");
       });
   }
 };

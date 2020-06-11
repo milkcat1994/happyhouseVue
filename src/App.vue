@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import NavHeader from "./layout/Header.vue";
+import NavHeader from "@/layout/Header.vue";
 
 export default {
   name: "App",
@@ -16,7 +16,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/styles";
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css);
-</style>
+<style></style>
