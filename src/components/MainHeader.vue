@@ -1,5 +1,5 @@
 <template>
-  
+
 <!-- Main header start -->
 <header class="main-header header-transparent sticky-header">
 
@@ -207,5 +207,4 @@
 export default {
 };
 </script>
-
 <style></style>
