@@ -7,7 +7,12 @@
           <div class="footer-item clearfix">
             <img src="img/logos/logo.png" alt="logo" class="f-logo" />
             <div class="text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae posuere sapien vitae posuere.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.
+                Donec a consectetur nulla. Nulla posuere sapien vitae posuere
+                sapien vitae posuere.
+              </p>
             </div>
           </div>
         </div>
@@ -26,9 +31,7 @@
                 <i class="flaticon-phone"></i>
                 <a href="tel:+55-417-634-7071">+0477 85X6 552</a>
               </li>
-              <li>
-                <i class="flaticon-fax"></i>+0477 85X6 552
-              </li>
+              <li><i class="flaticon-fax"></i>+0477 85X6 552</li>
               <li>
                 <i class="flaticon-internet"></i>
                 <a href="mailto:info@green.com">info@green.com</a>
@@ -65,7 +68,10 @@
           <div class="footer-item clearfix">
             <h4>Subscribe</h4>
             <div class="Subscribe-box">
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</p>
+              <p>
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit.
+              </p>
               <form class="form-inline" action="#" method="GET">
                 <input
                   type="text"
@@ -88,7 +94,8 @@
           <div class="col-lg-8 col-md-12">
             <p class="copy">
               © 2018
-              <a href="#">Theme Vessel.</a> Trademarks and brands are the property of their respective owners.
+              <a href="#">Theme Vessel.</a> Trademarks and brands are the
+              property of their respective owners.
             </p>
           </div>
           <div class="col-lg-4 col-md-12">
@@ -126,5 +133,4 @@ export default {
   name: "MainFooter"
 };
 </script>
-<style>
-</style>
+<style></style>

@@ -7,17 +7,15 @@
 </template>
 
 <script>
-import MainHeader from '@/components/MainHeader.vue';
-import MainFooter from '@/components/MainFooter.vue';
+import MainHeader from "@/components/MainHeader.vue";
+import MainFooter from "@/components/MainFooter.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     MainHeader,
     MainFooter
   }
-}
+};
 </script>
-<style>
-
-</style>
+<style></style>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <main-banner/>
-    <search-section/>
-    <featured-properties/>
-    <main-services/>
+    <main-banner />
+    <search-section />
+    <featured-properties />
+    <main-services />
   </div>
 </template>
 
@@ -17,7 +17,10 @@ import MainServices from "@/components/index/MainServices.vue";
 export default {
   name: "Index",
   components: {
-    MainBanner, SearchSection, FeaturedProperties, MainServices
+    MainBanner,
+    SearchSection,
+    FeaturedProperties,
+    MainServices
   }
 };
 </script>
