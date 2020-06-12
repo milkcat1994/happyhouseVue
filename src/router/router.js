@@ -12,6 +12,26 @@ const routes = [
     component: Index
   },
   {
+    path: "/deal",
+    name: "Deal",
+    component: Index
+  },
+  {
+    path: "/notice",
+    name: "Notice",
+    component: Index
+  },
+  {
+    path: "/qna",
+    name: "QnA",
+    component: Index
+  },
+  {
+    path: "/mypage",
+    name: "Mypage",
+    component: Index
+  },
+  {
     path: "/Properties",
     name: "Properties",
     component: Properties
