@@ -9,7 +9,6 @@
 <script>
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
-
 export default {
   name: "app",
   components: {
@@ -18,4 +17,8 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+/* .router-link-exact-active {
+  color: #ff214f;
+} */
+</style>

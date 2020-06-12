@@ -9,12 +9,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isLogin: false,
-        userInfo: { "id": "admin" },
+        userInfo: { id: "admin" },
         items: [],
         item: {},
         QnAs: [],
         QnAPageInfo: {
-            "curPage": 1
+            curPage: 1
         },
         QnA: {}
     },
@@ -36,7 +36,7 @@ export default new Vuex.Store({
         },
         QnAPageInfo(state) {
             return state.QnAPageInfo;
-        },
+        }
     },
     mutations: {
         mutateSetItems(state, items) {
@@ -63,7 +63,6 @@ export default new Vuex.Store({
         }
     },
     actions: {
-
         getItems(context) {
             http
                 .get("/qna")
@@ -79,9 +78,11 @@ export default new Vuex.Store({
                 context.commit("mutateSetItem", data);
             });
         },
-        getQnAs(context) {
+        getQnAs(context, pageNo) {
             http
-                .get("/qna")
+                .post("/qna/" + pageNo, {
+                    curPage: pageNo
+                })
                 .then(({ data }) => {
                     context.commit("mutateSetQnAs", data);
                     console.dir(data);
@@ -91,14 +92,14 @@ export default new Vuex.Store({
                 });
         },
         getQnA(context, qnaNo) {
-            http.get('/qna/' + qnaNo).then(({ data }) => {
+            http.get("/qna/" + qnaNo).then(({ data }) => {
                 console.dir(data);
                 context.commit("mutateSetQnA", data);
             });
         },
         getQnAPageInfo(context, pageNo) {
             http
-                .post('/qna/cnt/' + pageNo, {
+                .post("/qna/cnt/" + pageNo, {
                     curPage: pageNo
                 })
                 .then(({ data }) => {
@@ -150,7 +151,7 @@ export default new Vuex.Store({
                     console.log(error.config);
                 });
         }
-    },
+    }
     // plugins: [
     //     createPersistedState()
     // ]

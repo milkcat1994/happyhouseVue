@@ -18,7 +18,7 @@ export default {
   },
   created() {
     store.dispatch("getQnAs");
-  },
+  }
 };
 </script>
 

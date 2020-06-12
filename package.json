@@ -11,6 +11,7 @@
         "@ckeditor/ckeditor5-alignment": "^19.0.1",
         "@ckeditor/ckeditor5-build-classic": "^19.0.2",
         "@ckeditor/ckeditor5-vue": "^1.0.1",
+        "alertifyjs": "^1.13.1",
         "axios": "^0.19.2",
         "bootstrap": "^4.4.1",
         "bootstrap-vue": "^2.11.0",
@@ -22,6 +23,7 @@
         "sass-loader": "^7.3.1",
         "vue": "^2.6.11",
         "vue-router": "^3.2.0",
+        "vuetify": "^2.3.0",
         "vuex": "^3.4.0",
         "vuex-persistedstate": "^3.0.1"
     },
@@ -38,6 +40,9 @@
         "eslint-plugin-vue": "^6.2.2",
         "lint-staged": "^9.5.0",
         "prettier": "^1.19.1",
+        "sass": "^1.19.0",
+        "sass-loader": "^8.0.0",
+        "vue-cli-plugin-vuetify": "~2.0.5",
         "vue-template-compiler": "^2.6.11"
     },
     "eslintConfig": {

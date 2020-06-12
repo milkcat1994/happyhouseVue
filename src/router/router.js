@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Index from "@/views/Index.vue";
 import Properties from "@/views/Properties.vue";
 
-
 import QnAList from "@/views/qna/list.vue";
 import QnACreate from "@/views/qna/create.vue";
 import QnARead from "@/views/qna/read.vue";
@@ -46,11 +45,6 @@ const routes = [{
         name: "qnaupdate",
         component: QnAUpdate
     },
-    // {
-    //     path: "/qna/delete",
-    //     name: "qnadelete",
-    //     component: QnADelete
-    // },
     {
         path: "/mypage",
         name: "Mypage",
@@ -65,7 +59,11 @@ const routes = [{
 
 const router = new VueRouter({
     mode: "history",
-    routes
+    routes,
+    //router-link 클릭시 스크롤바 가장 최 상단으로 이동
+    scrollBehavior(to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    },
 });
 
 export default router;
