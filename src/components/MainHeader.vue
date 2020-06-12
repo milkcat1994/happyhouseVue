@@ -30,8 +30,9 @@
 
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand logo" href="index.html">
-                <img src="img/logos/black-logo.png" alt="logo">
+            <a class="navbar-brand logo"  style="color:white" href="/">
+                HAPPY HOUSE
+                <!-- <img src="img/logos/black-logo.png" alt="logo"> -->
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars"></span>
@@ -39,7 +40,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink">
+                            메인
+                        </a>
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Index
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -50,12 +54,16 @@
                             <li><a class="dropdown-item" href="index-5.html">Index 05</a></li>
                             <li><a class="dropdown-item" href="index-6.html">Index 06</a></li>
                             <li><a class="dropdown-item" href="index-7.html">Index 07</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/deal" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            거래 정보
+                        </a>
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Properties
                         </a>
+
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Property List</a>
                                 <ul class="dropdown-menu">
@@ -87,10 +95,13 @@
                                     <li><a class="dropdown-item" href="properties-details-3.html">Property Detail 03</a></li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/notice" id="navbarDropdownMenuLink6" >
+                            공지사항
+                        </a>
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Agents
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -103,10 +114,12 @@
                                 </ul>
                             </li>
                             <li><a class="dropdown-item" href="agent-detail.html">Agent Detail</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
+
                     <li class="nav-item dropdown megamenu-li">
-                        <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                        <a class="nav-link dropdown-toggle" href="/qna" id="dropdown01" >Q&A</a>
+                        <!-- <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                         <div class="dropdown-menu megamenu" aria-labelledby="dropdown01">
                             <div class="megamenu-area">
                                 <div class="row sobuz">
@@ -144,10 +157,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/mypage" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            MyPage
+                        </a>
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Blog
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -171,9 +187,9 @@
                                     <li><a class="dropdown-item" href="blog-single-fullwidth.html">Fullwidth</a></li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             My Account
                         </a>
@@ -193,7 +209,7 @@
                     </li>
                     <li class="nav-item sp">
                         <a href="submit-property.html" class="nav-link link-color"><i class="fa fa-plus"></i> Submit Property</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </nav>
