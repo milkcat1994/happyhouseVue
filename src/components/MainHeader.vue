@@ -124,7 +124,7 @@
                     </li>
 
                     <li class="nav-item dropdown megamenu-li">
-                        <a class="nav-link dropdown-toggle" href="/qna" id="dropdown01" >Q&A</a>
+                        <router-link class="nav-link dropdown-toggle" to="/qna" id="dropdown01" >Q&A</router-link>
                         <!-- <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                         <div class="dropdown-menu megamenu" aria-labelledby="dropdown01">
                             <div class="megamenu-area">

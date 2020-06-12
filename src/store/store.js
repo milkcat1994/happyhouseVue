@@ -3,18 +3,25 @@ import Vuex from "vuex";
 import http from "@/util/http-common";
 import router from "@/router/router.js";
 
+// import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         isLogin: false,
-        userInfo: {},
+        userInfo: { "id": "admin" },
         items: [],
         item: {},
         QnAs: [],
+        QnAPageInfo: {
+            "curPage": 1
+        },
         QnA: {}
     },
     getters: {
+        userInfo(state) {
+            return state.userInfo;
+        },
         items(state) {
             return state.items;
         },
@@ -26,7 +33,10 @@ export default new Vuex.Store({
         },
         QnA(state) {
             return state.QnA;
-        }
+        },
+        QnAPageInfo(state) {
+            return state.QnAPageInfo;
+        },
     },
     mutations: {
         mutateSetItems(state, items) {
@@ -41,6 +51,9 @@ export default new Vuex.Store({
         mutateSetQnA(state, QnA) {
             state.QnA = QnA;
         },
+        mutateQnAPageInfo(state, QnAPageInfo) {
+            state.QnAPageInfo = QnAPageInfo;
+        },
 
         mutateIsLogin(state, isLogin) {
             state.isLogin = isLogin;
@@ -50,6 +63,7 @@ export default new Vuex.Store({
         }
     },
     actions: {
+
         getItems(context) {
             http
                 .get("/qna")
@@ -76,11 +90,26 @@ export default new Vuex.Store({
                     alert("qna 리스트 조회중 에러가 발생했습니다.");
                 });
         },
-        getQnA(context, payload) {
-            http.get(payload).then(({ data }) => {
+        getQnA(context, qnaNo) {
+            http.get('/qna/' + qnaNo).then(({ data }) => {
                 console.dir(data);
                 context.commit("mutateSetQnA", data);
             });
+        },
+        getQnAPageInfo(context, pageNo) {
+            http
+                .post('/qna/cnt/' + pageNo, {
+                    curPage: pageNo
+                })
+                .then(({ data }) => {
+                    console.log("qnaPageInfo");
+                    console.dir(data);
+                    context.commit("mutateQnAPageInfo", data);
+                })
+                .catch(() => {
+                    console.log(pageNo);
+                    alert("qna 리스트 숫자 조회중 에러가 발생했습니다.");
+                });
         },
         login(context, { userId, pwd, url }) {
             http
@@ -121,5 +150,8 @@ export default new Vuex.Store({
                     console.log(error.config);
                 });
         }
-    }
+    },
+    // plugins: [
+    //     createPersistedState()
+    // ]
 });
