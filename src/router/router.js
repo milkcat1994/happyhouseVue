@@ -8,6 +8,7 @@ import QnACreate from "@/views/qna/create.vue";
 import QnARead from "@/views/qna/read.vue";
 import QnAUpdate from "@/views/qna/update.vue";
 
+import NoticeList from "@/views/notice/list.vue";
 Vue.use(VueRouter);
 
 const routes = [{
@@ -22,8 +23,8 @@ const routes = [{
     },
     {
         path: "/notice",
-        name: "Notice",
-        component: Index
+        name: "notice",
+        component: NoticeList
     },
     {
         path: "/qna",
