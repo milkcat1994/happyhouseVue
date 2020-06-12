@@ -12,7 +12,10 @@ export default new Vuex.Store({
         items: [],
         item: {},
         QnAs: [],
-        QnA: {}
+        QnA: {},
+
+        Notices: [],
+        Notice : {}
     },
     getters: {
         items(state) {
@@ -26,6 +29,12 @@ export default new Vuex.Store({
         },
         QnA(state) {
             return state.QnA;
+        },
+        Notices(state) {
+            return state.Notices;
+        },
+        Notice(state) {
+            return state.Notice;
         }
     },
     mutations: {
@@ -41,6 +50,13 @@ export default new Vuex.Store({
         mutateSetQnA(state, QnA) {
             state.QnA = QnA;
         },
+        mutateSetNotices(state, Notices) {
+            state.Notices = Notices;
+        },
+        mutateSetNotice(state, Notice) {
+            state.Notice = Notice;
+        },
+
 
         mutateIsLogin(state, isLogin) {
             state.isLogin = isLogin;
@@ -82,6 +98,28 @@ export default new Vuex.Store({
                 context.commit("mutateSetQnA", data);
             });
         },
+        getNotices(context) {
+            http
+                .get("/notice")
+                .then(({ data }) => {
+                    context.commit("mutateSetNotices", data);
+                    console.dir(data);
+                })
+                .catch(() => {
+                    alert("공지사항 조회중 에러가 발생했습니다.");
+                });
+        },
+        getNotice(context, payload) {
+            http.get(payload).then(({ data }) => {
+                console.dir(data);
+                context.commit("mutateSetQnA", data);
+            });
+        },
+
+
+
+
+
         login(context, { userId, pwd, url }) {
             http
                 .post("/login", {
