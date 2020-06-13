@@ -43,6 +43,7 @@
                 </div>
               </div>
             </div>
+            
             <!-- Page navigation start -->
             <div class="pagination-box hidden-mb-45 text-center">
               <v-pagination

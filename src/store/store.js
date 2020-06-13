@@ -12,6 +12,7 @@ export default new Vuex.Store({
         userInfo: { id: "admin" },
         items: [],
         item: {},
+
         QnAs: [],
         QnAPageInfo: {
             curPage: 1
@@ -19,6 +20,9 @@ export default new Vuex.Store({
         QnA: {},
 
         Notices: [],
+        NoticePageInfo: {
+            curPage: 1
+        },
         Notice: {}
     },
     getters: {
@@ -45,7 +49,10 @@ export default new Vuex.Store({
         },
         Notice(state) {
             return state.Notice;
-        }
+        },
+        NoticePageInfo(state) {
+            return state.NoticePageInfo;
+        },
     },
     mutations: {
         mutateSetItems(state, items) {
@@ -69,8 +76,9 @@ export default new Vuex.Store({
         mutateSetNotice(state, Notice) {
             state.Notice = Notice;
         },
-
-
+        mutateNoticePageInfo(state, NoticePageInfo) {
+            state.NoticePageInfo = NoticePageInfo;
+        },
         mutateIsLogin(state, isLogin) {
             state.isLogin = isLogin;
         },
@@ -144,6 +152,21 @@ export default new Vuex.Store({
                 console.dir(data);
                 context.commit("mutateSetQnA", data);
             });
+        },
+        getNoticePageInfo(context, pageNo) {
+            http
+                .post("/notice/cnt/" + pageNo, {
+                    curPage: pageNo
+                })
+                .then(({ data }) => {
+                    console.log("noticePageInfo");
+                    console.dir(data);
+                    context.commit("mutateNoticePageInfo", data);
+                })
+                .catch(() => {
+                    console.log(pageNo);
+                    alert("공지사항 리스트 숫자 조회중 에러가 발생했습니다.");
+                });
         },
         login(context, { userId, pwd, url }) {
             http
