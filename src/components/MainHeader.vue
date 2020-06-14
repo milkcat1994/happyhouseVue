@@ -69,7 +69,7 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><router-link class="dropdown-item" to="/mypage">내 정보</router-link></li>
-                <li><a class="dropdown-item" href="#">관심정보</a></li>
+                <li><a class="dropdown-item" href="/favarea">관심정보</a></li>
               </ul>
             </li>
           </ul>
@@ -81,9 +81,7 @@
 </template>
 
 <script>
-  import {
-    mapGetters
-  } from "vuex";
+  import {mapGetters} from "vuex";
   import store from "@/store/store.js";
   export default {
     data(){
@@ -93,7 +91,7 @@
     },
     computed: {
       userAuth() {
-        console.log('cchange userAuth ' + this.$session.get('userAuth'));
+        // console.log('cchange userAuth ' + this.$session.get('userAuth'));
         return this.$session.get('userAuth');
       }
     },
@@ -105,11 +103,11 @@
     },
     created() {
         if (this.$session.get('userId')) {
-          console.log('success ' + this.$session.get('userId'));
+          // console.log('success ' + this.$session.get('userId'));
           this.isLogin = true;
         }
         else{
-          console.log('fail ' + this.$session.get('userId'));
+          // console.log('fail ' + this.$session.get('userId'));
           this.isLogin = false;
         }
     }

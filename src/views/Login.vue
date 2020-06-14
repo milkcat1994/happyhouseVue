@@ -23,7 +23,7 @@
                     <div class="form-group clearfix mb-0">
                         <button type="submit" class="btn-md btn-theme float-left"
                         @click="login">Login</button>
-                        <a href="forgot-password.html" class="forgot-password">Forgot Password</a>
+                        <a href="#" class="forgot-password">Forgot Password</a>
                     </div>
                     <!-- </form> -->
                 </div>
@@ -76,6 +76,7 @@ export default {
             .then((response) => {
                 // console.log(response);
                 // console.log(response.data.id);
+                this.$session.start()
                 this.$session.set('userId', response.data.id);
                 this.$session.set('userAuth', response.data.auth);
                 console.log(this.$route.query.redirect);

@@ -1381,7 +1381,7 @@ input[type=checkbox]:checked+label:before {
 
 .show-search-area {
     z-index: 9999;
-    . search-contents transition: all 0.4 s;
+    transition: all 0.4 s;
     display: block;
 }
 

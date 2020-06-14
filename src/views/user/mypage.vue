@@ -1,9 +1,8 @@
 <template>
-
-    <!-- Dashbord start -->
     <div>
         <main-header />
         <sub-banner />
+    <!-- Dashbord start -->
         <div class="dashboard">
             <div class="container-fluid">
                 <div class="row">
@@ -11,12 +10,12 @@
                         <div class="dashboard-header clearfix">
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <h4>My Profile</h4>
+                                    <h4>내 정보</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="dashboard-list">
-                            <h3 class="heading">Profile Details</h3>
+                            <h3 class="heading">개인정보 수정</h3>
                             <div class="dashboard-message contact-2 bdr clearfix">
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3">
@@ -48,7 +47,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
-                                                <div class="form-group subject">
+                                                <div class="form-group phone">
                                                     <label>전화번호</label>
                                                     <input type="text" v-model="phone" ref="phone" name="phone" class="form-control"
                                                         placeholder="전화번호">
@@ -62,21 +61,21 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
-                                                <div class="form-group subject">
+                                                <div class="form-group">
                                                     <label>비밀번호</label>
                                                     <input type="password" v-model="pwd" ref="pwd" name="pwd"
                                                         class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
-                                                <div class="form-group email">
+                                                <div class="form-group">
                                                     <label>비밀번호재입력</label>
                                                     <input type="password" v-model="pwdchk" ref="pwdchk" name="pwdchk"
                                                         class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group message">
+                                                <div class="form-group">
                                                     <label>권한</label>
                                                     <input readonly :value="auth" class="form-control" name="message"
                                                         placeholder="권한">

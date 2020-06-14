@@ -13,24 +13,17 @@ import NoticeCreate from "@/views/notice/create.vue";
 import NoticeRead from "@/views/notice/read.vue";
 import NoticeUpdate from "@/views/notice/update.vue";
 
-import MyPage from "@/views/user/mypage.vue";
 import Login from "@/views/Login.vue";
-// import { Auth } from '@/api/auth'
+import Signup from "@/views/Signup.vue";
+import MyPage from "@/views/user/mypage.vue";
+import FavArea from "@/views/user/favarea.vue";
 Vue.use(VueRouter);
 
-import store from "@/store/store.js";
-// const requireAuth = (to, from, next) => {
-//     if (Auth.loggedIn()) return next()
-//     next({
-//         path: '/login',
-//         query: { redirect: to.fullPath }
-//     })
-// }
-
+// import store from "@/store/store.js";
 
 const requireAuth = (to, from, next) => {
     // if (store.state.auth.isLogin) return next()
-    if (Vue.prototype.$session.get('userId')) return next()
+    if (Vue.prototype.$session.exists()) return next()
     next({
         path: '/login',
         query: { redirect: to.fullPath }
@@ -39,7 +32,7 @@ const requireAuth = (to, from, next) => {
 
 const hasAuth = (to, from, next) => {
     // if (localStorage.userToken) {
-    if (Vue.prototype.$session.get('userId')) {
+    if (Vue.prototype.$session.exists()) {
         next({ path: '/' });
     }
     return next()
@@ -57,16 +50,19 @@ const routes = [{
         component: Login,
         beforeEnter: hasAuth
     },
-    // {
-    //     path: '/logout',
-    //     beforeEnter: (to, from, next) => {
-    //         Vue.prototype.$session.destroy();
-    //         next({ path: '/' })
-    //     }
-    // },
+    {
+        path: '/signup',
+        component: Signup,
+        beforeEnter: hasAuth
+    },
     {
         path: '/mypage',
         component: MyPage,
+        beforeEnter: requireAuth
+    },
+    {
+        path: '/favarea',
+        component: FavArea,
         beforeEnter: requireAuth
     },
     {

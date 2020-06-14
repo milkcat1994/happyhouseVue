@@ -198,51 +198,12 @@
             ><button class="pull-right btn btn-lg btn-info">
               목록
             </button></router-link>
-          <!-- <button class="pull-right btn btn-lg button-theme"
-             v-if="type == 'create'" @click="checkHandler">글쓰기</button>
-            <button class="pull-right btn btn-lg button-theme" v-else @click="checkHandler">수정</button> -->
         </div>
         <div class=""></div>
       </div>
     </div>
     <!-- Blog body end -->
 
-    <!-- <table class="table table-bordered w-50">
-      <tr>
-        <th>번호</th>
-        <td>{{ QnA.qnaNo }}</td>
-      </tr>
-      <tr>
-        <th>글쓴이</th>
-        <td>{{ QnA.qnaUserid }}</td>
-      </tr>
-      <tr>
-        <th>제목</th>
-        <td>{{ QnA.qnaTitle }}</td>
-      </tr>
-      <tr>
-        <th>날짜</th>
-        <td>{{ getFormatDate(QnA.qnaDatetime) }}</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          {{ QnA.qnaContent }}
-        </td>
-      </tr>
-    </table>
-
-    <br />
-    <div class="text-center">
-      <router-link to="/qna/list"
-        ><button class="btn btn-primary">목록</button></router-link
-      >
-      <router-link :to="'/qna/update?no=' + QnA.qnaNo"
-        ><button class="btn btn-primary">수정</button></router-link
-      >
-      <router-link :to="'/qna/delete?no=' + QnA.qnaNo"
-        ><button class="btn btn-primary">삭제</button></router-link
-      >
-    </div> -->
   </div>
 </template>
 
@@ -266,7 +227,6 @@ export default {
       let msg = "qna 삭제 처리시 문제가 발생했습니다.";
       alertify.confirm('QnA 게시글 삭제',
         '질문을 삭제 하시겠습니까?',
-        () => {
           http
           .delete('/qna/'+qnaNo)
           .then(({ data }) => {
@@ -280,9 +240,9 @@ export default {
             alertify.alert(msg, () =>
             alertify.warning('alert is closed')
             );
-          });
-        },
-        () => alertify.error('취소하셨습니다.'),
+          })
+        ,
+        alertify.error('취소하셨습니다.'),
       );
 
       return false;

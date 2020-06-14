@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <main-header />
     <!-- Blog body start -->
     <div class="blog-body content-area-5">
       <div class="container">
@@ -51,15 +51,23 @@
         </div>
       </div>
     </div>
+    <main-footer />
   </div>
 </template>
 
 <script>
+import MainHeader from "@/components/MainHeader.vue";
+import MainFooter from "@/components/MainFooter.vue";
+
 import http from "@/util/http-common";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { mapGetters } from "vuex";
 export default {
   name: "QnA-Form",
+  components: {
+    MainHeader,
+    MainFooter
+  },
   props: {
     type: { type: String }
   },
@@ -104,7 +112,7 @@ export default {
         (err = false),
         this.$refs.editorData.focus());
       console.dir(this.$session.get('userId'));
-      if (!err) alert(msg);
+      if (!err) alertify.error(msg, 3);
       else this.type == "create" ? this.createHandler() : this.updateHandler();
     },
     createHandler() {
@@ -142,7 +150,9 @@ export default {
             alertify.notify(msg, 'success', 3, function(){  console.log('qna수정 완료'); });
             this.moveList();
           }
+          else{
             alertify.error(msg, 3, function(){  console.log('qna수정 실패'); });
+          }
         })
         .catch(() => {
             alertify.error(msg, 3, function(){  console.log('qna수정 서버 통신 실패'); });
@@ -153,8 +163,8 @@ export default {
     }
   },
   created() {
-    () => {
-      if (this.type === "update") {
+    // console.log(type);
+      if (this.type == "update") {
         http
         .get(`/qna/${this.$route.query.no}`)
         .then(({ data }) => {
@@ -167,7 +177,6 @@ export default {
           alertify.error(msg, 3, function(){  console.log('qna수정전 데이터 전송 도중 서버 통신 실패'); });
         });
     }
-      }
   }
 };
 </script>
