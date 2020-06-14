@@ -5,7 +5,7 @@ import router from "@/router/router.js";
 
 import { auth } from './auth.module'
 
-import createPersistedState from 'vuex-persistedstate';
+// import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,10 +13,6 @@ export default new Vuex.Store({
         auth
     },
     state: {
-        // isLogin: false,
-        // userInfo: {},
-        // userToken: '',
-
         items: [],
         item: {},
 
@@ -83,15 +79,6 @@ export default new Vuex.Store({
         mutateNoticePageInfo(state, NoticePageInfo) {
             state.NoticePageInfo = NoticePageInfo;
         },
-        // mutateIsLogin(state, isLogin) {
-        //     state.isLogin = isLogin;
-        // },
-        // mutateUserInfo(state, userInfo) {
-        //     state.userInfo = userInfo;
-        // },
-        // mutateUserToken(state, userToken) {
-        //     state.userToken = userToken;
-        // }
     },
     actions: {
         getItems(context) {
@@ -183,49 +170,8 @@ export default new Vuex.Store({
                     alert("공지사항 리스트 숫자 조회중 에러가 발생했습니다.");
                 });
         },
-        // login(context, { userId, pwd, url }) {
-        //     http
-        //         .post("/login", {
-        //             id: userId,
-        //             pwd: pwd
-        //         })
-        //         .then(({ data }) => {
-        //             console.log(data);
-        //             context.commit("mutateIsLogin", true);
-        //             context.commit("mutateUserToken", Math.random().toString(36).substring(2));
-        //             context.commit("mutateUserInfo", data);
-        //             router.replace(url);
-
-        //             // 오류 코드 this in promise-then()
-        //             // Uncaught (in promise) TypeError
-        //             //this.$router.push('/About')
-        //         })
-        //         .catch(error => {
-        //             if (error.response.status == "404") {
-        //                 alertify.error("아이디 또는 비밀번호가 올바르지 않습니다.", 3);
-        //             } else {
-        //                 alertify.error("로그인 처리시 에러가 발생했습니다.", 3);
-        //             }
-        //             console.log(error.config);
-        //         });
-        // },
-        // logout(context, { url }) {
-        //     http
-        //         .post("/logout")
-        //         .then(data => {
-        //             console.log(data);
-        //             context.commit("mutateIsLogin", false);
-        //             context.commit("mutateUserToken", '');
-        //             context.commit("mutateUserInfo", {});
-        //             router.push(url);
-        //         })
-        //         .catch(error => {
-        //             alertify.error("로그아웃 처리시 에러가 발생했습니다.", 3);
-        //             console.log(error.config);
-        //         });
-        // }
     },
-    plugins: [
-        createPersistedState()
-    ]
+    // plugins: [
+    //     createPersistedState()
+    // ]
 });

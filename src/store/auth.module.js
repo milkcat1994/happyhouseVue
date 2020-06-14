@@ -1,4 +1,3 @@
-// import createPersistedState from 'vuex-persistedstate';
 import http from "@/util/http-common";
 
 export const auth = {
@@ -34,25 +33,20 @@ export const auth = {
         login(context, { userId, pwd, url }) {
             return new Promise((resolve, reject) => {
                 http
-                    .post("/login", {
+                    .post("/user/login", {
                         id: userId,
                         pwd: pwd
                     })
                     .then(({ data }) => {
-                        // console.log(response);
-                        // console.log(response.status)
                         console.log(data);
                         context.commit("mutateIsLogin", true);
                         let token = Math.random().toString(36).substring(2);
                         context.commit("mutateUserToken", token);
                         context.commit("mutateUserInfo", data);
-                        // console.log(state.isLogin);
-                        localStorage.userToken = token;
-                        localStorage.userInfo = { "userId": data.id, "userAuth": data.auth };
 
-                        // 오류 코드 this in promise-then()
-                        // Uncaught (in promise) TypeError
-                        //this.$router.push('/About')
+                        // localStorage.userToken = token;
+                        // localStorage.userInfo = { "userId": data.id, "userAuth": data.auth };
+
                         resolve({ data })
                     })
                     .catch((error) => {
@@ -72,33 +66,42 @@ export const auth = {
         logout(context) {
             return new Promise((resolve, reject) => {
                 http
-                    .get("/logout")
+                    .get("/user/logout")
                     .then(data => {
                         console.log(data);
                         context.commit("mutateIsLogin", false);
                         context.commit("mutateUserToken", '');
                         context.commit("mutateUserInfo", {});
-                        delete localStorage.token;
-                        delete localStorage.userInfo;
+                        // delete localStorage.token;
+                        // delete localStorage.userInfo;
                         resolve()
                     })
                     .catch(error => {
-                        alertify.error("로그아웃 처리시 에러가 발생했습니다.", 3);
-                        console.log(error.config);
+                        alertify.error("로그아웃 처리시 에러가 발생했습니다.", 3,
+                            function() { console.log(error.config); });
                         return reject();
                     });
             });
-        },
-        register(context, user) {
-
         },
         setUserInfo(context) {
             context.commit("mutateIsLogin", localStorage.isLogin);
             context.commit("mutateUserToken", localStorage.userToken);
             context.commit("mutateUserInfo", localStorage.userInfo);
-        }
+        },
+        getUserInfo(context, userid) {
+            return new Promise((resolve, reject) => {
+                http
+                    .get("/user/" + userid)
+                    .then(({ data }) => {
+                        console.dir(data);
+                        resolve({ data })
+                    })
+                    .catch(() => {
+                        alertify.error("유저정보가 없습니다.", 3,
+                            function() { console.log("유저정보가 없습니다."); });
+                        return reject();
+                    });
+            });
+        },
     },
-    // plugins: [
-    //     createPersistedState()
-    // ]
 }

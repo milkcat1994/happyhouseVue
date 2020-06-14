@@ -41,35 +41,6 @@
               <v-pagination v-model="QnAPageInfo.curPage" :length="QnAPageInfo.pageCnt" :total-visible="10"
                 @input="next"></v-pagination>
             </div>
-            <!-- <div class="pagination-box hidden-mb-45 text-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            
-                            <li v-if="QnAPageInfo.curRange != 1" li class="page-item">
-                                <router-link class="page-link" href="#">처음</router-link>
-                            </li>
-                            <li v-if="QnAPageInfo.curPage > 10" class="page-item">
-                                <router-link class="page-link" href="#">Prev</router-link>
-                            </li>
-
-                            <li  class="page-item">
-                                <a class="page-link" href="properties-list-rightside.html">11</a>
-                                </li>
-                            <li class="page-item"><a class="page-link" href="properties-list-leftsidebar.html">12</a></li>
-                            <li class="page-item"><a class="page-link active" href="properties-list-fullwidth.html">13</a></li>
-                            <li class="page-item"><a class="page-link" href="properties-list-rightside.html">14</a></li>
-                            <li class="page-item"><a class="page-link" href="properties-list-leftsidebar.html">15</a></li>
-                            <li class="page-item"><a class="page-link active" href="properties-list-fullwidth.html">16</a></li>
-                            <li class="page-item"><a class="page-link" href="properties-list-rightside.html">17</a></li>
-                            <li class="page-item"><a class="page-link" href="properties-list-leftsidebar.html">18</a></li>
-                            <li class="page-item"><a class="page-link active" href="properties-list-fullwidth.html">19</a></li>
-                            <li class="page-item"><a class="page-link active" href="properties-list-fullwidth.html">20</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="properties-list-rightside.html">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> -->
           </div>
         </div>
       </div>
@@ -127,7 +98,7 @@ import MainFooter from "@/components/MainFooter.vue";
 </script>
 
 <style>
-  .theme--light.v-pagination .v-pagination__item--active {
-    background-color: #1867c0 !important;
-  }
+
+  /* @import url("https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"); */
+  /* src="vuetify/dist/vuetify.min.css" */
 </style>

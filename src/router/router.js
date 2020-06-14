@@ -11,6 +11,7 @@ import QnAUpdate from "@/views/qna/update.vue";
 import NoticeList from "@/views/notice/list.vue";
 
 
+import MyPage from "@/views/user/mypage.vue";
 import Login from "@/views/Login.vue";
 // import { Auth } from '@/api/auth'
 Vue.use(VueRouter);
@@ -54,17 +55,17 @@ const routes = [{
         component: Login,
         beforeEnter: hasAuth
     },
+    // {
+    //     path: '/logout',
+    //     beforeEnter: (to, from, next) => {
+    //         Vue.prototype.$session.destroy();
+    //         next({ path: '/' })
+    //     }
+    // },
     {
-        path: '/logout',
-        beforeEnter: (to, from, next) => {
-            // store.dispatch("auth/login", {userId: this.userId, pwd: this.userPwd})
-            // .then(() => {
-            //         this.$router.replace(this.$route.query.redirect || '/');
-            // })
-            // store.dispatch("auth/logout");
-            Vue.prototype.$session.destroy();
-            next('/')
-        }
+        path: '/mypage',
+        component: MyPage,
+        beforeEnter: requireAuth
     },
     {
         path: "/deal",

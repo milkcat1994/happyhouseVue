@@ -14,11 +14,11 @@
                     <!-- <form action="#" method="GET"> -->
                     <div class="form-group form-box">
                         <input type="text" name="text" class="input-text" placeholder="ID"
-                        v-model="userId">
+                        v-model="userId" @keyup.enter="login">
                     </div>
                     <div class="form-group form-box clearfix">
                         <input type="password" name="Password" class="input-text" placeholder="Password"
-                        v-model="userPwd">
+                        v-model="userPwd" @keyup.enter="login">
                     </div>
                     <div class="form-group clearfix mb-0">
                         <button type="submit" class="btn-md btn-theme float-left"
@@ -31,7 +31,7 @@
             <div class="col-lg-6 bg-color-15 align-self-center pad-0 none-992 bg-img">
                 <div class="info clearfix">
                     <div class="logo-2">
-                        <router-link to="index.html">
+                        <router-link to="/">
                             <h4 style="color:white">HappyHouse</h4>
                             <!-- <img src="img/logos/logo.png" alt="logo"> -->
                         </router-link>
@@ -78,7 +78,13 @@ export default {
                 // console.log(response.data.id);
                 this.$session.set('userId', response.data.id);
                 this.$session.set('userAuth', response.data.auth);
-                this.$router.replace(this.$route.query.redirect || '/');
+                console.log(this.$route.query.redirect);
+                if(this.$route.query.redirect == undefined)
+                    // this.$router.push('/');
+                    window.location.href = "/"
+                else
+                    this.$router.replace(this.$route.query.redirect || '/');
+
             })
                 //인증에 성공하면 이전 페이지로 이동
         }
