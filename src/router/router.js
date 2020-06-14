@@ -9,12 +9,47 @@ import QnARead from "@/views/qna/read.vue";
 import QnAUpdate from "@/views/qna/update.vue";
 
 import NoticeList from "@/views/notice/list.vue";
+
+import Login from "@/views/Login.vue";
+// import { Auth } from '@/api/auth'
 Vue.use(VueRouter);
 
+
+import store from "@/store/store.js";
+// const requireAuth = (to, from, next) => {
+//     if (Auth.loggedIn()) return next()
+//     next({
+//         path: '/login',
+//         query: { redirect: to.fullPath }
+//     })
+// }
+
+
+const requireAuth = (to, from, next) => {
+    if (store.state.isLogin) return next()
+    next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+    })
+}
+
+
+//signup
 const routes = [{
         path: "/",
         name: "Index",
         component: Index
+    },
+    {
+        path: '/login',
+        component: Login
+    },
+    {
+        path: '/logout',
+        beforeEnter: (to, from, next) => {
+            store.logout()
+            next('/')
+        }
     },
     {
         path: "/deal",
@@ -24,12 +59,14 @@ const routes = [{
     {
         path: "/notice",
         name: "notice",
-        component: NoticeList
+        component: NoticeList,
+        beforeEnter: requireAuth
     },
     {
         path: "/qna",
         name: "qnalist",
-        component: QnAList
+        component: QnAList,
+        beforeEnter: requireAuth
     },
     {
         path: "/qna/create",
@@ -39,17 +76,20 @@ const routes = [{
     {
         path: "/qna/read",
         name: "qnaread",
-        component: QnARead
+        component: QnARead,
+        beforeEnter: requireAuth
     },
     {
         path: "/qna/update",
         name: "qnaupdate",
-        component: QnAUpdate
+        component: QnAUpdate,
+        beforeEnter: requireAuth
     },
     {
         path: "/mypage",
         name: "Mypage",
-        component: Index
+        component: Index,
+        beforeEnter: requireAuth
     },
     {
         path: "/Properties",
@@ -57,6 +97,7 @@ const routes = [{
         component: Properties
     }
 ];
+
 
 const router = new VueRouter({
     mode: "history",

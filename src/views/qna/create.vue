@@ -1,7 +1,9 @@
 <template>
   <div>
+    <main-header />
     <sub-banner />
     <create-form type="create" />
+    <main-footer />
   </div>
 </template>
 
@@ -10,14 +12,19 @@ import store from "@/store/store.js";
 import SubBanner from "@/components/qna/SubBanner.vue";
 import CreateForm from "@/components/qna/Form.vue";
 
+import MainHeader from "@/components/MainHeader.vue";
+import MainFooter from "@/components/MainFooter.vue";
+
 export default {
   name: "create",
   components: {
+    MainHeader,
     SubBanner,
-    CreateForm
+    CreateForm,
+    MainFooter
   },
   created() {
-    store.dispatch("getQnAs");
+    // store.dispatch("getQnAs");
   }
 };
 </script>

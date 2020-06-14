@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <!-- Blog body start -->
     <div class="blog-body content-area-5">
       <div class="container">
@@ -165,17 +166,20 @@
           <button
             class="pull-right btn btn-lg button-theme"
             v-if="type == 'create'"
-            @click="checkHandler"
-          >
+            @click="checkHandler">
             글쓰기
           </button>
           <button
             class="pull-right btn btn-lg button-theme"
             v-else
-            @click="checkHandler"
-          >
+            @click="checkHandler">
             수정
           </button>
+          
+          <router-link to="/qna"
+            ><button class="pull-right btn btn-lg btn-info">
+              목록
+            </button></router-link>
         </div>
       </div>
     </div>
@@ -286,6 +290,7 @@ export default {
       else this.type == "create" ? this.createHandler() : this.updateHandler();
     },
     createHandler() {
+      let msg = "등록 처리시 문제가 발생했습니다.";
       http
         .post("/qna", {
           qnaUserid: this.userInfo.id,
@@ -293,18 +298,18 @@ export default {
           qnaContent: this.editorData
         })
         .then(({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
           if (data === "success") {
             msg = "등록이 완료되었습니다.";
+            alertify.notify(msg, 'success', 3, function(){  console.log('qna등록 완료'); });
+            this.moveList();
           }
-          alert(msg);
-          this.moveList();
         })
         .catch(() => {
-          alert("등록 처리시 에러가 발생했습니다.");
+            alertify.error(msg, 3, function(){  console.log('qna등록 서버 통신 실패'); });
         });
     },
     updateHandler() {
+      let msg = "수정 처리시 문제가 발생했습니다.";
       http
         .put(`/qna/${this.no}`, {
           qnaNo: this.no,
@@ -314,15 +319,15 @@ export default {
           qnaContent: this.editorData
         })
         .then(({ data }) => {
-          let msg = "수정 처리시 문제가 발생했습니다.";
           if (data === "success") {
             msg = "수정이 완료되었습니다.";
+            alertify.notify(msg, 'success', 3, function(){  console.log('qna수정 완료'); });
+            this.moveList();
           }
-          alert(msg);
-          this.moveList();
+            alertify.error(msg, 3, function(){  console.log('qna수정 실패'); });
         })
         .catch(() => {
-          alert("수정 처리시 에러가 발생했습니다.");
+            alertify.error(msg, 3, function(){  console.log('qna수정 서버 통신 실패'); });
         });
     },
     moveList() {
@@ -340,7 +345,7 @@ export default {
           this.editorData = data.qnaContent;
         })
         .catch(() => {
-          alert("에러가 발생했습니다.");
+            alertify.error(msg, 3, function(){  console.log('qna수정전 데이터 전송 도중 서버 통신 실패'); });
         });
     }
   }

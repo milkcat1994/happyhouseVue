@@ -10,6 +10,8 @@ export default new Vuex.Store({
     state: {
         isLogin: false,
         userInfo: { id: "admin" },
+        userToken: '',
+
         items: [],
         item: {},
 
@@ -84,6 +86,9 @@ export default new Vuex.Store({
         },
         mutateUserInfo(state, userInfo) {
             state.userInfo = userInfo;
+        },
+        mutateUserToken(state, userToken) {
+            state.userToken = userToken;
         }
     },
     actions: {
@@ -112,13 +117,21 @@ export default new Vuex.Store({
                     console.dir(data);
                 })
                 .catch(() => {
-                    alert("qna 리스트 조회중 에러가 발생했습니다.");
+                    alertify.error("QnA 리스트 조회중 에러가 발생했습니다.", 3,
+                        function() { console.log("qna 리스트 조회중 에러가 발생했습니다."); });
+                    // alert("qna 리스트 조회중 에러가 발생했습니다.");
                 });
         },
         getQnA(context, qnaNo) {
             http.get("/qna/" + qnaNo).then(({ data }) => {
-                console.dir(data);
-                context.commit("mutateSetQnA", data);
+                if (data) {
+                    console.dir(data);
+                    context.commit("mutateSetQnA", data);
+                } else {
+                    alertify.error("정보가 없는 QnA입니다.", 3,
+                        function() { console.log("정보가 없는 QnA입니다."); });
+                    router.push('/qna');
+                }
             });
         },
         getQnAPageInfo(context, pageNo) {
@@ -177,8 +190,9 @@ export default new Vuex.Store({
                 .then(({ data }) => {
                     console.log(data);
                     context.commit("mutateIsLogin", true);
+                    context.commit("mutateUserToken", Math.random().toString(36).substring(2));
                     context.commit("mutateUserInfo", data);
-                    router.push(url);
+                    router.replace(url);
 
                     // 오류 코드 this in promise-then()
                     // Uncaught (in promise) TypeError
@@ -186,9 +200,9 @@ export default new Vuex.Store({
                 })
                 .catch(error => {
                     if (error.response.status == "404") {
-                        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+                        alertify.error("아이디 또는 비밀번호가 올바르지 않습니다.", 3);
                     } else {
-                        alert("로그인 처리시 에러가 발생했습니다.");
+                        alertify.error("로그인 처리시 에러가 발생했습니다.", 3);
                     }
                     console.log(error.config);
                 });
@@ -199,11 +213,12 @@ export default new Vuex.Store({
                 .then(data => {
                     console.log(data);
                     context.commit("mutateIsLogin", false);
+                    context.commit("mutateUserToken", '');
                     context.commit("mutateUserInfo", {});
                     router.push(url);
                 })
                 .catch(error => {
-                    alert("로그아웃 처리시 에러가 발생했습니다.");
+                    alertify.error("로그아웃 처리시 에러가 발생했습니다.", 3);
                     console.log(error.config);
                 });
         }
