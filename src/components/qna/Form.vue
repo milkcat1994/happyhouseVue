@@ -241,7 +241,7 @@ export default {
   props: {
     type: { type: String }
   },
-  data: function() {
+  data() {
     return {
       no: "",
       regtime: "",
@@ -270,11 +270,6 @@ export default {
       }
     };
   },
-  computed: {
-      ...mapGetters({
-        userInfo: 'auth/userInfo'
-      })
-  },
   methods: {
     checkHandler() {
       let err = true;
@@ -286,7 +281,7 @@ export default {
         ((msg = "내용 입력해주세요"),
         (err = false),
         this.$refs.editorData.focus());
-      console.dir(this.userInfo);
+      console.dir(this.$session.get('userId'));
       if (!err) alert(msg);
       else this.type == "create" ? this.createHandler() : this.updateHandler();
     },
@@ -294,7 +289,7 @@ export default {
       let msg = "등록 처리시 문제가 발생했습니다.";
       http
         .post("/qna", {
-          qnaUserid: this.userInfo.userId,
+          qnaUserid: this.$session.get('userId'),
           qnaTitle: this.title,
           qnaContent: this.editorData
         })
@@ -315,7 +310,7 @@ export default {
         .put(`/qna/${this.no}`, {
           qnaNo: this.no,
           qnaDatetime: this.regtime,
-          qnaUserid: this.userInfo.userId,
+          qnaUserid: this.$session.get('userId'),
           qnaTitle: this.title,
           qnaContent: this.editorData
         })
@@ -336,11 +331,6 @@ export default {
     }
   },
   created() {
-    () => {
-      if(!!localStorage.token){
-        store.dispatch("setUserInfo");
-      }
-    },
     () => {
       if (this.type === "update") {
         http

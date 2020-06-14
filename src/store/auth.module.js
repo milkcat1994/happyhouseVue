@@ -53,7 +53,7 @@ export const auth = {
                         // 오류 코드 this in promise-then()
                         // Uncaught (in promise) TypeError
                         //this.$router.push('/About')
-                        resolve({ token })
+                        resolve({ data })
                     })
                     .catch((error) => {
                         console.log(error);

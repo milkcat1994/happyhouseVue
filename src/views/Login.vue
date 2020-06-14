@@ -73,13 +73,12 @@ export default {
     methods:{
         login(){
             store.dispatch("auth/login", {userId: this.userId, pwd: this.userPwd})
-            .then(() => {
-                // return new Promise(resolve => {
-                    console.log("이동시작")
-                    this.$router.replace(this.$route.query.redirect || '/');
-                    console.log("이동 종료");
-                    // resolve();
-                // })
+            .then((response) => {
+                // console.log(response);
+                // console.log(response.data.id);
+                this.$session.set('userId', response.data.id);
+                this.$session.set('userAuth', response.data.auth);
+                this.$router.replace(this.$route.query.redirect || '/');
             })
                 //인증에 성공하면 이전 페이지로 이동
         }

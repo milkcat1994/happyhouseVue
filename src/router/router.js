@@ -10,10 +10,10 @@ import QnAUpdate from "@/views/qna/update.vue";
 
 import NoticeList from "@/views/notice/list.vue";
 
+
 import Login from "@/views/Login.vue";
 // import { Auth } from '@/api/auth'
 Vue.use(VueRouter);
-
 
 import store from "@/store/store.js";
 // const requireAuth = (to, from, next) => {
@@ -26,7 +26,8 @@ import store from "@/store/store.js";
 
 
 const requireAuth = (to, from, next) => {
-    if (store.state.auth.isLogin) return next()
+    // if (store.state.auth.isLogin) return next()
+    if (Vue.prototype.$session.get('userId')) return next()
     next({
         path: '/login',
         query: { redirect: to.fullPath }
@@ -34,9 +35,8 @@ const requireAuth = (to, from, next) => {
 }
 
 const hasAuth = (to, from, next) => {
-    console.log(store.state.auth.isLogin);
-    console.log(localStorage.userToken);
-    if (localStorage.userToken) {
+    // if (localStorage.userToken) {
+    if (Vue.prototype.$session.get('userId')) {
         next({ path: '/' });
     }
     return next()
@@ -61,7 +61,8 @@ const routes = [{
             // .then(() => {
             //         this.$router.replace(this.$route.query.redirect || '/');
             // })
-            store.dispatch("auth/logout");
+            // store.dispatch("auth/logout");
+            Vue.prototype.$session.destroy();
             next('/')
         }
     },

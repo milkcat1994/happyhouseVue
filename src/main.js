@@ -9,12 +9,19 @@ import CKEditor from "@ckeditor/ckeditor5-vue";
 
 import vuetify from '@/plugins/vuetify' // path to vuetify export
 
+import VueSession from 'vue-session';
+
+var sessionOptions = {
+    persist: true
+}
 
 Vue.use(CKEditor);
 
 // Vue.use(Vuetify);
 
 Vue.config.productionTip = false;
+
+Vue.use(VueSession, sessionOptions);
 
 new Vue({
     router,

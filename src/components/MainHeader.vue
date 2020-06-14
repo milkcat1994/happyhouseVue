@@ -228,17 +228,29 @@ import { mapGetters } from "vuex";
 import store from "@/store/store.js";
   export default {
     computed: {
-      ...mapGetters({
-        isLogin: 'auth/isLogin'
-      })
+      // ...mapGetters({
+        // isLogin: 'auth/isLogin'
+      // })
+       isLogin(){
+         if(this.$session.get('userId'))
+          return true;
+       },
+       userId(){
+         return this.$session.get('userId');
+       },
+       userAuth(){
+         return this.$session.get('userAuth');
+       }
     },
   created() {
-    ()=>{
-      if(!!localStorage.token){
-        isLogin = true;
-        store.dispatch("setUserInfo");
-      }
-    }
+    // ()=>{
+      // if(!!localStorage.token){
+      // if(this.$session.get('userId')){
+        // store.dispatch("setUserInfo");
+        // userId = this.$session.get('userId');
+        // userAuth = this.$session.get('userAuth');
+      // }
+    // }
   }
   };
 </script>
