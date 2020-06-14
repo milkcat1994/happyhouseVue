@@ -120,7 +120,7 @@ export default new Vuex.Store({
                 })
                 .catch(() => {
                     alertify.error("QnA 리스트 조회중 에러가 발생했습니다.", 3,
-                        function() { console.log("qna 리스트 조회중 에러가 발생했습니다."); });
+                        function () { console.log("qna 리스트 조회중 에러가 발생했습니다."); });
                     // alert("qna 리스트 조회중 에러가 발생했습니다.");
                 });
         },
@@ -131,7 +131,7 @@ export default new Vuex.Store({
                     context.commit("mutateSetQnA", data);
                 } else {
                     alertify.error("정보가 없는 QnA입니다.", 3,
-                        function() { console.log("정보가 없는 QnA입니다."); });
+                        function () { console.log("정보가 없는 QnA입니다."); });
                     router.push('/qna');
                 }
             });
@@ -162,10 +162,16 @@ export default new Vuex.Store({
                     alert("공지사항 조회중 에러가 발생했습니다.");
                 });
         },
-        getNotice(context, payload) {
-            http.get(payload).then(({ data }) => {
-                console.dir(data);
-                context.commit("mutateSetQnA", data);
+        getNotice(context, no) {
+            http.get("/notice/" + no).then(({ data }) => {
+                if (data) {
+                    console.dir(data);
+                    context.commit("mutateSetNotice", data);
+                } else {
+                    alertify.error("정보가 없는 공지사항입니다.", 3,
+                        function () { console.log("정보가 없는 공지사항입니다."); });
+                    router.push('/notice');
+                }
             });
         },
         getNoticePageInfo(context, pageNo) {

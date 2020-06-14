@@ -81,13 +81,9 @@
 
 <script>
   import store from "@/store/store.js";
-  import {
-    mapGetters
-  } from "vuex";
+  import {mapGetters} from "vuex";
   import SubBanner from "@/components/qna/SubBanner.vue";
-  import {
-    getDayDiff
-  } from "@/util/day-common";
+  import {getDayDiff} from "@/util/day-common";
   // import Pagination from "@/components/qna/Pagination.vue";
 
 import MainHeader from "@/components/MainHeader.vue";
