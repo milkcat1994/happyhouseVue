@@ -9,7 +9,9 @@ import QnARead from "@/views/qna/read.vue";
 import QnAUpdate from "@/views/qna/update.vue";
 
 import NoticeList from "@/views/notice/list.vue";
-
+import NoticeCreate from "@/views/notice/create.vue";
+import NoticeRead from "@/views/notice/read.vue";
+import NoticeUpdate from "@/views/notice/update.vue";
 
 import MyPage from "@/views/user/mypage.vue";
 import Login from "@/views/Login.vue";
@@ -74,8 +76,26 @@ const routes = [{
     },
     {
         path: "/notice",
-        name: "notice",
+        name: "notice_list",
         component: NoticeList,
+        beforeEnter: requireAuth
+    },
+    {
+        path: "/notice/create",
+        name: "notice_create",
+        component: NoticeCreate,
+        beforeEnter: requireAuth
+    },
+    {
+        path: "/notice/read",
+        name: "notice_read",
+        component: NoticeRead,
+        beforeEnter: requireAuth
+    },
+    {
+        path: "/notice/update",
+        name: "notice_update",
+        component: NoticeUpdate,
         beforeEnter: requireAuth
     },
     {
