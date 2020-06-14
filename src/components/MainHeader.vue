@@ -14,7 +14,9 @@
           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <ul class="top-social-media pull-right">
               <li>
-                <router-link to="/login" class="sign-in">
+                <router-link to="/logout" v-if="isLogin" class="sign-out">
+                  <i class="fa fa-sign-out"></i> Logout</router-link>
+                <router-link to="/login" v-else class="sign-in">
                   <i class="fa fa-sign-in"></i> Login</router-link>
               </li>
               <li>
@@ -222,7 +224,23 @@
 </template>
 
 <script>
-  export default {};
+import { mapGetters } from "vuex";
+import store from "@/store/store.js";
+  export default {
+    computed: {
+      ...mapGetters({
+        isLogin: 'auth/isLogin'
+      })
+    },
+  created() {
+    ()=>{
+      if(!!localStorage.token){
+        isLogin = true;
+        store.dispatch("setUserInfo");
+      }
+    }
+  }
+  };
 </script>
 <style>
 

@@ -26,11 +26,20 @@ import store from "@/store/store.js";
 
 
 const requireAuth = (to, from, next) => {
-    if (store.state.isLogin) return next()
+    if (store.state.auth.isLogin) return next()
     next({
         path: '/login',
         query: { redirect: to.fullPath }
     })
+}
+
+const hasAuth = (to, from, next) => {
+    console.log(store.state.auth.isLogin);
+    console.log(localStorage.userToken);
+    if (localStorage.userToken) {
+        next({ path: '/' });
+    }
+    return next()
 }
 
 
@@ -42,12 +51,17 @@ const routes = [{
     },
     {
         path: '/login',
-        component: Login
+        component: Login,
+        beforeEnter: hasAuth
     },
     {
         path: '/logout',
         beforeEnter: (to, from, next) => {
-            store.logout()
+            // store.dispatch("auth/login", {userId: this.userId, pwd: this.userPwd})
+            // .then(() => {
+            //         this.$router.replace(this.$route.query.redirect || '/');
+            // })
+            store.dispatch("auth/logout");
             next('/')
         }
     },

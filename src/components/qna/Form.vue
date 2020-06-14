@@ -271,7 +271,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["userInfo"])
+      ...mapGetters({
+        userInfo: 'auth/userInfo'
+      })
   },
   methods: {
     checkHandler() {
@@ -284,7 +286,6 @@ export default {
         ((msg = "내용 입력해주세요"),
         (err = false),
         this.$refs.editorData.focus());
-      //userid : this.userInfo.id
       console.dir(this.userInfo);
       if (!err) alert(msg);
       else this.type == "create" ? this.createHandler() : this.updateHandler();
@@ -293,7 +294,7 @@ export default {
       let msg = "등록 처리시 문제가 발생했습니다.";
       http
         .post("/qna", {
-          qnaUserid: this.userInfo.id,
+          qnaUserid: this.userInfo.userId,
           qnaTitle: this.title,
           qnaContent: this.editorData
         })
@@ -314,7 +315,7 @@ export default {
         .put(`/qna/${this.no}`, {
           qnaNo: this.no,
           qnaDatetime: this.regtime,
-          qnaUserid: this.userInfo.id,
+          qnaUserid: this.userInfo.userId,
           qnaTitle: this.title,
           qnaContent: this.editorData
         })
@@ -335,8 +336,14 @@ export default {
     }
   },
   created() {
-    if (this.type === "update") {
-      http
+    () => {
+      if(!!localStorage.token){
+        store.dispatch("setUserInfo");
+      }
+    },
+    () => {
+      if (this.type === "update") {
+        http
         .get(`/qna/${this.$route.query.no}`)
         .then(({ data }) => {
           this.no = data.qnaNo;
@@ -345,9 +352,10 @@ export default {
           this.editorData = data.qnaContent;
         })
         .catch(() => {
-            alertify.error(msg, 3, function(){  console.log('qna수정전 데이터 전송 도중 서버 통신 실패'); });
+          alertify.error(msg, 3, function(){  console.log('qna수정전 데이터 전송 도중 서버 통신 실패'); });
         });
     }
+      }
   }
 };
 </script>
