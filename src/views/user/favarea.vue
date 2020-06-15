@@ -27,20 +27,21 @@
                                                 class="img-fluid">
                                         </td>
                                         <td class="title-container" >
+                                            <!-- selectpicker 추가하기 -->
                                                 <!-- 시/도 -->
-                                                <select v-if="!fav.complete" v-model="city" @change="getGu">
+                                                <select v-if="!fav.complete" v-model="city" @change="getGu" class="selectpicker search-fields">
                                                     <option value=''>시/도 선택</option>
                                                     <option v-for="tcity in citys" :key="tcity" :value="tcity" >{{tcity}}</option>
                                                 </select>
 
                                                 <!-- 구/군 -->
-                                                <select v-if="!fav.complete" v-model="gu" @change="getDong">
+                                                <select v-if="!fav.complete" v-model="gu" @change="getDong" class="selectpicker search-fields">
                                                     <option value=''>구/군 선택</option>
                                                     <option v-for="tgu in gus" :key="tgu" :value="tgu" >{{tgu}}</option>
                                                 </select>
 
                                                 <!-- 동 -->
-                                                <select v-if="!fav.complete" v-model="dong">
+                                                <select v-if="!fav.complete" v-model="dong" class="selectpicker search-fields">
                                                     <option value=''>동 선택</option>
                                                     <option v-for="tdong in dongs" :key="tdong" :value="tdong">{{tdong}}</option>
                                                 </select>
@@ -101,6 +102,9 @@
         },
         computed:{
             ...mapGetters(["FavAreas"]),
+        },
+        mounted() {
+            $(".selectpicker").selectpicker();
         },
         methods: {
             removeFav(index){

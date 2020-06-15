@@ -16,6 +16,9 @@ import Login from "@/views/Login.vue";
 import Signup from "@/views/Signup.vue";
 import MyPage from "@/views/user/mypage.vue";
 import FavArea from "@/views/user/favarea.vue";
+
+import Deal from "@/views/deal/list.vue";
+// import Deal from "@/views/deal/propertiesGrid.vue";
 Vue.use(VueRouter);
 
 // import store from "@/store/store.js";
@@ -66,8 +69,8 @@ const routes = [{
     },
     {
         path: "/deal",
-        name: "Deal",
-        component: Index
+        component: Deal,
+        beforeEnter: requireAuth
     },
     {
         path: "/notice",

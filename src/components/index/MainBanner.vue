@@ -168,7 +168,13 @@
 
 <script>
 export default {
-  name: "MainBanner"
+  name: "MainBanner",
+  mounted() {
+        $(".player").YTPlayer({
+            mobileFallbackImage: "img/banner/banner-1.jpg"
+        });
+        $(".selectpicker").selectpicker();
+  }
 };
 </script>
 
