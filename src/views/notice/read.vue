@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header />
-    <notice-banner />
+    <sub-banner />
     <detail />
     <main-footer />
     
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NoticeBanner from "@/components/notice/NoticeBanner.vue";
+import SubBanner from "@/components/SubBanner.vue";
 import store from "@/store/store.js";
 import Detail from "@/components/notice/Detail.vue";
 
@@ -19,7 +19,7 @@ export default {
   name: "notice_read",
   components: {
     MainHeader,
-    NoticeBanner,
+    SubBanner,
     Detail,
     MainFooter
   },

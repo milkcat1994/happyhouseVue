@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header />
-    <notice-banner></notice-banner>
+    <sub-banner></sub-banner>
     <div class="blog-body content-area-5">
       <!-- Option bar start -->
 
@@ -61,7 +61,7 @@
 <script>
 import store from "@/store/store.js";
 import { mapGetters } from "vuex";
-import NoticeBanner from "@/components/notice/NoticeBanner.vue";
+import SubBanner from "@/components/SubBanner.vue";
 import { getDayDiff } from "@/util/day-common";
 
 import MainHeader from "@/components/MainHeader.vue";
@@ -78,7 +78,7 @@ export default {
   },
   components: {
     MainHeader,
-    NoticeBanner,
+    SubBanner,
     MainFooter
   },
   computed: {

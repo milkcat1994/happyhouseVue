@@ -9,7 +9,7 @@
 
 <script>
 import store from "@/store/store.js";
-import SubBanner from "@/components/qna/SubBanner.vue";
+import SubBanner from "@/components/SubBanner.vue";
 import CreateForm from "@/components/qna/Form.vue";
 
 import MainHeader from "@/components/MainHeader.vue";

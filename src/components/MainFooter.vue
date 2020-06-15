@@ -5,15 +5,8 @@
       <div class="row">
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
           <div class="footer-item clearfix">
-            <img src="img/logos/logo.png" alt="logo" class="f-logo" />
-            <div class="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.
-                Donec a consectetur nulla. Nulla posuere sapien vitae posuere
-                sapien vitae posuere.
-              </p>
-            </div>
+             <h4>HAPPY HOUSE</h4>
+            <div class="text"></div>
           </div>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -21,20 +14,22 @@
             <h4>Contact Us</h4>
             <ul class="contact-info">
               <li>
-                <i class="flaticon-pin"></i>20/F Green Road, Dhanmondi, Dhaka
+                <i class="flaticon-pin"></i>서울특별시 강남구 언주로 508 
               </li>
               <li>
                 <i class="flaticon-mail"></i>
-                <a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                <a href="">ssafy@ssafy.com</a>
               </li>
               <li>
                 <i class="flaticon-phone"></i>
-                <a href="tel:+55-417-634-7071">+0477 85X6 552</a>
+                <a href="">02-3429-5100</a>
               </li>
-              <li><i class="flaticon-fax"></i>+0477 85X6 552</li>
+              <!-- <li>
+                <i class="flaticon-fax"></i>+0477 85X6 552
+              </li> -->
               <li>
                 <i class="flaticon-internet"></i>
-                <a href="mailto:info@green.com">info@green.com</a>
+                <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp">SSAFY_URL</a>
               </li>
             </ul>
           </div>
@@ -47,19 +42,19 @@
                 <a href="#">Home</a>
               </li>
               <li>
-                <a href="about.html">About Us</a>
+                <a href="">About Us</a>
               </li>
               <li>
-                <a href="services.html">Services</a>
+                <a href="">Services</a>
               </li>
+              <!-- <li>
+                <a href="">Contact Us</a>
+              </li> -->
+              <!-- <li>
+                <a href="">Dashboard</a>
+              </li> -->
               <li>
-                <a href="contact.html">Contact Us</a>
-              </li>
-              <li>
-                <a href="dashboard.html">Dashboard</a>
-              </li>
-              <li>
-                <a href="properties-details.html">Properties Details</a>
+                <a href="">Properties Details</a>
               </li>
             </ul>
           </div>
@@ -68,10 +63,7 @@
           <div class="footer-item clearfix">
             <h4>Subscribe</h4>
             <div class="Subscribe-box">
-              <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit.
-              </p>
+
               <form class="form-inline" action="#" method="GET">
                 <input
                   type="text"
@@ -93,9 +85,10 @@
         <div class="row">
           <div class="col-lg-8 col-md-12">
             <p class="copy">
-              © 2018
-              <a href="#">Theme Vessel.</a> Trademarks and brands are the
-              property of their respective owners.
+              © 2020.
+              <a href="#">ssafy 양지용 윤창희</a>
+              <!-- <a href="#">ssafy.</a> Trademarks and brands are the
+              property of their respective owners. -->
             </p>
           </div>
           <div class="col-lg-4 col-md-12">
