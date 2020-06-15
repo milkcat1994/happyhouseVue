@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import SubBanner from "@/components/qna/SubBanner.vue";
+import SubBanner from "@/components/SubBanner.vue";
 import store from "@/store/store.js";
 import Detail from "@/components/qna/Detail.vue";
 

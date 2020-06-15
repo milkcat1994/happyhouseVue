@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header />
-    <notice-banner />
+    <sub-banner />
     <create-form type="create" />
     <main-footer />
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 import store from "@/store/store.js";
-import NoticeBanner from "@/components/notice/NoticeBanner.vue";
+import SubBanner from "@/components/SubBanner.vue";
 import CreateForm from "@/components/notice/Form.vue";
 
 import MainHeader from "@/components/MainHeader.vue";
@@ -19,7 +19,7 @@ export default {
   name: "create",
   components: {
     MainHeader,
-    NoticeBanner,
+    SubBanner,
     CreateForm,
     MainFooter
   },

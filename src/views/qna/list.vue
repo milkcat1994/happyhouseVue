@@ -53,7 +53,7 @@
 <script>
   import store from "@/store/store.js";
   import {mapGetters} from "vuex";
-  import SubBanner from "@/components/qna/SubBanner.vue";
+  import SubBanner from "@/components/SubBanner.vue";
   import {getDayDiff} from "@/util/day-common";
   // import Pagination from "@/components/qna/Pagination.vue";
 
