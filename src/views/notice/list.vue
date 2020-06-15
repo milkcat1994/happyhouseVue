@@ -2,59 +2,62 @@
   <div>
     <main-header />
     <sub-banner title="공지사항" />
-    <div class="blog-body content-area-5">
-      <!-- Option bar start -->
 
-      <div class="container">
-        <div v-if="uesrAuth == 'admin'" class="clearfix heading-properties-2">
-          <router-link to="/notice/create" class="pull-right btn btn-md button-theme">공지사항 등록</router-link>
-        </div>
-
-        <ul>
-          <li v-for="(notice, index) in Notices" :key="`${index}_notice`">
-            <div class="row">
-              <div class="col-lg-12">
-                <!-- Blog 1 start -->
-                <div class="blog-1 blog-big">
-                  <div class="detail">
-                    <h3>
-                      <router-link :to="`/notice/read?no=` + notice.no">{{notice.title}}</router-link>
-                    </h3>
-
-                    <div class="row clearfix">
-                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="blog-tags">
-                          <span>{{ '작성자 ' + notice.id }}</span>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="blog-social-list">
-                          <span>
-                            <i class="flaticon-calendar"></i>
-                            {{ getDayDiff(notice.date) }}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div class="dashboard-content">
+      <div class="dashboard-header clearfix">
+        <div class="row">
+          <div class="col-sm-12 col-md-5">
+            <h4></h4>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="breadcrumb-nav">
+              <ul>
+                <router-link to="/notice/create" class="pull-right btn btn-md button-theme">공지사항 등록</router-link>
+              </ul>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-
-      <!-- Page navigation start -->
-      <div class="pagination-box hidden-mb-45 text-center">
-        <v-pagination
-          v-model="NoticePageInfo.curPage"
-          :length="NoticePageInfo.pageCnt"
-          :total-visible="5"
-          @input="next"
-        ></v-pagination>
+      <div class="dashboard-list">
+        <table class="manage-table">
+          <tbody>
+            <tr
+              v-for="(notice, index) in Notices"
+              :key="`${index}_notice`"
+              class="responsive-table"
+            >
+              <td id="td0" />
+              <td id="td1">
+                <h6>
+                  <router-link :to="`/notice/read?no=` + notice.no">{{notice.title}}</router-link>
+                </h6>
+              </td>
+              <td id="td2">
+                <h6>
+                  <i class="fa fa-user-circle-o"></i>
+                  {{ ' '+ notice.id }}
+                </h6>
+              </td>
+              <td id="td3">
+                <i class="flaticon-calendar"></i>
+                {{ getDayDiff(notice.date) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <main-footer />
     </div>
+
+    <!-- Page navigation start -->
+    <div class="pagination-box hidden-mb-45 text-center">
+      <v-pagination
+        v-model="NoticePageInfo.curPage"
+        :length="NoticePageInfo.pageCnt"
+        :total-visible="5"
+        @input="next"
+      ></v-pagination>
+    </div>
+    <main-footer />
   </div>
 </template>
 
@@ -114,5 +117,19 @@ export default {
 <style>
 .theme--light.v-pagination .v-pagination__item--active {
   background-color: #1867c0 !important;
+}
+
+#td0 {
+  width: 200px;
+}
+
+#td1 {
+  width: 700px;
+}
+#td2 {
+  width: 150px;
+}
+#td3 {
+  width: 150px;
 }
 </style>

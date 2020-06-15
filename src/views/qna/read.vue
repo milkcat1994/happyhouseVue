@@ -4,7 +4,6 @@
     <sub-banner title="Q&A" />
     <detail />
     <main-footer />
-    
   </div>
 </template>
 

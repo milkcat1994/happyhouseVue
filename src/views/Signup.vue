@@ -37,7 +37,7 @@
                 </div>
             </div>
             <!-- bg 475 X 717 px로 구해야함. -->
-            <div class="col-lg-6 bg-color-15 align-self-center pad-0 none-992 bg-img">
+            <div id="singupImg" class="col-lg-6 bg-color-15 align-self-center pad-0 none-992 bg-img">
                 <div class="info clearfix">
                     <div class="logo-2">
                         <router-link to="/">
@@ -132,5 +132,9 @@ export default {
 </script>
 
 <style>
-
+#singupImg {
+  background-image: url("/img/img-3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
