@@ -49,7 +49,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown active">
-                <a class="nav-link" href="/">메인</a>
+                <router-link class="nav-link" to="/">메인</router-link>
               </li>
               <li class="nav-item dropdown">
                 <router-link
