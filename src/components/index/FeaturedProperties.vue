@@ -31,7 +31,7 @@
                         </div>
                         <ul class="facilities-list clearfix">
                             <li>
-                                <span>건축 연도</span>{{ housedeal.area}}
+                                <span>건축 연도</span>{{ housedeal.buildYear}}
                             </li>
                             <li>
                                 <span>면적</span>{{ housedeal.area}}
