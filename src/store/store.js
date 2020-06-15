@@ -26,7 +26,9 @@ export default new Vuex.Store({
         NoticePageInfo: {
             curPage: 1
         },
-        Notice: {}
+        Notice: {},
+
+        FavAreas: {},
     },
     getters: {
         items(state) {
@@ -53,6 +55,9 @@ export default new Vuex.Store({
         NoticePageInfo(state) {
             return state.NoticePageInfo;
         },
+        FavAreas(state) {
+            return state.FavAreas;
+        }
     },
     mutations: {
         mutateSetItems(state, items) {
@@ -79,6 +84,9 @@ export default new Vuex.Store({
         mutateNoticePageInfo(state, NoticePageInfo) {
             state.NoticePageInfo = NoticePageInfo;
         },
+        mutateFavAreas(state, FavAreas) {
+            state.FavAreas = FavAreas;
+        }
     },
     actions: {
         getItems(context) {
@@ -107,7 +115,7 @@ export default new Vuex.Store({
                 })
                 .catch(() => {
                     alertify.error("QnA 리스트 조회중 에러가 발생했습니다.", 3,
-                        function () { console.log("qna 리스트 조회중 에러가 발생했습니다."); });
+                        function() { console.log("qna 리스트 조회중 에러가 발생했습니다."); });
                     // alert("qna 리스트 조회중 에러가 발생했습니다.");
                 });
         },
@@ -118,7 +126,7 @@ export default new Vuex.Store({
                     context.commit("mutateSetQnA", data);
                 } else {
                     alertify.error("정보가 없는 QnA입니다.", 3,
-                        function () { console.log("정보가 없는 QnA입니다."); });
+                        function() { console.log("정보가 없는 QnA입니다."); });
                     router.push('/qna');
                 }
             });
@@ -156,7 +164,7 @@ export default new Vuex.Store({
                     context.commit("mutateSetNotice", data);
                 } else {
                     alertify.error("정보가 없는 공지사항입니다.", 3,
-                        function () { console.log("정보가 없는 공지사항입니다."); });
+                        function() { console.log("정보가 없는 공지사항입니다."); });
                     router.push('/notice');
                 }
             });
@@ -176,6 +184,17 @@ export default new Vuex.Store({
                     alert("공지사항 리스트 숫자 조회중 에러가 발생했습니다.");
                 });
         },
+        getFavAreas(context, userId) {
+            http.get("/user/fav/" + userId).then(({ data }) => {
+                if (data) {
+                    console.dir(data);
+                    context.commit("mutateFavAreas", data);
+                } else {
+                    alertify.error("관심지역 로딩 중 오류가 발생했습니다.", 3,
+                        function() { console.log("관심지역 로딩 중 오류가 발생했습니다."); });
+                }
+            });
+        }
     },
     // plugins: [
     //     createPersistedState()

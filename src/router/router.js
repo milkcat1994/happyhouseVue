@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Index from "@/views/Index.vue";
-import Properties from "@/views/Properties.vue";
 
 import QnAList from "@/views/qna/list.vue";
 import QnACreate from "@/views/qna/create.vue";
@@ -123,11 +122,6 @@ const routes = [{
         component: Index,
         beforeEnter: requireAuth
     },
-    {
-        path: "/Properties",
-        name: "Properties",
-        component: Properties
-    }
 ];
 
 
