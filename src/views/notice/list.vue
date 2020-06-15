@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header />
-    <sub-banner></sub-banner>
+    <sub-banner title="공지사항" />
     <div class="blog-body content-area-5">
       <!-- Option bar start -->
 
