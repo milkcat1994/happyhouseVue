@@ -227,6 +227,7 @@ export default {
       let msg = "qna 삭제 처리시 문제가 발생했습니다.";
       alertify.confirm('QnA 게시글 삭제',
         '질문을 삭제 하시겠습니까?',
+        () => {
           http
           .delete('/qna/'+qnaNo)
           .then(({ data }) => {
@@ -241,8 +242,8 @@ export default {
             alertify.warning('alert is closed')
             );
           })
-        ,
-        alertify.error('취소하셨습니다.'),
+        },
+        () => {alertify.error('취소하셨습니다.')}
       );
 
       return false;

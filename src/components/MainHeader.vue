@@ -16,14 +16,14 @@
           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <ul class="top-social-media pull-right">
               <li>
-                <a href="#" @click="logout" v-if="isLogin" class="sign-in">
+                <a href="#" @click.prevent="logout" v-if="isLogin" class="sign-in">
                   <i class="fa fa-sign-in"></i> 로그아웃
                 </a>
                 <router-link to="/login" v-else class="sign-in">
                   <i class="fa fa-sign-in"></i> 로그인
                 </router-link>
               </li>
-              <li>
+              <li v-if="!isLogin" >
                 <router-link to="/signup" class="sign-in">
                   <i class="flaticon-male"></i> 회원가입
                 </router-link>
@@ -123,6 +123,7 @@ export default {
     logout() {
       this.$session.destroy();
       this.isLogin = false;
+      this.$router.push('/');
     }
   },
   created() {

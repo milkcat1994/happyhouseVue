@@ -85,6 +85,11 @@ export default new Vuex.Store({
             state.NoticePageInfo = NoticePageInfo;
         },
         mutateFavAreas(state, FavAreas) {
+            for (let idx = 0; idx < FavAreas.length; idx++) {
+                FavAreas[idx]['complete'] = true;
+                // state.FavAreas.push(fav);
+            }
+            // console.dir(FavAreas);
             state.FavAreas = FavAreas;
         }
     },
@@ -187,7 +192,7 @@ export default new Vuex.Store({
         getFavAreas(context, userId) {
             http.get("/user/fav/" + userId).then(({ data }) => {
                 if (data) {
-                    console.dir(data);
+                    // console.dir(data);
                     context.commit("mutateFavAreas", data);
                 } else {
                     alertify.error("관심지역 로딩 중 오류가 발생했습니다.", 3,
