@@ -7,11 +7,8 @@
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="list-inline">
-              <a v-if="isLogin" href="tel:1-8X0-666-8X88">
-                <i class="flaticon-phone"></i>1-8X0-666-8X88
-              </a>
-              <a v-if="isLogin" href="tel:info@themevessel.com">
-                <i class="flaticon-mail"></i>info@themevessel.com
+              <a v-if="isLogin" href="">
+                <i class="fa fa-user-circle"></i>{{ userId }}
               </a>
             </div>
           </div>
@@ -36,6 +33,7 @@
         </div>
       </div>
       <!-- Top header end -->
+    </div>
 
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -101,7 +99,6 @@
           </div>
         </nav>
       </div>
-    </div>
   </header>
   <!-- Main header end -->
 </template>
