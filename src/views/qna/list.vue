@@ -1,7 +1,7 @@
 <template>
   <div ref='listDisplay'>
     <main-header />
-    <sub-banner />
+    <sub-banner title="Q&A" />
     <!-- Properties section body start -->
     <div class="properties-section-body content-area">
       <div class="container">

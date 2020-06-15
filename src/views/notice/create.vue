@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header />
-    <sub-banner />
+    <sub-banner title="공지사항" />
     <create-form type="create" />
     <main-footer />
   </div>

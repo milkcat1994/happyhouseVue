@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header />
-    <sub-banner />
+    <sub-banner title="Q&A" />
     <detail />
     <main-footer />
     

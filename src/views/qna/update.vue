@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sub-banner />
+    <sub-banner title="Q&A" />
     <update-form type="update" />
   </div>
 </template>

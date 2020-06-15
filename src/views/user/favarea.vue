@@ -1,7 +1,7 @@
 <template>
     <div>
         <main-header />
-        <sub-banner />
+        <sub-banner title="MY PAGE"/>
         <!-- Dashboard start -->
         <div class="dashboard container">
             <div class="container-fluid">
@@ -76,7 +76,7 @@
 <script>
     import http from "@/util/http-common";
     import {mapGetters} from "vuex";
-    import SubBanner from "@/components/qna/SubBanner.vue";
+    import SubBanner from "@/components/SubBanner.vue";
     import MainHeader from "@/components/MainHeader.vue";
     import MainFooter from "@/components/MainFooter.vue";
     import store from "@/store/store.js";

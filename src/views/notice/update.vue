@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sub-banner />
+    <sub-banner title="공지사항" />
     <update-form type="update" />
   </div>
 </template>
