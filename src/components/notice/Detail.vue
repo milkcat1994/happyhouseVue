@@ -1,37 +1,22 @@
 <template>
   <div>
-    <!-- Blog body start -->
-    <div class="blog-body content-area-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <!-- Blog 1 start -->
-            <div class="blog-1 blog-big">
-              <div class="detail">
-                <h3>
-                  <span>{{ Notice.title }}</span>
-                </h3>
-                <div v-html="Notice.content"></div>
-                <div class="row clearfix">
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="blog-tags">
-                      <span>작성자</span>
-                      <a href="#">{{ Notice.id }}</a>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <span class="pull-right">
-                      <i class="flaticon-calendar"></i>
-                      {{ getFormatDate(Notice.date) }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="dashboard-content">
+      <div class="dashboard-list">
+        <h3 class="heading">{{ Notice.title }}</h3>
 
-        <div class="clearfix heading-properties-2">
+        <div class="dashboard-message contact-2 bdr clearfix">
+          <div v-html="Notice.content"></div>
+        </div>
+        <div class="dashboard-message contact-2 bdr clearfix">
+          <span>작성자 {{ Notice.id }}</span>
+          <span class="pull-right">
+            <i class="flaticon-calendar"></i>
+            {{ getFormatDate(Notice.date) }}
+          </span>
+        </div>
+      </div>
+
+       <div class="clearfix heading-properties-2">
           <div>
             <button class="pull-right btn btn-lg btn-danger" @click="deleteNotice(Notice.no)">삭제</button>
           </div>
@@ -47,8 +32,8 @@
              v-if="type == 'create'" @click="checkHandler">글쓰기</button>
           <button class="pull-right btn btn-lg button-theme" v-else @click="checkHandler">수정</button>-->
         </div>
-      </div>
     </div>
+
   </div>
 </template>
 

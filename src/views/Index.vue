@@ -2,9 +2,9 @@
   <div>
     <main-header></main-header>
     <main-banner />
-    <search-section />
+    <!-- <search-section /> -->
     <featured-properties />
-    <main-services />
+    <!-- <main-services /> -->
     <main-footer></main-footer>
   </div>
 </template>

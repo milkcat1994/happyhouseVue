@@ -19,12 +19,10 @@
               <div class="text-center">
                 <h3 class="text-uppercase">Find Your Dreem Property</h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod
                 </p>
                 <div class="inline-search-area isa-4">
                   <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-sm-4 col-6 search-col">
+                    <!-- <div class="col-xl-2 col-lg-2 col-sm-4 col-6 search-col">
                       <select
                         class="selectpicker search-fields"
                         name="any-status"
@@ -153,7 +151,7 @@
                       <button class="btn button-theme btn-search btn-block">
                         <i class="fa fa-search"></i><strong>Search</strong>
                       </button>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
