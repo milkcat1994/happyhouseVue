@@ -4,7 +4,7 @@ import router from "@/router/router.js";
 import store from "@/store/store.js";
 
 import CKEditor from "@ckeditor/ckeditor5-vue";
-// import Vuetify from 'vuetify'
+import Vuetify from 'vuetify'
 // import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
 import vuetify from '@/plugins/vuetify' // path to vuetify export
@@ -17,7 +17,7 @@ var sessionOptions = {
 
 Vue.use(CKEditor);
 
-// Vue.use(Vuetify);
+Vue.use(Vuetify);
 
 Vue.config.productionTip = false;
 

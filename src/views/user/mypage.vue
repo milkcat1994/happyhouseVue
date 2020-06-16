@@ -85,7 +85,10 @@
                                     </div>
                                 </div>
                                 <div class="clearfix heading-properties-2">
-                                    <button class="pull-right btn btn-lg button-theme" @click="checkUpdatable">
+                                    <button class="pull-right btn btn-lg btn-danger" @click="userDelete">
+                                        탈퇴하기
+                                    </button>
+                                    <button class="pull-right btn btn-lg btn-warning" @click="checkUpdatable">
                                         수정하기
                                     </button>
                                 </div>
@@ -173,6 +176,35 @@ import http from "@/util/http-common";
                 this.phone = user.phone;
                 this.email = user.email;
                 this.pwd = user.pwd;
+            },
+            userDelete(){
+                let tid = this.$session.get('userId');
+                let msg = '회원탈퇴 실패';
+                let vue = this;
+                alertify.confirm('회원 탈퇴', '탈퇴 하시겠습니까?',
+                function(){
+                    http
+                    .delete('user/'+ tid)
+                    .then(({data}) => {
+                        if (data === "success") {
+                            msg = "탈퇴가 완료되었습니다."
+                            alertify.notify(msg, 'success', 3, function(){  console.log('회원탈퇴 완료'); });
+                            vue.logout();
+                        }
+                        else{
+                            alertify.error(msg, 3, function(){  console.log('회원탈퇴 실패'); });
+                        }
+                    })
+                    .catch(() => {
+                        msg = '회원탈퇴 서버 통신 실패';
+                        alertify.error(msg, 3, function(){  console.log('회원탈퇴 서버 통신 실패'); });
+                    });
+                },
+                function(){ alertify.error('취소되었습니다.')});
+            },
+            logout() {
+                this.$session.destroy();
+                this.$router.push('/');
             }
         },
         created() {
@@ -180,6 +212,9 @@ import http from "@/util/http-common";
             store.dispatch("auth/getUserInfo", this.$session.get('userId'))
                 .then((response) => {
                     this.setUserInfo(response.data);
+                })
+                .catch((error) =>{
+                    this.$router.push('/');
                 })
         }
     }

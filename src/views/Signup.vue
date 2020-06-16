@@ -94,7 +94,7 @@ export default {
                 ((msg = "전화번호를 입력해주세요"), (err = false), this.$refs.phone.focus());
 
             if (!err) alertify.error(msg, 3);
-            // else this.regist();
+            else this.regist();
         },
         regist() {
             let user = {};
@@ -111,6 +111,7 @@ export default {
                     if (data === "success") {
                         msg = "회원가입이 되었습니다."
                         alertify.notify(msg, 'success', 3, function(){  console.log('회원가입 완료'); });
+                        this.$router.push('/login');
                     }
                     else{
                         alertify.error(msg, 3, function(){  console.log('회원가입 실패'); });

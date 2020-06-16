@@ -18,6 +18,7 @@
                 name="text"
                 class="input-text"
                 placeholder="ID"
+                ref="id"
                 v-model="userId"
                 @keyup.enter="login"
               />
@@ -34,7 +35,7 @@
             </div>
             <div class="form-group clearfix mb-0">
               <button type="submit" class="btn-md btn-theme float-left" @click="login">Login</button>
-              <a href="#" class="forgot-password">Forgot Password</a>
+              <router-link to="/findpwd" class="forgot-password">Forgot Password</router-link>
             </div>
             <!-- </form> -->
           </div>
@@ -79,6 +80,9 @@ export default {
       userId: "",
       userPwd: ""
     };
+  },
+  mounted(){
+    this.$refs.id.focus();
   },
   methods: {
     login() {

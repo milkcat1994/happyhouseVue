@@ -14,10 +14,12 @@ import NoticeUpdate from "@/views/notice/update.vue";
 
 import Login from "@/views/Login.vue";
 import Signup from "@/views/Signup.vue";
+import FindPwd from "@/views/user/forgotPwd.vue";
 import MyPage from "@/views/user/mypage.vue";
 import FavArea from "@/views/user/favarea.vue";
 
 import Deal from "@/views/deal/list.vue";
+import HouseDetail from "@/views/deal/detail.vue";
 // import Deal from "@/views/deal/propertiesGrid.vue";
 Vue.use(VueRouter);
 
@@ -55,6 +57,11 @@ const routes = [{
     {
         path: '/signup',
         component: Signup,
+        beforeEnter: hasAuth
+    },
+    {
+        path: '/findpwd',
+        component: FindPwd,
         beforeEnter: hasAuth
     },
     {
@@ -120,9 +127,8 @@ const routes = [{
         beforeEnter: requireAuth
     },
     {
-        path: "/mypage",
-        name: "Mypage",
-        component: Index,
+        path: '/house/detail',
+        component: HouseDetail,
         beforeEnter: requireAuth
     },
 ];

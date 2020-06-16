@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="dashboard-content">
-      <div class="dashboard-list">
+    <div class="dashboard-content container">
+      <div class="dashboard-list" >
         <h3 class="heading">{{ Notice.title }}</h3>
 
         <div class="dashboard-message contact-2 bdr clearfix">

@@ -3,9 +3,10 @@ import Vuex from "vuex";
 import http from "@/util/http-common";
 import router from "@/router/router.js";
 
+import { padZero } from "@/util/util-common";
 import { auth } from './auth.module'
 
-// import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -29,6 +30,11 @@ export default new Vuex.Store({
         Notice: {},
 
         FavAreas: {},
+
+        Houses: [],
+        House: {},
+        NeerPriceHosues: [],
+        RecentHouse: [],
     },
     getters: {
         items(state) {
@@ -57,6 +63,20 @@ export default new Vuex.Store({
         },
         FavAreas(state) {
             return state.FavAreas;
+        },
+        Houses(state) {
+            return state.Houses;
+        },
+        House(state) {
+            return state.House;
+        },
+        NeerPriceHosues(state) {
+            return state.NeerPriceHosues;
+        },
+        RecentHouse(state) {
+            console.log('getter>>');
+            console.dir(state.RecentHouse);
+            return state.RecentHouse;
         }
     },
     mutations: {
@@ -91,6 +111,53 @@ export default new Vuex.Store({
             }
             // console.dir(FavAreas);
             state.FavAreas = FavAreas;
+        },
+        mutateSetHouses(state, Houses) {
+            state.Houses = Houses.map(
+                h => h.dealDate ? h : {...h, dealDate: padZero(h.dealYear, 2) + padZero(h.dealMonth, 2) + padZero(h.dealDay, 2) }
+            );
+        },
+        mutateSetHouse(state, House) {
+            state.House = House;
+        },
+        mutateSetNeerPrice(state, NeerPriceHosues) {
+            state.NeerPriceHosues = NeerPriceHosues;
+        },
+        mutateSetRecentHouse(state, RecentHouse) {
+            console.dir(state.RecentHouse);
+            console.log(state.RecentHouse.length);
+            //없다면 무조건 넣기
+            if (state.RecentHouse.length == 0) {
+                state.RecentHouse = [];
+                state.RecentHouse.unshift(RecentHouse);
+                // state.RecentHouse.push(RecentHouse);
+                console.log('--1--');
+            } else {
+                let isExistsItem = false;
+                //한번 돌면서 이미 들어있는지 확인
+                for (let idx in state.RecentHouse) {
+                    if (state.RecentHouse[idx].no == RecentHouse.no) {
+                        isExistsItem = true;
+                        break;
+                    }
+                }
+                //없을 경우만 저장 할 것이다.
+                if (!isExistsItem) {
+                    //최대 길이라면 마지막 삭제 이후 넣기
+                    if (state.RecentHouse.lenght >= 3) {
+                        state.RecentHouse = state.RecentHouse.slice(0, 3);
+                        state.RecentHouse.unshift(RecentHouse);
+                        console.log('--2--');
+                    } else {
+                        state.RecentHouse.unshift(RecentHouse);
+                        console.log('--3--');
+                    }
+                }
+            }
+            // state.RecentHouse = RecentHouse;
+            if (state.RecentHouse.length > 3) {
+                state.RecentHouse = state.RecentHouse.slice(0, 3);
+            }
         }
     },
     actions: {
@@ -199,9 +266,62 @@ export default new Vuex.Store({
                         function() { console.log("관심지역 로딩 중 오류가 발생했습니다."); });
                 }
             });
+        },
+        getHouses(context, no) {
+            return new Promise((resolve) => {
+                http
+                    .get("/housedeal/multi/" + no)
+                    .then(({ data }) => {
+                        if (data) {
+                            console.dir(data);
+                            context.commit("mutateSetHouses", data);
+                            resolve(data);
+                        } else {
+                            alertify.error("거래정보가 없습니다.", 3,
+                                function() { console.log("거래정보가 없습니다."); });
+                        }
+                    });
+            })
+        },
+        getHouse(context, obj) {
+            // console.log(obj);
+            return new Promise((resolve) => {
+                http
+                    .post("/housedeal/" + obj.no, { dong: obj.dong })
+                    .then(({ data }) => {
+                        if (data) {
+                            console.dir(data);
+                            context.commit("mutateSetHouse", data);
+                            console.log('getHouse end');
+                            resolve(data);
+                        } else {
+                            alertify.error("정보가 없는 거래정보입니다.", 3,
+                                function() { console.log("정보가 없는 거래정보입니다."); });
+                            router.push('/deal');
+                        }
+                    });
+            })
+        },
+        getNeerPriceHouses(context, price) {
+            http
+                .post("/housedeal/neerprice", { dealAmount: price })
+                .then(({ data }) => {
+                    if (data) {
+                        console.dir(data);
+                        context.commit("mutateSetNeerPrice", data);
+                        console.log('getNeerGet start');
+                    } else {
+                        alertify.error("가격이 비슷한 매물이 없는 거래 정보입니다.", 3,
+                            function() { console.log("가격이 비슷한 매물이 없는 거래 정보입니다"); });
+                    }
+                });
+        },
+        saveRecentHouse(context, obj) {
+            console.log('call me');
+            context.commit("mutateSetRecentHouse", obj);
         }
     },
-    // plugins: [
-    //     createPersistedState()
-    // ]
+    plugins: [
+        createPersistedState()
+    ]
 });

@@ -4,7 +4,7 @@
     <sub-banner title="Q&A" />
     <!-- Properties section body start -->
 
-    <div class="dashboard-content">
+    <div class="dashboard-content container">
 
       <div class="clearfix heading-properties-2">
       <router-link to="/qna/create" class="pull-right btn btn-md button-theme">글쓰기</router-link>
@@ -14,11 +14,11 @@
       <div class="dashboard-list">
         <table class="manage-table">
           <tbody>
-            <tr v-for="(qna, index) in QnAs" :key="`${index}_qna`" class="responsive-table">
+            <tr v-for="(qna, index) in QnAs" :key="`${index}_qna`" @click="moveDetail(qna.qnaNo)" class="responsive-table qna-clickable">
               <td id="td0" />
               <td id="td1">
                 <h6>
-                  <router-link :to="`/qna/read?no=` + qna.qnaNo">{{qna.qnaTitle}}</router-link>
+                  <a>{{qna.qnaTitle}}</a>
                 </h6>
               </td>
               <td id="td2">
@@ -57,7 +57,7 @@ import store from "@/store/store.js";
 import { mapGetters } from "vuex";
 import SubBanner from "@/components/SubBanner.vue";
 import { getDayDiff } from "@/util/day-common";
-// import Pagination from "@/components/qna/Pagination.vue";
+import { moveScrollTop } from "@/util/scroll-common";
 
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
@@ -84,18 +84,18 @@ export default {
     },
     next(page) {
       store.dispatch("getQnAs", page);
+      moveScrollTop();
+    },
+    moveDetail(qnaNo){
+      this.$router.push(`/qna/read?no=` + qnaNo);
+      moveScrollTop();
     }
-  },
-  updated() {
-    //페이지 이동시 가장 상단으로 이동
-    let display = this.$refs.listDisplay;
-    display.scrollTop = 0;
-    //   display.scrollHeight;
   }
 };
 </script>
 
 <style>
-/* @import url("https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"); */
-/* src="vuetify/dist/vuetify.min.css" */
+    .qna-clickable :hover {
+        cursor: pointer;
+    }
 </style>

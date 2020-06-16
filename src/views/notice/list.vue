@@ -3,7 +3,7 @@
     <main-header />
     <sub-banner title="공지사항" />
 
-    <div class="dashboard-content">
+    <div class="dashboard-content container">
       <div class="dashboard-header clearfix">
         <div class="row">
           <div class="col-sm-12 col-md-5">
@@ -24,12 +24,13 @@
             <tr
               v-for="(notice, index) in Notices"
               :key="`${index}_notice`"
-              class="responsive-table"
+              class="responsive-table notice-clickable"
+              @click="moveDetail(notice.no)"
             >
               <td id="td0" />
               <td id="td1">
                 <h6>
-                  <router-link :to="`/notice/read?no=` + notice.no">{{notice.title}}</router-link>
+                  <a >{{notice.title}}</a>
                 </h6>
               </td>
               <td id="td2">
@@ -66,6 +67,7 @@ import store from "@/store/store.js";
 import { mapGetters } from "vuex";
 import SubBanner from "@/components/SubBanner.vue";
 import { getDayDiff } from "@/util/day-common";
+import { moveScrollTop } from "@/util/scroll-common";
 
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
@@ -103,17 +105,15 @@ export default {
     },
     next(page) {
       store.dispatch("getNotices", page);
+      moveScrollTop();
+    },
+    moveDetail(noticeNo){
+      this.$router.push(`/notice/read?no=` + noticeNo);
+      moveScrollTop();
     }
-  },
-  pdated() {
-    //페이지 이동시 가장 상단으로 이동
-    let display = this.$refs.listDisplay;
-    display.scrollTop = 0;
-    //   display.scrollHeight;
   }
 };
 </script>
-
 <style>
 .theme--light.v-pagination .v-pagination__item--active {
   background-color: #1867c0 !important;
@@ -131,5 +131,8 @@ export default {
 }
 #td3 {
   width: 150px;
+}
+.notice-clickable :hover {
+    cursor: pointer;
 }
 </style>

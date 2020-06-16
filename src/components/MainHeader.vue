@@ -127,7 +127,7 @@ export default {
     }
   },
   created() {
-    if (this.$session.get("userId")) {
+    if (this.$session.exists()) {
       // console.log('success ' + this.$session.get('userId'));
       this.isLogin = true;
       this.userId = this.$session.get("userId");
