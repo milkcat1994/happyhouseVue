@@ -16,9 +16,9 @@
                 <div class="col-sm-12 col-md-7">
                   <div class="breadcrumb-nav">
                     <ul>
-                      <li :class="{active : priceShow}" @click="priceShow = !priceShow" >내게 맞는 집 가격 알아보기</li>
-                      <li :class="{active : loanShow}" @click="loanShow = !loanShow" >대출 이자 계산기</li>
-                      <li :class="{active : goalShow}" @click="goalShow = !goalShow" >목돈 모으기</li>
+                      <li :class="{active : priceShow}" @click="showControll(1)" ><button>내게 맞는 집 가격 알아보기</button></li>
+                      <li :class="{active : loanShow}" @click="showControll(2)" ><button>대출 이자 계산기</button></li>
+                      <li :class="{active : goalShow}" @click="showControll(3)" ><button>목돈 모으기</button></li>
                     </ul>
                   </div>
                 </div>
@@ -26,6 +26,8 @@
             </div>
 
             <goal v-if="goalShow" />
+            <HousePrice v-if="priceShow" />
+            <Loan v-if="loanShow" />
             
           </div>
         </div>
@@ -47,43 +49,49 @@ import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 
 import Goal from "@/components/plan/Goal.vue";
+import HousePrice from "@/components/plan/HousePrice.vue";
+import Loan from "@/components/plan/Loan.vue";
 
 export default {
   name: "plan",
 
   data() {
     return {
-        priceShow : false,
+        priceShow : true,
         loanShow : false,
-        goalShow : true
+        goalShow : false,
     };
   },
   components: {
     MainHeader,
     SubBanner,
     MainFooter,
-    Goal
+    Goal,
+    HousePrice,
+    Loan,
   },
   computed: {
-    //해당 페이지 정보에 따라 갱신해야함.
-    ...mapGetters(["NoticePageInfo"]),
-    ...mapGetters(["Notices"])
+
   },
   created() {
-    store.dispatch("getNoticePageInfo", 1);
-    store.dispatch("getNotices", 1);
-    store.dispatch("getNotices", 1);
+
   },
   methods: {
-    checkAdmin() {
-      return uesrAuth == "admin" ? true : false;
-    },
-    getDayDiff(curTime) {
-      return getDayDiff(curTime);
-    },
-    next(page) {
-      store.dispatch("getNotices", page);
-    }
+   showControll(num){
+     if(num === 1){
+       this.priceShow = true;
+       this.loanShow = false;
+       this.goalShow = false;
+     }else if(num === 2){
+       this.priceShow = false;
+       this.loanShow = true;
+       this.goalShow = false;
+     }else{
+       this.priceShow = false;
+       this.loanShow = false;
+       this.goalShow = true;
+     }
+   }
   },
   pdated() {
     //페이지 이동시 가장 상단으로 이동
