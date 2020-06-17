@@ -142,8 +142,8 @@
                 val && val !== this.address && this.querySelections(val)
             },
             favAddress(val) {
-                console.log('val2>>>' + val);
-                console.log('select2>>>' + this.favAddress);
+                // console.log('val2>>>' + val);
+                // console.log('select2>>>' + this.favAddress);
                 if(this.favAddress){
                     this.address = null;
                     this.makeFav(this.FavAreas);
@@ -151,6 +151,12 @@
                 }
                 // val && val !== this.favAddress && (this.showFavAddress = this.favAddress)
             },
+            address(val){
+                if(this.address){
+                    this.favAddress = null;
+                    this.searchDealInfo();
+                }
+            }
         },
         updated() {
             // this.$nextTick(function () {
