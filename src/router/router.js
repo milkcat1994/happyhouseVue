@@ -20,6 +20,8 @@ import FavArea from "@/views/user/favarea.vue";
 
 import Deal from "@/views/deal/list.vue";
 import HouseDetail from "@/views/deal/detail.vue";
+
+import Plan from "@/views/plan/index.vue";
 // import Deal from "@/views/deal/propertiesGrid.vue";
 Vue.use(VueRouter);
 
@@ -129,6 +131,12 @@ const routes = [{
     {
         path: '/house/detail',
         component: HouseDetail,
+        beforeEnter: requireAuth
+    },
+    {
+        path: "/plan",
+        name: "Plan",
+        component: Plan,
         beforeEnter: requireAuth
     },
 ];

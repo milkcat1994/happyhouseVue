@@ -8,7 +8,7 @@
         </div>
         <!-- Slick slider area start -->
         <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+             <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}},  {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'> 
                 <div  v-for="(housedeal, index) in houseDeals" :key="`${index}_housedeal`" class="slick-slide-item">
                     <div class="property-box">
                         <div class="property-thumbnail">
@@ -48,7 +48,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+                
+             </div> 
         </div>
     </div>
 </div>
