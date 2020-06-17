@@ -42,7 +42,7 @@
               <v-pagination
                 v-model="QnAPageInfo.curPage"
                 :length="QnAPageInfo.pageCnt"
-                :total-visible="10"
+                :total-visible="QnAPageInfo.pageSize"
                 @input="next"
               ></v-pagination>
             </div>

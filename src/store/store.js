@@ -218,9 +218,11 @@ export default new Vuex.Store({
                     alert("qna 리스트 숫자 조회중 에러가 발생했습니다.");
                 });
         },
-        getNotices(context) {
+        getNotices(context, pageNo) {
             http
-                .get("/notice")
+                .post("/notice/" + pageNo, {
+                    curPage: pageNo
+                })
                 .then(({ data }) => {
                     context.commit("mutateSetNotices", data);
                     console.dir(data);

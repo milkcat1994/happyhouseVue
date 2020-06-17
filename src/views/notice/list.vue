@@ -54,7 +54,7 @@
       <v-pagination
         v-model="NoticePageInfo.curPage"
         :length="NoticePageInfo.pageCnt"
-        :total-visible="5"
+        :total-visible="NoticePageInfo.pageSize"
         @input="next"
       ></v-pagination>
     </div>
@@ -78,7 +78,6 @@ export default {
   data() {
     return {
       userId: this.$session.get("userId"),
-      uesrAuth: this.$session.get("userAuth")
     };
   },
   components: {
@@ -98,7 +97,7 @@ export default {
   },
   methods: {
     checkAdmin() {
-      return uesrAuth == "admin" ? true : false;
+      return this.$session.get("userAuth") == "admin" ? true : false;
     },
     getDayDiff(curTime) {
       return getDayDiff(curTime);

@@ -28,23 +28,12 @@
                                         </td>
                                         <td class="title-container" >
                                             <!-- selectpicker 추가하기 -->
-                                                <!-- 시/도 -->
-                                                <select v-if="!fav.complete" v-model="city" @change="getGu" class=" search-fields" data-size="5" data-live-search="true" >
-                                                    <option value=''>시/도 선택</option>
-                                                    <option v-for="tcity in citys" :key="tcity" :value="tcity" >{{tcity}}</option>
-                                                </select>
-
-                                                <!-- 구/군 -->
-                                                <select v-if="!fav.complete" v-model="gu" @change="getDong" class=" search-fields" data-size="5" data-live-search="true" >
-                                                    <option value=''>구/군 선택</option>
-                                                    <option v-for="tgu in gus" :key="tgu" :value="tgu" >{{tgu}}</option>
-                                                </select>
-
-                                                <!-- 동 -->
-                                                <select v-if="!fav.complete" v-model="dong" class=" search-fields" data-size="5" data-live-search="true" >
-                                                    <option value=''>동 선택</option>
-                                                    <option v-for="tdong in dongs" :key="tdong" :value="tdong">{{tdong}}</option>
-                                                </select>
+                                            <v-app id="inspire" v-if="!fav.complete">
+                                                <v-autocomplete height="50" v-model="address" :loading="loading"
+                                                    :items="showAddresses" :search-input.sync="search" @keyup.enter.prevent="searchDealInfo" cache-items
+                                                    class="mx-4" hide-no-data hide-details label="주소 검색" solo
+                                                    :menu-props="{ 'nudge-top':367, 'nudge-left':117, 'z-index':9999}"></v-autocomplete>
+                                            </v-app>
                                             <h2>
                                                 <a v-if="fav.complete">{{fav.city}}</a>
                                             </h2>
@@ -93,6 +82,13 @@
                 city:'',
                 gu:'',
                 dong:'',
+
+                search: null,
+                address:null,
+                loading: false,
+                addresses:[],
+                address: {},
+                showAddresses:[],
             }
         },
         components: {
@@ -103,16 +99,24 @@
         computed:{
             ...mapGetters(["FavAreas"]),
         },
+        watch: {
+            search(val) {
+                console.log('val>>>' + val);
+                console.log('select>>>' + this.address);
+                val && val !== this.address && this.querySelections(val)
+            },
+        },
         mounted() {
-            $(".selectpicker").selectpicker();
+
         },
         updated(){
-            $('.selectpicker').selectpicker('refresh')
+
         },
         methods: {
             removeFav(index){
                 let msg = "관심지역 삭제 처리시 문제가 발생했습니다.";
                 let area = {};
+                //잘라야됨 this.address
                 area.city = this.FavAreas[index].city;
                 area.gu = this.FavAreas[index].gu;
                 area.dong = this.FavAreas[index].dong;
@@ -139,24 +143,25 @@
                 let msg = "";
                 let err = true;
                 console.log(this.FavAreas[0]['complete']);
+                console.log(this.address.split(' ').length);
 
                 let obj = {};
-                this.city=='' &&
-                    ((msg = "시/도 정보를 선택해주세요."), (err = false));
-                err && this.gu=='' &&
-                    ((msg = "구/군 정보를 선택해주세요."), (err = false));
-                err && this.dong=='' &&
-                    ((msg = "동 정보를 선택해주세요."), (err = false));
-                console.log(this.gu=='');
+                this.address.split(' ').length != 3 &&
+                    ((msg = "주소를 올바르게 입력해주세요"), (err = false));
+                // err && this.gu=='' &&
+                //     ((msg = "구/군 정보를 선택해주세요."), (err = false));
+                // err && this.dong=='' &&
+                //     ((msg = "동 정보를 선택해주세요."), (err = false));
+                // console.log(this.gu=='');
                 if (!err){
                     alertify.error(msg, 3);
                     return false;
                 }
                 msg = "관심지역 등록 중 오류발생";
 
-                obj.city = this.city;
-                obj.gu = this.gu;
-                obj.dong = this.dong;
+                obj.city =this.getAddress(this.address,0);
+                obj.gu = this.getAddress(this.address,1);
+                obj.dong = this.getAddress(this.address,2);
 
                 http
                 .post('/user/fav/'+this.$session.get('userId'), obj)
@@ -229,11 +234,47 @@
                 this.city = '';
                 this.gu = '';
                 this.dong = '';
-            $('.selectpicker').selectpicker('refresh')
-            }
+                $('.selectpicker').selectpicker('refresh')
+            },
+            makeObjectToAddress(data) {
+                this.showAddresses = [];
+                for (let idx in data) {
+                    this.showAddresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
+                }
+            },
+            querySelections(v) {
+                this.loading = true
+                // Simulated ajax query
+                console.log('in>>');
+                setTimeout(() => {
+                    this.showAddresses = this.addresses.filter(e => {
+                        console.dir(e);
+                        return (e.address || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                    })
+                    this.loading = false
+                }, 500)
+            },
+            getAddress(address, index) {
+                return address.split(' ')[index];
+            },
         },
         created(){
             store.dispatch("getFavAreas", this.$session.get('userId'));
+
+            http
+                .get('/util/address')
+                .then(({
+                    data
+                }) => {
+                    this.makeObjectToAddress(data);
+                    console.log('success get addresses');
+                    // console.dir(data);
+                })
+                .catch((error) => {
+                    alertify.error(msg, 3, function () {
+                        console.log(error);
+                    });
+                });
         }
     }
 </script>
