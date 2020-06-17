@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <!-- 관심지역으로 검색 -->
                                 <v-app id="inspire">
-                                    <v-select :items="showFav" v-model="favAddress" label="Solo field"  solo @keyup.enter.prevent="searchFavDealInfo" :search-input.sync="favSearch"
+                                    <v-select :items="showFav" v-model="favAddress" label="관심지역"  solo @keyup.enter.prevent="searchFavDealInfo" :search-input.sync="favSearch"
                                         :menu-props="{ 'nudge-top':152, 'nudge-left':20, 'z-index':9999}"></v-select>
                                 </v-app>
                             </div>

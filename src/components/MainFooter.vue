@@ -29,7 +29,7 @@
               </li> -->
               <li>
                 <i class="flaticon-internet"></i>
-                <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp">SSAFY_URL</a>
+                <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp" target="_blank">SSAFY_URL</a>
               </li>
             </ul>
           </div>
