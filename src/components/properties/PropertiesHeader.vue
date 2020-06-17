@@ -4,6 +4,7 @@
 <!-- Top header start -->
 <header class="top-header top-header-bg" id="top-header-2">
     <div class="container-fluid">
+      <img src="/img/vue-3.png" style="width:65px; height:50px; padding-top:5px;float: left;">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div class="list-inline">

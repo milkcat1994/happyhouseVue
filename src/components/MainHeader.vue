@@ -3,6 +3,7 @@
   <header class="main-header header-transparent sticky-header">
     <!-- Top header start -->
     <div class="top-header top-header-bg" id="top-header-2">
+      <img src="/img/vue-3.png" style="width:75px; height:60px; padding-top:10px;float: left;">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
