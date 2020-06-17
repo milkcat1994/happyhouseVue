@@ -24,7 +24,7 @@
                             </select> -->
                             <v-app id="inspire">
                                 <v-autocomplete height="50" v-model="address" :loading="loading"
-                                    :items="showAddresses" :search-input.sync="search" :blur="searchDealInfo" @keyup.enter.prevent="searchDealInfo" cache-items
+                                    :items="showAddresses" :search-input.sync="search" @change="searchIdx" @keyup.enter.prevent="searchDealInfo" cache-items
                                     class="mx-4" hide-no-data hide-details label="주소 검색" solo
                                     :menu-props="{ 'nudge-top':200, 'nudge-left':20, 'z-index':9999}"></v-autocomplete>
                             </v-app>
@@ -38,7 +38,7 @@
                                 </select> -->
 
                                 <v-app id="inspire">
-                                    <v-select :items="showFav" label="Solo field" :blur="searchFavDealInfo" solo @keyup.enter.prevent="searchFavDealInfo"
+                                    <v-select :items="showFav" v-model="favAddress" label="Solo field"  solo @keyup.enter.prevent="searchFavDealInfo" :search-input.sync="favSearch"
                                         :menu-props="{ 'nudge-top':152, 'nudge-left':20, 'z-index':9999}"></v-select>
                                 </v-app>
                             </div>
@@ -102,6 +102,8 @@
                 addresses: [],
                 showAddresses: [],
                 address: null,
+                favAddress: null,
+                showFavAddress:[],
                 searchName: '',
 
                 showFav: [],
@@ -121,6 +123,8 @@
                 search: null,
                 select: null,
 
+                // searchIdx: -1,
+                favSearch:0,
             }
         },
         components: {
@@ -136,10 +140,12 @@
         },
         mounted() {
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
-
         },
         watch: {
             FavAreas: function () {
+                if(this.FavAreas.length>0){
+                    this.favAddress = this.joinAddress(this.FavAreas[0]);
+                }
                 this.searchFavDealInfo();
                 this.makeFav(this.FavAreas);
             },
@@ -148,20 +154,36 @@
                 console.log('select>>>' + this.address);
                 val && val !== this.address && this.querySelections(val)
             },
-            select(value) {
-                console.log('in1');
-                // dialog opened (value is true) in edit mode (editedIndex > -1)
-                if (value && this.editedIndex > -1) {
-                    searchDealInfo();
+            favAddress(val) {
+                console.log('val2>>>' + val);
+                console.log('select2>>>' + this.favAddress);
+                if(this.favAddress){
+                    this.address = null;
+                    this.searchFavDealInfo();
                 }
-            }
+                // val && val !== this.favAddress && (this.showFavAddress = this.favAddress)
+            },
         },
         updated() {
             // this.$nextTick(function () {
-            //     $('.selectpicker').selectpicker('refresh')
+                //     $('.selectpicker').selectpicker('refresh')
             // });
         },
         methods: {
+            searchIdx(value) {
+                console.log('in1>>'+this.address);
+                if(this.address){
+                    this.favAddress = null;
+                    this.searchDealInfo();
+                }
+                // dialog opened (value is true) in edit mode (editedIndex > -1)
+                // if (value && this.editedIndex > -1) {
+                    //     searchDealInfo();
+                // }
+            },
+            favSearchIdx(value){
+                console.log('in2>>'+this.favAddress);
+            },
             // setItems(value) {
             //     console.log('in2');
             //     if (value && value.length > 0) {
@@ -237,7 +259,7 @@
                     }) => {
                         if (data.length != 0) {
                             self.favIndex = '';
-
+                            this.searchName = '';
                             console.log('test>>');
                             console.dir(data);
                             self.makeProperties(data);
@@ -257,8 +279,8 @@
                     })
             },
             searchFavDealInfo() {
-                console.log('favIndex : ' + this.favIndex);
-                if (this.favIndex === '') {
+                console.log('favAddress : ' + this.favAddress);
+                if (!this.favAddress) {
                     return;
                 }
                 let msg = '거래정보를 가져올 수 없습니다.';
@@ -267,7 +289,8 @@
                 // console.dir(temp);
                 // console.dir(this.FavAreas);
                 // console.log(this.favIndex);
-                obj.dong = this.FavAreas[this.favIndex].dong;
+                obj.dong = this.getAddress(this.favAddress,2);
+                // this.FavAreas[this.favIndex].dong;
 
                 let self = this;
                 http
@@ -277,11 +300,13 @@
                     }) => {
                         //데이터가 없는경우 거래정보 없다고 표기
                         if (data.length != 0) {
+                            this.searchName = '';
                             self.makeProperties(data);
                             self.makeMarker(data);
                         } else {
                             msg = '해당 지역의 거래정보가 없습니다.';
-                            self.favIndex = self.exFav;
+                            // self.favIndex = self.exFav;
+                            this.favAddress = null;
                             alertify.error(msg, 3, function () {
                                 console.log(msg);
                             });
@@ -302,7 +327,7 @@
                 //아니라면 관심지역으로 검색하기.
                 this.address &&
                     (obj.dong = this.getAddress(this.address, 2)) ||
-                    (obj.dong = this.FavAreas[this.favIndex].dong);
+                    (obj.dong = this.getAddress(this.favAddress,2));
 
                 obj.aptName = this.searchName;
 
@@ -346,7 +371,7 @@
                 console.log('start makeProperties '+ this.address);
                 this.address &&
                     ((tobj.city = this.getAddress(this.address, 0)), (tobj.gu = this.getAddress(this.address, 1)), (tobj.dong = this.getAddress(this.address, 2))) ||
-                    ((tobj.city = this.FavAreas[this.favIndex].city), (tobj.gu = this.FavAreas[this.favIndex].gu), (tobj.dong = this.FavAreas[this.favIndex].dong));
+                    ((tobj.city = this.getAddress(this.favAddress,0)), (tobj.gu = this.getAddress(this.favAddress,1)), (tobj.dong = this.getAddress(this.favAddress,2)));
 
                 for (let idx = 0; idx < data.length; ++idx) {
                     let obj = new Object();
