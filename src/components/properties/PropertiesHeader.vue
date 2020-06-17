@@ -73,6 +73,9 @@
               <li class="nav-item dropdown megamenu-li">
                 <router-link class="nav-link" to="/qna" id="dropdown01">Q&A</router-link>
               </li>
+              <li class="nav-item dropdown megamenu-li">
+                <router-link class="nav-link" to="/plan" >PLAN</router-link>
+              </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
