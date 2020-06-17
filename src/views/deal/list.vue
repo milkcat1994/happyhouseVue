@@ -18,7 +18,7 @@
                             <v-app id="inspire">
                                 <!-- 주소로 검색 -->
                                 <v-autocomplete height="50" v-model="address" :loading="loading"
-                                    :items="showAddresses" :search-input.sync="search" @keyup.enter.prevent="searchDealInfo" cache-items
+                                    :items="showAddresses" :search-input.sync="search" @keyup.enter.prevent="searchDealInfo" no-filter
                                     class="mx-4" hide-no-data hide-details label="주소 검색" solo
                                     :menu-props="{ 'nudge-top':200, 'nudge-left':20, 'z-index':9999}"></v-autocomplete>
                             </v-app>
@@ -79,6 +79,7 @@
     import PropertiesGrid from "@/components/properties/PropertiesGrid.vue";
     import MainFooter from "@/components/MainFooter.vue";
     import store from "@/store/store.js";
+    import {bestSearch} from "@/util/search-common";
 
     export default {
         name: "properties",
@@ -678,11 +679,12 @@
                 const self = this;
                 self.loading = true
                 // Simulated ajax query
-                console.log('in>>');
-                setTimeout(() => {
-                    self.showAddresses = self.addresses.filter(e => {
-                        // console.dir(e);
-                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                console.log('inQuery>> '+v);
+                    setTimeout(() => {
+                        self.showAddresses = self.addresses.filter(e => {
+                            // console.dir(e);
+                        // return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                        return bestSearch(e, v);
                     })
                     self.loading = false
                 }, 500)
