@@ -31,7 +31,7 @@
                                             <!-- selectpicker 추가하기 -->
                                             <v-app id="inspire" v-if="!fav.complete">
                                                 <v-autocomplete height="50" v-model="address" :loading="loading"
-                                                    :items="showAddresses" :search-input.sync="search" cache-items
+                                                    :items="showAddresses" :search-input.sync="search" no-filter
                                                     class="mx-4" hide-no-data hide-details label="주소 검색" solo
                                                     :menu-props="{ 'nudge-top':367, 'nudge-left':117, 'z-index':9999}">
                                                 </v-autocomplete>
@@ -75,6 +75,7 @@
     import MainHeader from "@/components/MainHeader.vue";
     import MainFooter from "@/components/MainFooter.vue";
     import store from "@/store/store.js";
+    import {bestSearch} from "@/util/search-common";
     
     export default {
         name: "favarea",
@@ -276,9 +277,9 @@
                 $('.selectpicker').selectpicker('refresh')
             },
             makeObjectToAddress(data) {
-                this.showAddresses = [];
+                this.addresses = [];
                 for (let idx in data) {
-                    this.showAddresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
+                    this.addresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
                 }
             },
             querySelections(v) {
@@ -288,8 +289,9 @@
                 const self = this;
                 setTimeout(() => {
                     self.showAddresses = self.addresses.filter(e => {
-                        console.dir(e);
-                        return (e.address || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                        // console.dir(e);
+                        // return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                        return bestSearch(e, v);
                     })
                     this.loading = false
                 }, 500)

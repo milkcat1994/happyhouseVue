@@ -36,6 +36,8 @@ export default new Vuex.Store({
         House: {},
         NeerPriceHosues: [],
         RecentHouse: [],
+
+        HouseName: [],
     },
     getters: {
         items(state) {
@@ -77,6 +79,9 @@ export default new Vuex.Store({
         House(state) {
             return state.House;
         },
+        HouseName(state) {
+            return state.HouseName;
+        },
         NeerPriceHosues(state) {
             return state.NeerPriceHosues;
         },
@@ -84,7 +89,7 @@ export default new Vuex.Store({
             console.log('getter>>');
             console.dir(state.RecentHouse);
             return state.RecentHouse;
-        }
+        },
     },
     mutations: {
         mutateSetItems(state, items) {
@@ -123,6 +128,12 @@ export default new Vuex.Store({
             state.Houses = Houses.map(
                 h => h.dealDate ? h : {...h, dealDate: padZero(h.dealYear, 2) + padZero(h.dealMonth, 2) + padZero(h.dealDay, 2) }
             );
+        },
+        mutateSetHouseName(state, HouseName) {
+            state.HouseName = [];
+            for (let idx in HouseName) {
+                state.HouseName.push(HouseName[idx].aptName)
+            }
         },
         mutateSetStores(state, Stores) {
             state.Stores = Stores;
@@ -313,6 +324,21 @@ export default new Vuex.Store({
                             alertify.error("정보가 없는 거래정보입니다.", 3,
                                 function() { console.log("정보가 없는 거래정보입니다."); });
                             router.push('/deal');
+                        }
+                    });
+            })
+        },
+        getHouseName(context) {
+            return new Promise((resolve) => {
+                http
+                    .get("/houseinfo")
+                    .then(({ data }) => {
+                        if (data) {
+                            context.commit("mutateSetHouseName", data);
+                            resolve(data);
+                        } else {
+                            alertify.error("오류발생하였습니다.", 3,
+                                function() { console.log("오류가 발생하였습니다."); });
                         }
                     });
             })
