@@ -37,7 +37,7 @@
                             <v-app id="inspire">
                                 <!-- 주소로 검색 -->
                                 <v-autocomplete height="50" v-model="searchName" :loading="loading2"
-                                    :items="showHouseNames" :search-input.sync="search2" @keyup.enter.prevent="searchDealInfo" no-filter
+                                    :items="showHouseNames" :search-input.sync="search2" @keyup.enter.prevent="searchDealInfoAdd" no-filter
                                     class="mx-4" hide-no-data hide-details label="아파트 이름 검색" solo
                                     :menu-props="{ 'nudge-top':200, 'nudge-left':20, 'z-index':9999}"></v-autocomplete>
                             </v-app>
@@ -176,7 +176,12 @@
                     this.favAddress = null;
                     this.searchDealInfo();
                 }
-            }
+            },
+            searchName(val){
+                if(this.searchName){
+                    this.searchDealInfoAdd();
+                }
+            },
         },
         updated() {
             // this.$nextTick(function () {
