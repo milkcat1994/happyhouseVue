@@ -30,7 +30,8 @@ export default new Vuex.Store({
         Notice: {},
 
         FavAreas: {},
-
+        Stores: [],
+        Envs: [],
         Houses: [],
         House: {},
         NeerPriceHosues: [],
@@ -63,6 +64,12 @@ export default new Vuex.Store({
         },
         FavAreas(state) {
             return state.FavAreas;
+        },
+        Stores(state) {
+            return state.Stores;
+        },
+        Envs(state) {
+            return state.Envs;
         },
         Houses(state) {
             return state.Houses;
@@ -116,6 +123,12 @@ export default new Vuex.Store({
             state.Houses = Houses.map(
                 h => h.dealDate ? h : {...h, dealDate: padZero(h.dealYear, 2) + padZero(h.dealMonth, 2) + padZero(h.dealDay, 2) }
             );
+        },
+        mutateSetStores(state, Stores) {
+            state.Stores = Stores;
+        },
+        mutateSetEnvs(state, Envs) {
+            state.Envs = Envs;
         },
         mutateSetHouse(state, House) {
             state.House = House;
@@ -300,6 +313,48 @@ export default new Vuex.Store({
                             alertify.error("정보가 없는 거래정보입니다.", 3,
                                 function() { console.log("정보가 없는 거래정보입니다."); });
                             router.push('/deal');
+                        }
+                    });
+            })
+        },
+        getStores(context, obj) {
+            return new Promise((resolve) => {
+                http
+                    .post("/store", {
+                        city: obj.city,
+                        gu: obj.gu,
+                        dong: obj.dong,
+                    })
+                    .then(({ data }) => {
+                        if (data) {
+                            console.log('success Stores')
+                            console.dir(data);
+                            context.commit("mutateSetStores", data);
+                            resolve(data);
+                        } else {
+                            alertify.error("상가 정보조회 중 오류가 발생하였습니다.", 3,
+                                function() { console.log("상가 정보조회 중 오류가 발생하였습니다."); });
+                        }
+                    });
+            })
+        },
+        getEnvs(context, no) {
+            return new Promise((resolve) => {
+                http
+                    .post("/env", {
+                        city: obj.city,
+                        gu: obj.gu,
+                        dong: obj.dong,
+                    })
+                    .then(({ data }) => {
+                        if (data) {
+                            console.log('success Envs')
+                            console.dir(data);
+                            context.commit("mutateSetEnvs", data);
+                            resolve(data);
+                        } else {
+                            alertify.error("환경 정보조회 중 오류가 발생하였습니다.", 3,
+                                function() { console.log("환경 정보조회 중 오류가 발생하였습니다."); });
                         }
                     });
             })
