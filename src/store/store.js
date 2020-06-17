@@ -338,7 +338,7 @@ export default new Vuex.Store({
                     });
             })
         },
-        getEnvs(context, no) {
+        getEnvs(context, obj) {
             return new Promise((resolve) => {
                 http
                     .post("/env", {

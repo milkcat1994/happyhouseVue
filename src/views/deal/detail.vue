@@ -40,12 +40,35 @@
                         <!-- Floor plans start -->
                         <h3 class="heading-2">거래내역</h3>
                         <v-app id="inspire" class=" mb-50">
-                            <v-data-table :headers="headers" :items="Houses" multi-sort
+                            <v-data-table :headers="headers" :items="Houses" multi-sort 
                                 :footer-props="{'disable-items-per-page': true,}" class="elevation-1">
                                 <template v-slot:header.name="{ header }">
                                     {{ header.text.toUpperCase() }}
                                 </template>
                             </v-data-table>
+                        </v-app>
+                        <!-- Floor plans start -->
+                        <!-- <h3 class="heading-2">주변 환경점검 정보</h3> -->
+                        <v-app id="inspire" class=" mb-50">
+                            <v-card>
+                            <v-card-title>
+                                주변 환경 점검 정보
+                                <v-spacer></v-spacer>
+                                <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="Search"
+                                single-line
+                                hide-details
+                                ></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="envHeaders" :items="Envs" multi-sort :search="search"
+                                :footer-props="{'disable-items-per-page': true,}" class="elevation-1">
+                                <template v-slot:header.name="{ header }">
+                                    {{ header.text.toUpperCase() }}
+                                </template>
+                            </v-data-table>
+                            </v-card>
                         </v-app>
                         <!-- Location start -->
                         <div class="location mb-50">
@@ -151,6 +174,20 @@
                         value: 'floor'
                     },
                 ],
+                envHeaders: [{
+                        text: '업체명',
+                        value: 'name'
+                    },
+                    {
+                        text: '주소',
+                        value: 'address'
+                    },
+                    {
+                        text: '업종명',
+                        value: 'bizname'
+                    },
+                ],
+                search:'',
             }
         },
         components: {
@@ -163,6 +200,7 @@
             ...mapGetters(["Houses"]),
             ...mapGetters(["RecentHouse"]),
             ...mapGetters(["NeerPriceHosues"]),
+            ...mapGetters(["Envs"]),
             getPriceAtArea() {
                 return (this.House.dealAmount.replace(/\,/g, "") / this.House.area).toFixed(1);
             }
@@ -179,6 +217,17 @@
                 .then(() => {
                     store.dispatch("getNeerPriceHouses", self.House.dealAmount);
                     store.dispatch("getHouses", this.$route.query.no);
+
+                    store.dispatch("getEnvs", {city:'', gu:'', dong:self.House.dong})
+                    .then((data) => {
+                        if(!data){
+                            alertify.error("해당 지역의 환경점검정보이 없습니다.", 3,
+                                function() { console.log("해당 지역의 환경점검이 없습니다."); });
+                        }
+                        else{
+                            // self.makeEnvMarker(data);
+                        }
+                    });
                     self.makeMarker();
                 })
         },
