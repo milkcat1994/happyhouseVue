@@ -505,7 +505,7 @@
                         position: position,
                         clickable: true,
                         xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
-                        yAnchor: 1.1 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+                        yAnchor: 0.5 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
                     });
                     // var infowindow = new kakao.maps.InfoWindow({
                     //     // map: this.map,
@@ -642,9 +642,22 @@
                         image: markerImage, // 마커 이미지
                         clickable: true
                     });
+                    
+                    let iwContent = '<div class ="label"><span class="left"></span><span class="center">'+data[idx].shopname+'</span><span class="right"></span></div>';
+                    let position = obj.latlng;
+                    let mapCustomOverlay = new kakao.maps.CustomOverlay({
+                        content: iwContent,
+                        position: position,
+                        clickable: true,
+                        xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+                        yAnchor: 1.2 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+                    });
+                    mapCustomOverlay.setMap(this.map);
+                    
                     marker.setMap(this.map);
 
                     this.storeMarkers.push(marker);
+                    this.storeMarkers.push(mapCustomOverlay);
                 }
                 this.map.panTo(new kakao.maps.LatLng(data[0].lat, data[0].lng));
             },
@@ -756,4 +769,10 @@
     .below-content {
         padding-left: 25px;
     }
+
+    /* .label {margin-bottom: 96px;} */
+.label * {display: inline-block;vertical-align: top;}
+.label .left {background: url("https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
+.label .center {background: url(https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
+.label .right {background: url("https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
 </style>
