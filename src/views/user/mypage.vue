@@ -18,20 +18,13 @@
                             <h3 class="heading">개인정보 수정</h3>
                             <div class="dashboard-message contact-2 bdr clearfix">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-3">
+                                    <div >
                                         <!-- Edit profile photo -->
-                                        <div class="edit-profile-photo">
-                                            <img src="http://placehold.it/223x223" alt="profile-photo"
-                                                class="img-fluid">
-                                            <!-- <div class="change-photo-btn">
-                                        <div class="photoUpload clip-home">
-                                            <span><i class="fa fa-upload"></i></span>
-                                            <input type="file" class="upload">
-                                        </div>
-                                    </div> -->
+                                        <div class="edit-profile-photo" >
+                                            <img :src="getUrl(null)"  style="width:233px;height:233px;" alt="profile-photo">
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 col-md-9">
+                                    <div class="col-lg col-md">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-group">
@@ -205,7 +198,11 @@ import http from "@/util/http-common";
             logout() {
                 this.$session.destroy();
                 this.$router.push('/');
-            }
+            },
+            getUrl(img) {
+                if (!img) return '/img/unknownImg.jpg';
+                return "/img/area/" + img;
+            },
         },
         created() {
             console.log()
