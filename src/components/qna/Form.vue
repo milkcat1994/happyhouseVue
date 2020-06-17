@@ -148,7 +148,7 @@ export default {
           if (data === "success") {
             msg = "수정이 완료되었습니다.";
             alertify.notify(msg, 'success', 3, function(){  console.log('qna수정 완료'); });
-            this.moveList();
+            this.$router.push("/qna/read?no="+this.no);
           }
           else{
             alertify.error(msg, 3, function(){  console.log('qna수정 실패'); });
