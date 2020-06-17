@@ -33,11 +33,20 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <div class="form-group">
+                            
+                            <v-app id="inspire">
+                                <!-- 주소로 검색 -->
+                                <v-autocomplete height="50" v-model="searchName" :loading="loading2"
+                                    :items="showHouseNames" :search-input.sync="search2" @keyup.enter.prevent="searchDealInfo" no-filter
+                                    class="mx-4" hide-no-data hide-details label="아파트 이름 검색" solo
+                                    :menu-props="{ 'nudge-top':200, 'nudge-left':20, 'z-index':9999}"></v-autocomplete>
+                            </v-app>
+
                                 <!-- 추가적인 부가검색이다. -->
+                            <!-- <div class="form-group">
                                 <input v-model="searchName" @keyup.enter="searchDealInfoAdd"
                                     class="form-control search-fields" placeholder="아파트 이름">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -113,6 +122,12 @@
 
                 // searchIdx: -1,
                 favSearch:0,
+
+                showHouseNames:[],
+                loading2: false,
+                search2: null,
+
+                
             }
         },
         components: {
@@ -122,6 +137,7 @@
         },
         computed: {
             ...mapGetters(["FavAreas"]),
+            ...mapGetters(["HouseName"]),
         },
         destroyed() {
             console.log('destory');
@@ -138,9 +154,12 @@
                 // this.makeFav(this.FavAreas);
             },
             search(val) {
-                console.log('val>>>' + val);
-                console.log('select>>>' + this.address);
                 val && val !== this.address && this.querySelections(val)
+            },
+            search2(val) {
+                console.log('val>>>' + val);
+                // console.log('select>>>' + this.HouseName);
+                val && val !== this.searchName && this.querySelections2(val)
             },
             favAddress(val) {
                 // console.log('val2>>>' + val);
@@ -679,7 +698,7 @@
                 const self = this;
                 self.loading = true
                 // Simulated ajax query
-                console.log('inQuery>> '+v);
+                // console.log('inQuery>> '+v);
                     setTimeout(() => {
                         self.showAddresses = self.addresses.filter(e => {
                             // console.dir(e);
@@ -689,10 +708,25 @@
                     self.loading = false
                 }, 500)
             },
+            querySelections2(v) {
+                const self = this;
+                self.loading2 = true
+                // Simulated ajax query
+                // console.log('inQuery>> '+v);
+                    setTimeout(() => {
+                        self.showHouseNames = self.HouseName.filter(e => {
+                            // console.dir(e);
+                        // return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                        return bestSearch(e, v);
+                    })
+                    self.loading2 = false
+                }, 500)
+            },
 
         },
         created() {
             store.dispatch("getFavAreas", this.$session.get('userId'));
+            store.dispatch("getHouseName");
 
             let msg = '주소 정보를 가져올 수 없습니다.';
             http
