@@ -18,7 +18,7 @@
                             <v-app id="inspire">
                                 <!-- 주소로 검색 -->
                                 <v-autocomplete height="50" v-model="address" :loading="loading"
-                                    :items="showAddresses" :search-input.sync="search" @change="searchIdx" @keyup.enter.prevent="searchDealInfo" cache-items
+                                    :items="showAddresses" :search-input.sync="search" @keyup.enter.prevent="searchDealInfo" cache-items
                                     class="mx-4" hide-no-data hide-details label="주소 검색" solo
                                     :menu-props="{ 'nudge-top':200, 'nudge-left':20, 'z-index':9999}"></v-autocomplete>
                             </v-app>
@@ -225,9 +225,9 @@
                 }
             },
             makeObjectToAddress(data) {
-                this.showAddresses = [];
+                this.addresses = [];
                 for (let idx in data) {
-                    this.showAddresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
+                    this.addresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
                 }
             },
             searchDealInfo() {
@@ -669,15 +669,16 @@
                 this.markers = [];
             },
             querySelections(v) {
-                this.loading = true
+                const self = this;
+                self.loading = true
                 // Simulated ajax query
                 console.log('in>>');
                 setTimeout(() => {
-                    this.showAddresses = this.addresses.filter(e => {
-                        console.dir(e);
-                        return (e.address || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                    self.showAddresses = self.addresses.filter(e => {
+                        // console.dir(e);
+                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                     })
-                    this.loading = false
+                    self.loading = false
                 }, 500)
             },
 

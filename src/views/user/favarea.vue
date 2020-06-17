@@ -276,9 +276,9 @@
                 $('.selectpicker').selectpicker('refresh')
             },
             makeObjectToAddress(data) {
-                this.showAddresses = [];
+                this.addresses = [];
                 for (let idx in data) {
-                    this.showAddresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
+                    this.addresses.push(data[idx].city.concat(' ', data[idx].gu, ' ', data[idx].dong));
                 }
             },
             querySelections(v) {
@@ -288,8 +288,8 @@
                 const self = this;
                 setTimeout(() => {
                     self.showAddresses = self.addresses.filter(e => {
-                        console.dir(e);
-                        return (e.address || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                        // console.dir(e);
+                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                     })
                     this.loading = false
                 }, 500)
