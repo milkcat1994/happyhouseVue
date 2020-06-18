@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: "/",
+    publicPath: "./",
     lintOnSave: false,
     outputDir: "../HappyHouseAPI/src/main/resources/static"
 };

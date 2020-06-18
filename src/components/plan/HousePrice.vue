@@ -1,6 +1,6 @@
 <template>
   <div class="submit-address dashboard-list">
-    <form method="GET">
+    <form>
       <h4 class="bg-grea-3"></h4>
       <div class="search-contents-sidebar">
         <div class="row pad-20">
@@ -9,7 +9,7 @@
               <label>
                 <strong>현재 보유 금액</strong> (원)
               </label>
-              <input type="text" v-model.number="holdingAmount" class="input-text" />
+              <input type="number" v-model.number="holdingAmount" class="input-text" />
               <h6></h6>
             </div>
           </div>
@@ -18,7 +18,7 @@
               <label>
                 <strong>월 급여</strong> (원)
               </label>
-              <input type="email" v-model.number="monthlySalary" class="input-text" />
+              <input type="number" v-model.number="monthlySalary" class="input-text" />
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -26,7 +26,7 @@
               <label>
                 <strong>월 고정 지출</strong> (원)
               </label>
-              <input type="email" v-model.number="monthlyExpenses" class="input-text" />
+              <input type="number" v-model.number="monthlyExpenses" class="input-text" />
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -34,7 +34,7 @@
               <label>
                 <strong>금리</strong> (%)
               </label>
-              <input type="text" v-model.number="rate" class="input-text" name="phone" placeholder="Phone" />
+              <input type="number" v-model.number="rate" class="input-text"/>
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -42,7 +42,7 @@
               <label>
                 <strong>상환기간</strong> (년)
               </label>
-              <input type="text" v-model.number="period" class="input-text" name="phone" placeholder="Phone" />
+              <input type="number" v-model.number="period" class="input-text" />
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -50,7 +50,7 @@
           </div>
           <div class="row pad-20">
             <div class="col-lg-4 col-md-12 col-sm-12">
-              <a @click="resultShow = true" class="btn btn-md button-theme">결과 확인</a>
+              <a @click.prevent="setObj" class="btn btn-md button-theme">결과 확인</a>
             </div>
           </div>
         </div>
@@ -144,39 +144,50 @@ export default {
       m2:0,
       m3:0,
 
-
-
       rate : 3,
       period : 1,
 
       resultShow: false,
     };
   },
+  watch:{
+      holdingAmount(){
+        this.resultShow = false;
+      },
+      monthlySalary(){
+        this.resultShow = false;
+      },
+      monthlyExpenses(){
+        this.resultShow = false;
+      },
+      rate(){
+        this.resultShow = false;
+      },
+      period(){
+        this.resultShow = false;
+      }
+  },
   methods:{
     setObj(){
-        let pRate = this.rate / 100; //이자율
+      console.log('run');
+      let pRate = this.rate / 100; //이자율
         let per = this.period * 12;
 
         this.p = this.monthlySalary - this.monthlyExpenses;
-
-        // (Math.pow(1+pRate/12,per)-1)
-
-        // ((pRate/12)*Math.pow(1+pRate/12,per))
 
         this.limit = Math.round(this.p*(Math.pow(1+pRate/12,per)-1)/((pRate/12)*Math.pow(1+pRate/12,per)),1);
 
         this.m1 = Math.round(this.limit*0.4,1);
         this.m2 = Math.round(this.limit*0.6,1);
         this.m3 = Math.round(this.limit*0.8,1);
-        console.log(this.limit);
 
+      console.log(this.resultShow);
+        this.resultShow = true;
+      console.log(this.resultShow);
     },
     addTwo(a,b){
       return a+b;
     }
-  },
-  mounted(){
-    this.setObj();
   }
 };
 </script>

@@ -9,7 +9,7 @@
               <label>
                 <strong>목표 금액</strong> (원)
               </label>
-              <input type="text" v-model.number="goalAmount" class="input-text" />
+              <input type="number" v-model.number="goalAmount" class="input-text" />
               <h6></h6>
             </div>
           </div>
@@ -18,7 +18,7 @@
               <label>
                 <strong>적립 기간</strong> (월)
               </label>
-              <input type="text" v-model.number="period" class="input-text" />
+              <input type="number" v-model.number="period" class="input-text" />
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-12">
@@ -27,11 +27,9 @@
                 <strong>연 이자율</strong> (%)
               </label>
               <input
-                type="text"
+                type="number"
                 v-model.number="rate"
                 class="input-text"
-                name="phone"
-                placeholder="Phone"
               />
             </div>
           </div>
@@ -58,7 +56,7 @@
 
           <div class="row pad-20">
             <div class="col-lg-4 col-md-12 col-sm-12">
-              <a @click="resultShow = true" class="btn btn-md button-theme">결과 확인</a>
+              <a @click.prevent="resultShow = true" class="btn btn-md button-theme">결과 확인</a>
             </div>
           </div>
         </div>

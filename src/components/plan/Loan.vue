@@ -1,6 +1,6 @@
 <template>
   <div class="submit-address dashboard-list">
-    <form method="GET">
+    <form>
       <h4 class="bg-grea-3"></h4>
       <div class="search-contents-sidebar">
         <div class="row pad-20">
@@ -20,7 +20,7 @@
               <label>
                 <strong>대출 금액</strong> (원)
               </label>
-              <input type="text" v-model.number="loanAmount" class="input-text" />
+              <input type="number" v-model.number="loanAmount" class="input-text" />
               <h6></h6>
             </div>
           </div>
@@ -30,7 +30,7 @@
               <label>
                 <strong>연 이자율</strong> (%)
               </label>
-              <input type="text" v-model.number="rate" class="input-text" />
+              <input type="number" v-model.number="rate" class="input-text" />
             </div>
           </div>
 
@@ -39,7 +39,7 @@
               <label>
                 <strong>상환기간</strong> (년)
               </label>
-              <input type="text" v-model.number="period" class="input-text" />
+              <input type="number" v-model.number="period" class="input-text" />
             </div>
           </div>
 
@@ -52,7 +52,7 @@
 
           <div class="row pad-20">
             <div class="col-lg-4 col-md-12 col-sm-12">
-              <a @click="setObj" class="btn btn-md button-theme">결과 확인</a>
+              <a @click.prevent="setObj" class="btn btn-md button-theme">결과 확인</a>
             </div>
           </div>
         </div>
@@ -190,6 +190,7 @@
             //r, o, p(고정)
             obj.p = p;
             obj.r = Math.round(this.getRate(n, pRate),1);
+            if(obj.r <0) obj.r = 0;
             this.totalr += obj.r;
             n = n - p;
             obj.o = Math.round(this.getOrigin(p, obj.r),1);
@@ -199,8 +200,6 @@
           console.dir(this.resultArr);
         }
 
-
-        
         this.resultShow = true
       },
       //이자 구하기
