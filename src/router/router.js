@@ -22,13 +22,10 @@ import Deal from "@/views/deal/list.vue";
 import HouseDetail from "@/views/deal/detail.vue";
 
 import Plan from "@/views/plan/index.vue";
-// import Deal from "@/views/deal/propertiesGrid.vue";
 Vue.use(VueRouter);
 
-// import store from "@/store/store.js";
 
 const requireAuth = (to, from, next) => {
-    // if (store.state.auth.isLogin) return next()
     if (Vue.prototype.$session.exists()) return next()
     next({
         path: '/login',
@@ -37,7 +34,6 @@ const requireAuth = (to, from, next) => {
 }
 
 const hasAuth = (to, from, next) => {
-    // if (localStorage.userToken) {
     if (Vue.prototype.$session.exists()) {
         next({ path: '/' });
     }

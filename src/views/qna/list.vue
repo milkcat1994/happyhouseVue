@@ -69,7 +69,6 @@ export default {
     MainFooter
   },
   computed: {
-    //   QnAPageInfo.curPage
     //해당 페이지 정보에 따라 갱신해야함.
     ...mapGetters(["QnAPageInfo"]),
     ...mapGetters(["QnAs"])

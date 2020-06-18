@@ -38,20 +38,14 @@ export const auth = {
                         pwd: pwd
                     })
                     .then(({ data }) => {
-                        console.log(data);
                         context.commit("mutateIsLogin", true);
                         let token = Math.random().toString(36).substring(2);
                         context.commit("mutateUserToken", token);
                         context.commit("mutateUserInfo", data);
 
-                        // localStorage.userToken = token;
-                        // localStorage.userInfo = { "userId": data.id, "userAuth": data.auth };
-
                         resolve({ data })
                     })
                     .catch((error) => {
-                        console.log(error);
-                        console.log("로그인 실패");
                         if (error.response) {
                             if (error.response.status == "404") {
                                 alertify.error("아이디 또는 비밀번호가 올바르지 않습니다.", 3);
@@ -68,7 +62,6 @@ export const auth = {
                 http
                     .get("/user/logout")
                     .then(data => {
-                        console.log(data);
                         context.commit("mutateIsLogin", false);
                         context.commit("mutateUserToken", '');
                         context.commit("mutateUserInfo", {});
@@ -93,7 +86,6 @@ export const auth = {
                 http
                     .get("/user/" + userid)
                     .then(({ data }) => {
-                        console.dir(data);
                         resolve({ data })
                     })
                     .catch(() => {

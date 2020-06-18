@@ -135,7 +135,6 @@ import http from "@/util/http-common";
                 err && !this.pwdchk &&
                     ((msg = "비밀번호를 확인해주세요"), (err = false), this.$refs.pwdchk.focus());
 
-                // console.dir(this.$session.get('userId'));
                 if (!err) alertify.error(msg, 3);
                 else this.updateProfile();
             },

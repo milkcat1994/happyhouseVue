@@ -111,7 +111,6 @@ export default {
         ((msg = "내용 입력해주세요"),
         (err = false),
         this.$refs.editorData.focus());
-      console.dir(this.$session.get('userId'));
       if (!err) alertify.error(msg, 3);
       else this.type == "create" ? this.createHandler() : this.updateHandler();
     },

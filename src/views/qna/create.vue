@@ -22,9 +22,6 @@ export default {
     SubBanner,
     CreateForm,
     MainFooter
-  },
-  created() {
-    // store.dispatch("getQnAs");
   }
 };
 </script>

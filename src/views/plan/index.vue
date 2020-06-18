@@ -97,7 +97,6 @@ export default {
     //페이지 이동시 가장 상단으로 이동
     let display = this.$refs.listDisplay;
     display.scrollTop = 0;
-    //   display.scrollHeight;
   }
 };
 </script>

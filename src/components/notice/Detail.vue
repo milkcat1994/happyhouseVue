@@ -28,9 +28,6 @@
           <router-link to="/notice">
             <button class="pull-right btn btn-lg btn-info">목록</button>
           </router-link>
-          <!-- <button class="pull-right btn btn-lg button-theme"
-             v-if="type == 'create'" @click="checkHandler">글쓰기</button>
-          <button class="pull-right btn btn-lg button-theme" v-else @click="checkHandler">수정</button>-->
         </div>
     </div>
 

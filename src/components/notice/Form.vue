@@ -87,7 +87,6 @@ export default {
           "undo",
           "redo"
         ]
-        // language: "ko",
         // The configuration of the editor.
       }
     };
@@ -103,7 +102,6 @@ export default {
         ((msg = "내용 입력해주세요"),
         (err = false),
         this.$refs.editorData.focus());
-      console.dir(this.$session.get("userId"));
       if (!err) alert(msg);
       else this.type == "create" ? this.createHandler() : this.updateHandler();
     },
@@ -146,9 +144,11 @@ export default {
             });
             this.moveList();
           }
-          alertify.error(msg, 3, function() {
-            console.log("공지사항 수정 실패");
+          else{
+            alertify.error(msg, 3, function() {
+              console.log("공지사항 수정 실패");
           });
+          }
         })
         .catch(() => {
           alertify.error(msg, 3, function() {

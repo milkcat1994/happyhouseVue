@@ -6,9 +6,6 @@
             <div class="property-box property-clickable" :id="'id-property-box'+property.no" @click="moveDetail()">
                 <div class="property-thumbnail">
                     <a href="#" class="property-img">
-                        <!-- <div class="listing-badges">
-                            <span class="featured">Featured</span>
-                        </div> -->
                         <div class="price-box"><span>{{property.dealAmount}}만원</span></div>
                         <img class="d-block w-100" :src="getUrl(property.img)" alt="properties">
                     </a>
@@ -63,7 +60,6 @@
                 return "/img/house/" + img;
             },
             moveDetail() {
-                console.log('can move>>/house/detail/' + this.property.no);
                 store.dispatch("saveRecentHouse", this.property);
                 this.$router.push('/house/detail?no=' + this.property.no + '&dong=' + this.property.dong);
             },

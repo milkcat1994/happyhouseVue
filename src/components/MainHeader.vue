@@ -40,7 +40,6 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <router-link class="navbar-brand logo" to="/">
             HAPPY HOUSE
-            <!-- <img src="img/logos/black-logo.png" alt="logo"> -->
           </router-link>
           <button
             class="navbar-toggler"
@@ -119,7 +118,6 @@ export default {
   },
   computed: {
     userAuth() {
-      // console.log('cchange userAuth ' + this.$session.get('userAuth'));
       return this.$session.get("userAuth");
     }
   },
@@ -132,11 +130,9 @@ export default {
   },
   created() {
     if (this.$session.exists()) {
-      // console.log('success ' + this.$session.get('userId'));
       this.isLogin = true;
       this.userId = this.$session.get("userId");
     } else {
-      // console.log('fail ' + this.$session.get('userId'));
       this.isLogin = false;
     }
   }

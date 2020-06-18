@@ -23,7 +23,6 @@
                         </div>
                         <div class="form-group form-box">
                             <input type="password" v-model="pwdchk" ref="pwdchk" name="pwdchk" class="input-text" placeholder="비밀번호 확인">
-                            <!-- <p style="color:black;">맞아요</p> -->
                         </div>
                         <div class="form-group form-box">
                             <input type="email" v-model="email" ref="email" name="email" class="input-text" placeholder="xxx@google.com">
@@ -42,7 +41,6 @@
                     <div class="logo-2">
                         <router-link to="/">
                             <h4 style="color:white">HappyHouse</h4>
-                            <!-- <img src="img/logos/logo.png" alt="logo"> -->
                         </router-link>
                     </div>
                     <h3>Welcome to HappyHouse</h3>

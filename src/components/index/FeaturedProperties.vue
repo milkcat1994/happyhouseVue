@@ -60,7 +60,6 @@
         },
         name: "FeaturedProperties",
         created: function () {
-            console.log("hello");
             http
                 .get("/housedeal/main")
                 .then(({data}) => {
@@ -77,7 +76,6 @@
                 return "/img/house/" + img;
             },
             moveDetail(index) {
-                console.log('can move>>/house/detail/' + this.houseDeals[index].no);
                 store.dispatch("saveRecentHouse", this.houseDeals[index]);
                 this.$router.push('/house/detail?no=' + this.houseDeals[index].no + '&dong=' + this.houseDeals[index].dong);
             },

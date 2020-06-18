@@ -4,10 +4,6 @@
     <div class="container">
        <div class="breadcrumb-area">
          <h1>{{ title }}</h1>
-        <!-- <ul class="breadcrumbs">
-           <li><a href="index.html">Home</a></li>
-          <li class="active">Properties Fullwidth</li>
-        </ul>  -->
       </div> 
     </div>
   </div>

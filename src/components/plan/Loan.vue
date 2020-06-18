@@ -200,7 +200,6 @@
 
             this.resultArr.push(obj);
           }
-          console.dir(this.resultArr);
         }
 
         this.resultShow = true

@@ -240,7 +240,6 @@
             },
             searchDetail(no, dong) {
                 const self = this;
-                console.log(no + "<<>>" + $.trim(dong));
                 store.dispatch("getHouse", {
                         no: no,
                         dong: $.trim(dong),
@@ -264,9 +263,6 @@
                 };
 
                 this.map = new kakao.maps.Map(container, options);
-                // let mapTypeControl = new kakao.maps.mapTypeControl();
-
-                // this.map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
             },
             addScript() {
                 const script = document.createElement('script'); /* global kakao */
@@ -282,8 +278,6 @@
                 obj = new Object();
                 obj.title = this.House.aptName;
                 obj.latlng = new kakao.maps.LatLng(this.House.lat, this.House.lng);
-                console.log('makeMarker>>');
-                console.dir(this.House);
                 let iwContent = '<div class="customoverlay">' +
                     '<a href="http://www.kcrbds.co.kr/search/search.php?kwd=' +
                     this.makeUrl(this.House.dong, this.House.aptName) + '" target="_blank">' +
@@ -300,9 +294,6 @@
                 });
 
                 mapCustomOverlay.setMap(this.map);
-                // this.markers.push(mapCustomOverlay);
-
-
                 this.map.panTo(new kakao.maps.LatLng(this.House.lat, this.House.lng));
             },
             makeUrl(dong, name) {

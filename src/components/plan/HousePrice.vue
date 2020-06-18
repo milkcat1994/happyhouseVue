@@ -172,7 +172,6 @@
     },
     methods: {
       setObj() {
-        console.log('run');
         let pRate = this.rate / 100; //이자율
         let per = this.period * 12;
 
@@ -185,9 +184,7 @@
         this.m2 = Math.round(this.limit * 0.6, 1);
         this.m3 = Math.round(this.limit * 0.8, 1);
 
-        console.log(this.resultShow);
         this.resultShow = true;
-        console.log(this.resultShow);
       },
       addTwo(a, b) {
         return a + b;

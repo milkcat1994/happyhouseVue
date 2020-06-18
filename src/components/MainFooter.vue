@@ -24,9 +24,6 @@
                 <i class="flaticon-phone"></i>
                 <a href="">02-3429-5100</a>
               </li>
-              <!-- <li>
-                <i class="flaticon-fax"></i>+0477 85X6 552
-              </li> -->
               <li>
                 <i class="flaticon-internet"></i>
                 <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp" target="_blank">SSAFY_URL</a>
@@ -47,12 +44,6 @@
               <li>
                 <a href="">Services</a>
               </li>
-              <!-- <li>
-                <a href="">Contact Us</a>
-              </li> -->
-              <!-- <li>
-                <a href="">Dashboard</a>
-              </li> -->
               <li>
                 <a href="">Properties Details</a>
               </li>
@@ -87,8 +78,6 @@
             <p class="copy">
               © 2020.
               <a href="#">ssafy 양지용 윤창희</a>
-              <!-- <a href="#">ssafy.</a> Trademarks and brands are the
-              property of their respective owners. -->
             </p>
           </div>
           <div class="col-lg-4 col-md-12">

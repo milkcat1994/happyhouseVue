@@ -28,7 +28,6 @@
                                                 class="img-fluid">
                                         </td>
                                         <td class="title-container">
-                                            <!-- selectpicker 추가하기 -->
                                             <v-app id="inspire" v-if="!fav.complete">
                                                 <v-autocomplete height="50" v-model="address" :loading="loading"
                                                     :items="showAddresses" :search-input.sync="search" no-filter
@@ -47,7 +46,6 @@
                                             <a @click.prevent="removeFav(index)" class="delete"><i
                                                     class="fa fa-remove"></i> 삭제</a>
                                         </td>
-                                        <!-- 아래는 새롭게 추가한 Fav이다. -->
                                         <td v-else class="action">
                                             <a @click.prevent="saveFav"><i class="fa fa-pencil"></i> 등록</a>
                                             <a @click.prevent="undo" class="delete"><i class="fa fa-remove"></i> 취소</a>
@@ -108,9 +106,6 @@
         },
         watch: {
             search(val) {
-                console.log('val>>>' + val);
-                console.log('select>>>' + this.address);
-
                 val && val !== this.address && this.querySelections(val)
             },
         },
@@ -160,17 +155,10 @@
             saveFav() {
                 let msg = "";
                 let err = true;
-                console.log(this.FavAreas[0]['complete']);
-                console.log(this.address.split(' ').length);
 
                 let obj = {};
                 this.address.split(' ').length != 3 &&
                     ((msg = "주소를 올바르게 입력해주세요"), (err = false));
-                // err && this.gu=='' &&
-                //     ((msg = "구/군 정보를 선택해주세요."), (err = false));
-                // err && this.dong=='' &&
-                //     ((msg = "동 정보를 선택해주세요."), (err = false));
-                // console.log(this.gu=='');
                 if (!err) {
                     alertify.error(msg, 3);
                     return false;
@@ -237,12 +225,9 @@
             querySelections(v) {
                 this.loading = true
                 // Simulated ajax query
-                console.log('in>>');
                 const self = this;
                 setTimeout(() => {
                     self.showAddresses = self.addresses.filter(e => {
-                        // console.dir(e);
-                        // return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                         return bestSearch(e, v);
                     })
                     this.loading = false
@@ -268,8 +253,6 @@
                     data
                 }) => {
                     this.makeObjectToAddress(data);
-                    console.log('success get addresses');
-                    // console.dir(data);
                 })
                 .catch((error) => {
                     alertify.error(msg, 3, function () {

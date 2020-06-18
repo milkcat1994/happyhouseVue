@@ -7,9 +7,6 @@
             <div class="properties-map-search properties-pad2">
                 <div class="title-area">
                     <h2 class="pull-left">Search</h2>
-                    <!-- <a class="show-more-options pull-right" data-toggle="collapse" data-target="#options-content">
-                        <i class="fa fa-plus-circle"></i> Show More Options
-                        </a> -->
                     <div class="clearfix"></div>
                 </div>
                 <div class="properties-map-search-content">
@@ -41,12 +38,6 @@
                                     class="mx-4" hide-no-data hide-details label="아파트 이름 검색" solo
                                     :menu-props="{ 'nudge-top':200, 'nudge-left':20, 'z-index':9999}"></v-autocomplete>
                             </v-app>
-
-                                <!-- 추가적인 부가검색이다. -->
-                            <!-- <div class="form-group">
-                                <input v-model="searchName" @keyup.enter="searchDealInfoAdd"
-                                    class="form-control search-fields" placeholder="아파트 이름">
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -107,7 +98,6 @@
                 map: {},
                 //customOverlay 정보
                 markers: [],
-                // envMarkers: [],
                 storeMarkers: [],
 
                 properties: [],
@@ -120,7 +110,6 @@
                 search: null,
                 select: null,
 
-                // searchIdx: -1,
                 favSearch:0,
 
                 showHouseNames:[],
@@ -150,26 +139,19 @@
                 if(this.FavAreas.length>0){
                     this.favAddress = this.joinAddress(this.FavAreas[0]);
                 }
-                // this.searchFavDealInfo();
-                // this.makeFav(this.FavAreas);
             },
             search(val) {
                 val && val !== this.address && this.querySelections(val)
             },
             search2(val) {
-                console.log('val>>>' + val);
-                // console.log('select>>>' + this.HouseName);
                 val && val !== this.searchName && this.querySelections2(val)
             },
             favAddress(val) {
-                // console.log('val2>>>' + val);
-                // console.log('select2>>>' + this.favAddress);
                 if(this.favAddress){
                     this.address = null;
                     this.makeFav(this.FavAreas);
                     this.searchFavDealInfo();
                 }
-                // val && val !== this.favAddress && (this.showFavAddress = this.favAddress)
             },
             address(val){
                 if(this.address){
@@ -183,47 +165,21 @@
                 }
             },
         },
-        updated() {
-            // this.$nextTick(function () {
-                //     $('.selectpicker').selectpicker('refresh')
-            // });
-        },
         methods: {
             searchIdx(value) {
-                console.log('in1>>'+this.address);
                 if(this.address){
                     this.favAddress = null;
                     this.searchDealInfo();
                 }
-                // dialog opened (value is true) in edit mode (editedIndex > -1)
-                // if (value && this.editedIndex > -1) {
-                    //     searchDealInfo();
-                // }
             },
-            favSearchIdx(value){
-                console.log('in2>>'+this.favAddress);
-            },
-            // setItems(value) {
-            //     console.log('in2');
-            //     if (value && value.length > 0) {
-            //         if (Array.isArray(value)) {
-            //             this.items = value
-            //         } else {
-            //             this.items.push(value)
-            //         }
-            //     }
-            // },
             hasScrolled() {
-                // console.log('slef>>')
                 let st = document.getElementById('scrolldiv').scrollTop;
                 let sh = document.getElementById('scrolldiv').scrollHeight;
                 let oh = document.getElementById('scrolldiv').offsetHeight;
-                // console.dir(st+','+sh+','+oh+','+(st+oh)+','+(sh === (st+oh)));
                 if (sh === (st + oh)) {
                     this.scrollBlock++;
                     this.endIndex = 20 + (20 * this.scrollBlock);
                     this.showData = this.properties.slice(0, this.endIndex);
-                    // console.log('slice!!!!!!!!!');
                 }
             },
             initMap() {
@@ -234,9 +190,6 @@
                 };
 
                 this.map = new kakao.maps.Map(container, options);
-                // let mapTypeControl = new kakao.maps.mapTypeControl();
-
-                // this.map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
             },
             addScript() {
                 const script = document.createElement('script'); /* global kakao */
@@ -282,8 +235,6 @@
                         if (data.length != 0) {
                             self.favIndex = '';
                             this.searchName = '';
-                            console.log('test>>');
-                            console.dir(data);
                             self.makeProperties(data);
                             self.makeMarker(data);
                         } else {
@@ -309,16 +260,6 @@
                             self.makeStoreMarker(data);
                         }
                     });
-                    // store.dispatch("getEnvs", obj)
-                    // .then((data) => {
-                    //     if(!data){
-                    //         alertify.error("환경정보가 없습니다.", 3,
-                    //             function() { console.log("환경정보가 없습니다."); });
-                    //     }
-                    //     else{
-                    //         self.makeEnvMarker(data);
-                    //     }
-                    // });
             },
             searchFavDealInfo() {
                 console.log('favAddress : ' + this.favAddress);
@@ -327,14 +268,9 @@
                 }
                 let msg = '거래정보를 가져올 수 없습니다.';
                 let obj = {};
-                // let temp = store.state.FavAreas;
-                // console.dir(temp);
-                // console.dir(this.FavAreas);
-                // console.log(this.favIndex);
                 obj.city = this.getAddress(this.favAddress, 0);
                 obj.gu = this.getAddress(this.favAddress, 1);
                 obj.dong = this.getAddress(this.favAddress,2);
-                // this.FavAreas[this.favIndex].dong;
 
                 let self = this;
                 http
@@ -349,8 +285,6 @@
                             self.makeMarker(data);
                         } else {
                             msg = '해당 지역의 거래정보가 없습니다.';
-                            // self.favIndex = self.exFav;
-                            // this.favAddress = null;
                             alertify.error(msg, 3, function () {
                                 console.log(msg);
                             });
@@ -371,16 +305,6 @@
                             self.makeStoreMarker(data);
                         }
                     });
-                    // store.dispatch("getEnvs", obj)
-                    // .then((data) => {
-                    //     if(!data){
-                    //         alertify.error("환경정보가 없습니다.", 3,
-                    //             function() { console.log("환경정보가 없습니다."); });
-                    //     }
-                    //     else{
-                    //         self.makeEnvMarker(data);
-                    //     }
-                    // });
             },
             searchDealInfoAdd() {
                 console.log('searchDealInfoAdd');
@@ -428,16 +352,6 @@
                             self.makeStoreMarker(data);
                         }
                     });
-                    // store.dispatch("getEnvs", obj)
-                    // .then((data) => {
-                    //     if(!data){
-                    //         alertify.error("환경정보가 없습니다.", 3,
-                    //             function() { console.log("환경정보가 없습니다."); });
-                    //     }
-                    //     else{
-                    //         self.makeEnvMarker(data);
-                    //     }
-                    // });
             },
             joinAddress(favArea) {
                 return favArea.city + ' ' + favArea.gu + ' ' + favArea.dong;
@@ -453,7 +367,6 @@
             makeProperties(data) {
                 this.properties = [];
                 let tobj = {};
-                console.log('start makeProperties '+ this.address);
                 this.address &&
                     ((tobj.city = this.getAddress(this.address, 0)), (tobj.gu = this.getAddress(this.address, 1)), (tobj.dong = this.getAddress(this.address, 2))) ||
                     ((tobj.city = this.getAddress(this.favAddress,0)), (tobj.gu = this.getAddress(this.favAddress,1)), (tobj.dong = this.getAddress(this.favAddress,2)));
@@ -478,12 +391,9 @@
                     this.properties.push(obj);
                 }
                 this.showData = this.properties.slice(0, this.endIndex);
-                console.log('end makeProperties'+this.properties.length);
             },
             // map에 불러온 marker를 표시한다.
             makeMarker(data) {
-                console.dir(data.length);
-                // console.dir(kakao.maps);
                 if (data.length == 0) {
                     let msg = "거래 정보가 존재하지 않습니다.";
                     alertify.error(msg, 3, function () {
@@ -492,38 +402,12 @@
                     return;
                 }
                 let obj;
-                // let positions = {};
-
-                // var clusterer = new kakao.maps.MarkerClusterer({
-                //     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-                //     averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-                //     minLevel: 10 // 클러스터 할 최소 지도 레벨 
-                // });
-                // clusterer.clear();
-                // 마커 이미지의 이미지 주소입니다
-                // let imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-                // let imageSize = new kakao.maps.Size(24, 35);
-                // let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
                 this.removeMarkers();
 
                 for (let idx = 0; idx < data.length; ++idx) {
                     obj = new Object();
                     obj.title = data[idx].aptName;
                     obj.latlng = new kakao.maps.LatLng(data[idx].lat, data[idx].lng);
-                    // console.dir(obj);
-                    //클러스터에 추가
-
-                    // 마커를 생성합니다
-                    // let marker = new kakao.maps.Marker({
-                    //     map: this.map, // 마커를 표시할 지도
-                    //     position: obj.latlng, // 마커를 표시할 위치
-                    //     title: obj.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                    //     image: markerImage, // 마커 이미지
-                    //     clickable: true
-                    // });
-                    // marker.setMap(this.map);
-
-                    // let iwRemoveable = true;
 
                     let iwContent = '<div class="customoverlay">' +
                         '<a href="http://www.kcrbds.co.kr/search/search.php?kwd=' +
@@ -538,101 +422,14 @@
                         xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
                         yAnchor: 0.5 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
                     });
-                    // var infowindow = new kakao.maps.InfoWindow({
-                    //     // map: this.map,
-                    //     position: obj.latlng,
-                    //     content: 'I am InfoWindow'
-                    // });
 
                     mapCustomOverlay.setMap(this.map);
-                    // infowindow.open(this.map, marker);
-                    // kakao.maps.event.addListener(marker, 'click', function () {
-                    //     // 마커 위에 인포윈도우를 표시합니다
-                    //     console.log('click!!');
-                    //     infowindow.open(this.map, marker);
-                    // });
-                    // let s = this.makeInfoWindow(data[idx])
                     this.markers.push(mapCustomOverlay);
                 }
 
                 this.map.panTo(new kakao.maps.LatLng(data[0].lat, data[0].lng));
-                // clusterer.addMarkers(positions);
             },
-            // makeEnvMarker(data) {
-            //     console.log('env Info>>');
-            //     console.dir(data);
-            //     // console.dir(kakao.maps);
-            //     if (data.length == 0) {
-            //         let msg = "환경 정보가 존재하지 않습니다.";
-            //         alertify.error(msg, 3, function () {
-            //             console.log(msg);
-            //         });
-            //         return;
-            //     }
-            //     let size = this.envMarkers.length;
-            //     for (var i = 0; i < size; i++) {
-            //         this.envMarkers[i].setMap(null);
-            //     }
-            //     this.envMarkers = [];
-
-            //     let obj;
-            //     geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status){
-            //         if (status === kakao.maps.services.Status.OK) {
-
-            //             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-            //             // 결과값으로 받은 위치를 마커로 표시합니다
-            //             var marker = new kakao.maps.Marker({
-            //                 map: map,
-            //                 position: coords
-            //             });
-
-            //             // 인포윈도우로 장소에 대한 설명을 표시합니다
-            //             var infowindow = new kakao.maps.InfoWindow({
-            //                 content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-            //             });
-            //             infowindow.open(map, marker);
-
-            //             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-            //             map.setCenter(coords);
-            //         }
-            //         else
-            //         console.log('getAddressToLatLng Fail');
-            //     });
-            //     // 상가마커 이미지의 저작권
-            //     // Icon made by Freepik from www.flaticon.com
-            //     //  <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon"> www.flaticon.com</a>
-                
-            //     // Icon made by Freepik from www.flaticon.com
-            //     // <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon"> www.flaticon.com</a>
-            //     let imageSrc = "/img/envMarker.png";
-            //     let imageSize = new kakao.maps.Size(34, 45);
-            //     let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-            //     for (let idx = 0; idx < data.length; ++idx) { 
-            //         obj = new Object();
-            //         obj.latlng = new kakao.maps.LatLng(data[idx].lat, data[idx].lng);
-            //         // console.dir(obj);
-            //         //클러스터에 추가
-
-            //         // 마커를 생성합니다
-            //         let marker = new kakao.maps.Marker({
-            //             map: this.map, // 마커를 표시할 지도
-            //             position: obj.latlng, // 마커를 표시할 위치
-            //             title: obj.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            //             image: markerImage, // 마커 이미지
-            //             clickable: true
-            //         });
-            //         marker.setMap(this.map);
-
-            //         this.envMarkers.push(marker);
-            //     }
-            //     this.map.panTo(new kakao.maps.LatLng(data[0].lat, data[0].lng));
-            // },
             makeStoreMarker(data) {
-                console.log('store Info>>');
-                console.dir(data);
-                // console.dir(kakao.maps);
                 if (data.length == 0) {
                     let msg = "상가 정보가 존재하지 않습니다.";
                     alertify.error(msg, 3, function () {
@@ -662,7 +459,6 @@
                 for (let idx = 0; idx < data.length; ++idx) {
                     obj = new Object();
                     obj.latlng = new kakao.maps.LatLng(data[idx].lat, data[idx].lng);
-                    // console.dir(obj);
                     //클러스터에 추가
 
                     // 마커를 생성합니다
@@ -702,12 +498,8 @@
             querySelections(v) {
                 const self = this;
                 self.loading = true
-                // Simulated ajax query
-                // console.log('inQuery>> '+v);
                     setTimeout(() => {
                         self.showAddresses = self.addresses.filter(e => {
-                            // console.dir(e);
-                        // return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                         return bestSearch(e, v);
                     })
                     self.loading = false
@@ -716,12 +508,8 @@
             querySelections2(v) {
                 const self = this;
                 self.loading2 = true
-                // Simulated ajax query
-                // console.log('inQuery>> '+v);
                     setTimeout(() => {
                         self.showHouseNames = self.HouseName.filter(e => {
-                            // console.dir(e);
-                        // return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                         return bestSearch(e, v);
                     })
                     self.loading2 = false
@@ -740,8 +528,6 @@
                     data
                 }) => {
                     this.makeObjectToAddress(data);
-                    console.log('success get addresses');
-                    // console.dir(data);
                 })
                 .catch((error) => {
                     alertify.error(msg, 3, function () {

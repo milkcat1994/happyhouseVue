@@ -12,7 +12,4 @@ export default {
 };
 </script>
 <style>
-/* .router-link-exact-active {
-  color: #ff214f;
-} */
 </style>
