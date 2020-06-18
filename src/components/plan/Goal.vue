@@ -64,18 +64,18 @@
         </div>
         <div v-if="resultShow" id="result" class="row pad-20">
           <div class="result">
-            <h6>15.4% 세후 기준</h6>
+            <h6>비과세 기준</h6>
             <br />
             <h2>
               목표 금액
-              <strong>1,000,000원</strong>을 모으려면
+              <strong>{{goalAmount}}원</strong>을 모으려면
               연 이율
-              <strong>2.4%</strong>의
-              <strong>단리</strong>로
-              <strong>12</strong>개월 동안
+              <strong>{{rate}}%</strong>의
+              <strong>{{rateMode}}</strong>로
+              <strong>{{period}}</strong>개월 동안
               <br />월
               <strong>
-                <font color="#ff214f">824,269원</font>
+                <font color="#ff214f">{{amountPerMonth}}원</font>
               </strong>을 저축하셔야 합니다.
             </h2>
           </div>
@@ -98,6 +98,19 @@ export default {
 
       resultShow: false
     };
+  },
+  computed:{
+    amountPerMonth(){
+      if(this.rateMode == '단리'){
+        let pRate = this.rate/100;
+        return Math.round(this.goalAmount/(this.period+(this.period*(this.period+1)/2)*(pRate/12)),1);
+      }
+      else if(this.rateMode == '복리'){
+        let pRate = this.rate/100;
+        
+        return Math.round(this.goalAmount/(((Math.pow(1+pRate, ((this.period+1)/12)) - (Math.pow(1+pRate,1/12)))/(Math.pow(1+pRate,1/12)-1))) -this.period,1);
+      }
+    }
   }
 };
 </script>

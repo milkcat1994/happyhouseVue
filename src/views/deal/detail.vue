@@ -202,7 +202,9 @@
             ...mapGetters(["NeerPriceHosues"]),
             ...mapGetters(["Envs"]),
             getPriceAtArea() {
-                return (this.House.dealAmount.replace(/\,/g, "") / this.House.area).toFixed(1);
+                if(this.House.dealAmount){
+                    return (this.House.dealAmount.replace(/\,/g, "") / this.House.area).toFixed(1);
+                }
             }
         },
         mounted() {

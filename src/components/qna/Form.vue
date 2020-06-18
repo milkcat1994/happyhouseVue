@@ -163,8 +163,7 @@ export default {
     }
   },
   created() {
-    // console.log(type);
-      if (this.type == "update") {
+      if (this.type === "update") {
         http
         .get(`/qna/${this.$route.query.no}`)
         .then(({ data }) => {

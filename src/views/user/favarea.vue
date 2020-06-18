@@ -181,6 +181,7 @@
                 obj.gu = this.getAddress(this.address, 1);
                 obj.dong = this.getAddress(this.address, 2);
 
+                const self = this;
                 http
                     .post('/user/fav/' + this.$session.get('userId'), obj)
                     .then(({
@@ -189,8 +190,9 @@
                         if (data === "success") {
                             msg = "관심지역 등록이 완료되었습니다.";
                             alertify.success(msg);
-                            this.FavAreas[0]['complete'] = true;
-                            store.dispatch("getFavAreas", this.$session.get('userId'));
+                            self.address = '';
+                            self.FavAreas[0]['complete'] = true;
+                            store.dispatch("getFavAreas", self.$session.get('userId'));
                         }
                     })
                     .catch(() => {
@@ -202,11 +204,13 @@
             addFav() {
                 let msg = "";
                 let err = false;
-                this.FavAreas[0]['complete'] ||
+                if(this.FavAreas.length > 0){
+                    this.FavAreas[0]['complete'] ||
                     ((msg = "관심지역을 먼저 등록해주세요."), err = true,
                         (alertify.error(msg, 3, function () {
                             console.log('먼저 등록해야 사용가능합니다.');
                         })));
+                }
                 if (err) return false;
 
                 let obj = {};
@@ -216,58 +220,6 @@
                 obj.dong = '';
                 obj.complete = false;
                 this.FavAreas.unshift(obj);
-
-                msg = '시,도 정보를 가져올 수 없습니다.';
-                http
-                    .get('/util/city')
-                    .then(({
-                        data
-                    }) => {
-                        console.dir(data);
-                        this.citys = data;
-                    })
-                    .catch(() => {
-                        alertify.error(msg, 3, function () {
-                            console.log(msg);
-                        });
-                    })
-            },
-            getGu() {
-                let msg = '구,군 정보를 가져올 수 없습니다.';
-                http
-                    .post('/util/gu', {
-                        'city': this.city
-                    })
-                    .then(({
-                        data
-                    }) => {
-                        this.gus = data;
-                        this.gu = '';
-                        this.dong = '';
-                    })
-                    .catch(() => {
-                        alertify.error(msg, 3, function () {
-                            console.log(this.city);
-                        });
-                    })
-            },
-            getDong() {
-                let msg = '동 정보를 가져올 수 없습니다.';
-                http
-                    .post('/util/dong', {
-                        'gu': this.gu
-                    })
-                    .then(({
-                        data
-                    }) => {
-                        this.dongs = data;
-                        this.dong = '';
-                    })
-                    .catch(() => {
-                        alertify.error(msg, 3, function () {
-                            console.log(msg);
-                        });
-                    })
             },
             undo() {
                 this.FavAreas.splice(0, 1);

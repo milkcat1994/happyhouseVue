@@ -10,11 +10,8 @@
                 <strong>상환 방식</strong>
               </label>
               <v-app id="inspire">
-                <v-select
-                  :items="repaymentList"
-                  v-model="repayment"
-                  :menu-props="{ 'nudge-top':450, 'nudge-left':200 }"
-                ></v-select>
+                <v-select :items="repaymentList" v-model="repayment"
+                  :menu-props="{ 'nudge-top':450, 'nudge-left':200 }"></v-select>
               </v-app>
             </div>
           </div>
@@ -47,21 +44,15 @@
           </div>
 
           <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="form-group">
-              <label>
-                <strong>거치기간</strong> (년)
-              </label>
-              <input type="text" v-model.number="delay" class="input-text" />
-            </div>
+            <div class="form-group"></div>
           </div>
-
           <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group"></div>
           </div>
 
           <div class="row pad-20">
             <div class="col-lg-4 col-md-12 col-sm-12">
-              <a @click="resultShow = true" class="btn btn-md button-theme">결과 확인</a>
+              <a @click="setObj" class="btn btn-md button-theme">결과 확인</a>
             </div>
           </div>
         </div>
@@ -75,12 +66,12 @@
                     <div class="result">
                       <br />
                       <h2>
-                        1억원을
-                        10년(거치기간1년) 동안
+                        {{loanAmount}}억원을
+                        {{period}}년 동안
                         원리금균등상환으로 대출을 받았을때
-                        <br />연 이율 3.2%기준 매월
+                        <br />연 이율 {{rate}}%기준 매월
                         <strong>
-                          <font color="#ff214f">106만 6876원</font>
+                          <font color="#ff214f">{{p}}원</font>
                         </strong>씩 갚아야 합니다.
                         <br />
                         <br />
@@ -109,79 +100,22 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1~12</td>
-                              <td class="text-center">26만 6667원</td>
-                              <td class="text-center">0원</td>
-                              <td class="text-right">26만 6667원</td>
+                            <tr v-for="(res, index) in resultArr" :key="index">
+                              <td>{{index+1}}</td>
+                              <td class="text-center">{{resultArr[index].r}}원</td>
+                              <td class="text-center">{{resultArr[index].o}}원</td>
+                              <td class="text-right">{{resultArr[index].p}}원</td>
                             </tr>
-                            <tr>
-                              <td>13</td>
-                              <td class="text-center">26만 6667원</td>
-                              <td class="text-center">80만 209원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>24</td>
-                              <td class="text-center">24만 2878원</td>
-                              <td class="text-center">82만 3998원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>36</td>
-                              <td class="text-center">21만 6120원</td>
-                              <td class="text-center">85만 756원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>48</td>
-                              <td class="text-center">18만 8493원</td>
-                              <td class="text-center">87만 8383원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>60</td>
-                              <td class="text-center">15만 9969원</td>
-                              <td class="text-center">90만 6907원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>72</td>
-                              <td class="text-center">13만 519원</td>
-                              <td class="text-center">93만 6357원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>84</td>
-                              <td class="text-center">10만 112원</td>
-                              <td class="text-center">96만 6764원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>96</td>
-                              <td class="text-center">6만 8718원</td>
-                              <td class="text-center">99만 8158원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>108</td>
-                              <td class="text-center">3만 6304원</td>
-                              <td class="text-center">103만 572원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
-                            <tr>
-                              <td>120</td>
-                              <td class="text-center">2837원</td>
-                              <td class="text-center">106만 4039원</td>
-                              <td class="text-right">106만 6876원</td>
-                            </tr>
+
                             <tr>
                               <td class="no-line"></td>
                               <td class="no-line"></td>
                               <td class="no-line text-center">
                                 <strong>Total</strong>
                               </td>
-                              <td class="no-line text-right"><font color="#ff214f">총 이자액 1842만 2604원</font></td>
+                              <td class="no-line text-right">
+                                <font color="#ff214f">총 이자액 {{totalr}}원</font>
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -199,25 +133,92 @@
 </template>
 
 <script>
-export default {
-  name: "Goal",
-  data() {
-    return {
-      repayment: "",
-      repaymentList: ["만기일시상환", "원리금균등상환", "원금균등상환"],
+  export default {
+    name: "Goal",
+    data() {
+      return {
+        repayment: "",
+        repaymentList: ["원리금균등상환",
+        // "만기일시상환",  "원금균등상환"
+        ],
 
-      loanAmount: 100000000,
-      rate: 3.2,
-      period: 10,
-      delay: 1,
-      resultShow: false
-    };
-  }
-};
+
+
+        loanAmount: 100000000,
+        rate: 3,
+        period: 1,
+        resultShow: false,
+
+//상환금액
+        p:0,
+
+        resultArr: [],
+        //총 이자액
+        totalr:0,
+
+      };
+    },
+    watch:{
+      loanAmount(){
+        this.resultShow = false;
+      },
+      period(){
+        this.resultShow = false;
+      },
+      rate(){
+        this.resultShow = false;
+      }
+    },
+    methods: {
+      setObj() {
+        let pRate = this.rate / 100; //이자율
+        let per = this.period * 12;
+        if (this.repayment == '원리금균등상환') {
+          this.totalr = 0;
+
+          this.p=Math.round((this.loanAmount * pRate / 12) * ((Math.pow(1 + pRate / 12, per)) / ((Math.pow(1 + pRate /
+            12, per)) - 1)), 1);
+
+          //매달 상환 금액
+          let p = this.p;
+          let n = this.loanAmount; //잔액
+
+          for (let i = 1; i <= per; ++i) {
+            // if()
+            let obj = new Object();
+            //이자, 원금, 낼금액
+            //r, o, p(고정)
+            obj.p = p;
+            obj.r = Math.round(this.getRate(n, pRate),1);
+            this.totalr += obj.r;
+            n = n - p;
+            obj.o = Math.round(this.getOrigin(p, obj.r),1);
+
+            this.resultArr.push(obj);
+          }
+          console.dir(this.resultArr);
+        }
+
+
+        
+        this.resultShow = true
+      },
+      //이자 구하기
+      //잔액과 이자율로 구하기
+      getRate(e, r) {
+        return e * r / 12;
+      },
+      //원금구하기
+      //월불입금 - 이자
+      getOrigin(p, r) {
+        return p - r;
+      },
+    }
+  };
 </script>
 
 <style>
-#result {
-  padding: 10px 100px 10px 100px;
-}
+  #result {
+    padding: 10px 100px 10px 100px;
+  }
 </style>

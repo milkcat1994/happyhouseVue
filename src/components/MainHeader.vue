@@ -95,7 +95,7 @@
                     <router-link class="dropdown-item" to="/mypage">내 정보</router-link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/favarea">관심정보</a>
+                    <router-link class="dropdown-item" to="/favarea">관심정보</router-link>
                   </li>
                 </ul>
               </li>

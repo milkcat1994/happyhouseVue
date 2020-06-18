@@ -1,5 +1,6 @@
 <template>
   <div>
+    <main-header />
     <!-- Blog body start -->
     <div class="blog-body content-area-5">
       <div class="container">
@@ -7,7 +8,7 @@
           <div class="col-lg-12">
             <!-- Blog 1 start -->
             <div class="blog-1 blog-big">
-              <div id="form-qna">
+              <div id="form-notice">
                 <!-- 제목 -->
                 <input
                   class="title title-danger"
@@ -37,27 +38,34 @@
           >등록</button>
           <button class="pull-right btn btn-lg button-theme" v-else @click="checkHandler">수정</button>
 
-          <router-link to="/qna">
+          <router-link to="/notice">
             <button class="pull-right btn btn-lg btn-info">목록</button>
           </router-link>
         </div>
       </div>
     </div>
+    <main-footer />
   </div>
 </template>
 
 <script>
+import MainHeader from "@/components/MainHeader.vue";
+import MainFooter from "@/components/MainFooter.vue";
 import http from "@/util/http-common";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { mapGetters } from "vuex";
 export default {
   name: "Notice-Form",
+  components: {
+    MainHeader,
+    MainFooter
+  },
   props: {
     type: { type: String }
   },
   data() {
     return {
-      no: this.$route.query.no,
+      no: "",
       regtime: "",
       title: "",
 
@@ -153,22 +161,20 @@ export default {
     }
   },
   created() {
-    () => {
-      if (this.type === "update") {
-        http
-          .get(`/qna/${this.$route.query.no}`)
-          .then(({ data }) => {
-            this.no = data.no;
-            this.regtime = data.date;
-            this.title = data.title;
-            this.editorData = data.content;
-          })
-          .catch(() => {
-            alertify.error(msg, 3, function() {
-              console.log("공지사항 수정전 데이터 전송 도중 서버 통신 실패");
-            });
+    if (this.type === "update") {
+      http
+        .get(`/notice/${this.$route.query.no}`)
+        .then(({data}) => {
+          this.no = data.no;
+          this.regtime = data.date;
+          this.title = data.title;
+          this.editorData = data.content;
+        })
+        .catch(() => {
+          alertify.error(msg, 3, function() {
+            console.log("공지사항 수정전 데이터 전송 도중 서버 통신 실패");
           });
-      }
+        });
     };
   }
 };
@@ -177,7 +183,7 @@ export default {
 .ck-editor__editable {
   height: 400px;
 }
-#form-qna .title {
+#form-notice .title {
   padding: 15px 15px;
   background-color: #ffffff;
   margin-bottom: 10px;
@@ -191,7 +197,7 @@ export default {
   width: 100%;
 }
 
-#form-qna .title-danger {
+#form-notice .title-danger {
   border-left-color: #eb344f !important;
 }
 </style>

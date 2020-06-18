@@ -85,31 +85,31 @@
                               <td></td>
                               <td class="text-center">여유</td>
                               <td class="text-center">0원</td>
-                              <td class="text-right">200,000,000원</td>
+                              <td class="text-right">{{holdingAmount}}원</td>
                             </tr>
                             <tr>
                               <td></td>
                               <td class="text-center"></td>
-                              <td class="text-center">24,300,000원</td>
-                              <td class="text-right">224,300,000원</td>
+                              <td class="text-center">{{m1}}원</td>
+                              <td class="text-right">{{addTwo(m1,limit)}}원</td>
                             </tr>
                             <tr>
                               <td></td>
                               <td class="text-center">적정</td>
-                              <td class="text-center">54,300,000원</td>
-                              <td class="text-right">254,300,000원</td>
+                              <td class="text-center">{{m2}}원</td>
+                              <td class="text-right">{{addTwo(m2,limit)}}원</td>
                             </tr>
                             <tr>
                               <td></td>
                               <td class="text-center"></td>
-                              <td class="text-center">94,800,000원</td>
-                              <td class="text-right">294,800,000원</td>
+                              <td class="text-center">{{m3}}원</td>
+                              <td class="text-right">{{addTwo(m3,limit)}}원</td>
                             </tr>
                             <tr>
                               <td></td>
                               <td class="text-center">절약 필요</td>
-                              <td class="text-center">115,600,000원</td>
-                              <td class="text-right">315,600,000원</td>
+                              <td class="text-center">{{limit}}원</td>
+                              <td class="text-right">{{addTwo(holdingAmount,limit)}}원</td>
                             </tr>
                           </tbody>
                         </table>
@@ -131,15 +131,53 @@ export default {
   name: "Goal",
   data() {
     return {
-      holdingAmount : 200000000,
-      monthlySalary : 3500000,
-      monthlyExpenses : 3000000,
-      rate : 3.2,
-      period : 30,
+      holdingAmount : 100000000,  //보유금액
+      monthlySalary : 3500000,     //급여
+      monthlyExpenses : 3000000,        //지출
+      //상환금액 S-E
+      p:0,
+      //최대 가능
+      limit:0,
+
+      //중간 필요 값
+      m1:0,
+      m2:0,
+      m3:0,
+
+
+
+      rate : 3,
+      period : 1,
 
       resultShow: false,
     };
   },
+  methods:{
+    setObj(){
+        let pRate = this.rate / 100; //이자율
+        let per = this.period * 12;
+
+        this.p = this.monthlySalary - this.monthlyExpenses;
+
+        // (Math.pow(1+pRate/12,per)-1)
+
+        // ((pRate/12)*Math.pow(1+pRate/12,per))
+
+        this.limit = Math.round(this.p*(Math.pow(1+pRate/12,per)-1)/((pRate/12)*Math.pow(1+pRate/12,per)),1);
+
+        this.m1 = Math.round(this.limit*0.4,1);
+        this.m2 = Math.round(this.limit*0.6,1);
+        this.m3 = Math.round(this.limit*0.8,1);
+        console.log(this.limit);
+
+    },
+    addTwo(a,b){
+      return a+b;
+    }
+  },
+  mounted(){
+    this.setObj();
+  }
 };
 </script>
 
