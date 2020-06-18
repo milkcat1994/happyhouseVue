@@ -66,14 +66,14 @@
             <br />
             <h2>
               목표 금액
-              <strong>{{goalAmount}}원</strong>을 모으려면
+              <strong>{{changeString(goalAmount)}}원</strong>을 모으려면
               연 이율
               <strong>{{rate}}%</strong>의
               <strong>{{rateMode}}</strong>로
               <strong>{{period}}</strong>개월 동안
               <br />월
               <strong>
-                <font color="#ff214f">{{amountPerMonth}}원</font>
+                <font color="#ff214f">{{changeString(amountPerMonth)}}원</font>
               </strong>을 저축하셔야 합니다.
             </h2>
           </div>
@@ -84,6 +84,9 @@
 </template>
 
 <script>
+  import {
+    numberWithCommas
+  } from "@/util/util-common"
 export default {
   name: "Goal",
   data() {
@@ -108,8 +111,14 @@ export default {
         
         return Math.round(this.goalAmount/(((Math.pow(1+pRate, ((this.period+1)/12)) - (Math.pow(1+pRate,1/12)))/(Math.pow(1+pRate,1/12)-1))) -this.period,1);
       }
-    }
+    },
+  },
+methods:{
+  changeString(v) {
+    return numberWithCommas(v);
   }
+  
+}
 };
 </script>
 

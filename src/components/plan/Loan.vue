@@ -66,12 +66,12 @@
                     <div class="result">
                       <br />
                       <h2>
-                        {{loanAmount}}억원을
+                        {{changeString(loanAmount)}}억원을
                         {{period}}년 동안
                         원리금균등상환으로 대출을 받았을때
                         <br />연 이율 {{rate}}%기준 매월
                         <strong>
-                          <font color="#ff214f">{{p}}원</font>
+                          <font color="#ff214f">{{changeString(p)}}원</font>
                         </strong>씩 갚아야 합니다.
                         <br />
                         <br />
@@ -102,9 +102,9 @@
                           <tbody>
                             <tr v-for="(res, index) in resultArr" :key="index">
                               <td>{{index+1}}</td>
-                              <td class="text-center">{{resultArr[index].r}}원</td>
-                              <td class="text-center">{{resultArr[index].o}}원</td>
-                              <td class="text-right">{{resultArr[index].p}}원</td>
+                              <td class="text-center">{{changeString(resultArr[index].r)}}원</td>
+                              <td class="text-center">{{changeString(resultArr[index].o)}}원</td>
+                              <td class="text-right">{{changeString(resultArr[index].p)}}원</td>
                             </tr>
 
                             <tr>
@@ -114,7 +114,7 @@
                                 <strong>Total</strong>
                               </td>
                               <td class="no-line text-right">
-                                <font color="#ff214f">총 이자액 {{totalr}}원</font>
+                                <font color="#ff214f">총 이자액 {{changeString(totalr)}}원</font>
                               </td>
                             </tr>
                           </tbody>
@@ -133,6 +133,9 @@
 </template>
 
 <script>
+  import {
+    numberWithCommas
+  } from "@/util/util-common"
   export default {
     name: "Goal",
     data() {
@@ -212,6 +215,9 @@
       getOrigin(p, r) {
         return p - r;
       },
+      changeString(v) {
+        return numberWithCommas(v);
+      }
     }
   };
 </script>
